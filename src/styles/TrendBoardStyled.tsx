@@ -7,7 +7,7 @@ export const Board = styled.div`
     justify-content:space-around;
 `;
 export const BoardWrap = styled.div`
-    width:60%;
+    width:65%;
     height:100%;
     
 `;
