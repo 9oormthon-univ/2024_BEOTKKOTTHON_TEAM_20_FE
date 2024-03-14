@@ -1,5 +1,5 @@
 import React,{useState,useEffect} from "react";
-import { Board, BoardWrap } from "../styles/TrendBoardStyled";
+import { Board, BoardWrap,H1 } from "../styles/TrendBoardStyled";
 import { BoxWrap } from "../styles/PreferBoardStyled";
 import PostBox from "./PostBox";
 
@@ -29,7 +29,7 @@ const PreferBoard = () => {
         <BoardWrap>
         {isLoggedIn ? (
                     <>
-                        <h1>님의 관심사에 맞춘 포스팅</h1>
+                        <H1>님의 관심사에 맞춘 포스팅</H1>
                         <BoxWrap>
                             <PostBox></PostBox>
                             <PostBox></PostBox>

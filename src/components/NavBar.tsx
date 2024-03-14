@@ -1,22 +1,15 @@
 import React from "react";
-import { Div, Navigation } from "../styles/NavBarStyled";
+import { Div, Navigation,Logo, Nav } from "../styles/NavBarStyled";
 import MainLogo from "../image/MainLogo.png";
-import { NavLink } from "react-router-dom";
 
 const NavBar = () => {
     return <Navigation>
+                <Logo src={MainLogo} alt="mainlogo"></Logo>
             <Div>
-                <img src={MainLogo} alt="mainlogo" style={{width:'75px',height:'75px'}}/>
+                <Nav>스터디 포스팅</Nav>
+                <Nav>AI 퀴즈</Nav>
             </Div>
-            <Div>
-                <NavLink to="">스터디 포스팅</NavLink>
-            </Div>
-            <Div>
-                <NavLink to="">AI 퀴즈</NavLink>
-            </Div>
-            <Div>
-                <NavLink to="">로그인</NavLink>
-            </Div>
+                <Nav>로그인</Nav>
     </Navigation>
 };
 export default NavBar;

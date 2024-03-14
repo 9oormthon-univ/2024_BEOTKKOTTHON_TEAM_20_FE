@@ -12,3 +12,10 @@ export const Slider = styled.div`
     border:1px solid gray;
     margin-bottom:120px;
 `;
+export const Question = styled.div`
+    width:100%;
+    height:400px;
+    background-color:#f1dcff;
+    margin-top:200px;
+    padding:100px;
+`;

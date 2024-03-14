@@ -1,5 +1,5 @@
 import React,{ useState, useEffect }  from "react";
-import { Board, BoardWrap, Div } from "../styles/TrendBoardStyled";
+import { Board, BoardWrap, Div,H1 } from "../styles/TrendBoardStyled";
 
 const TrendBoard = () => {
   const [topPosts, setTopPosts] = useState([]);
@@ -21,26 +21,26 @@ const TrendBoard = () => {
 
     return <Board>
         <BoardWrap>
-        <h1>요즘 뜨는 트렌드</h1>
+        <H1>요즘 뜨는 트렌드</H1>
         <Div>
           <h3>1위</h3>
-          <h3>제목제목멪고메곶ㄱㄱ</h3>
+          <h3>제목제목제목제목제목</h3>
         </Div>
         <Div>
           <h3>2위</h3>
-          <h3>제목제목멪고메곶ㄱㄱ</h3>
+          <h3>제목제목제목제목제목</h3>
         </Div>
         <Div>
           <h3>3위</h3>
-          <h3>제목제목멪고메곶ㄱㄱ</h3>
+          <h3>제목제목제목제목제목</h3>
         </Div>
         <Div>
           <h3>4위</h3>
-          <h3>제목제목멪고메곶ㄱㄱ</h3>
+          <h3>제목제목제목제목제목</h3>
         </Div>
         <Div>
           <h3>5위</h3>
-          <h3>제목제목멪고메곶ㄱㄱ</h3>
+          <h3>제목제목제목제목제목</h3>
         </Div>
 
         {/*
