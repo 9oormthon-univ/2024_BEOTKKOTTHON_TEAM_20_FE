@@ -34,7 +34,7 @@ const PostBoardPage = () => {
                         <T onClick={showAllPosts} style={{ color: view === "all" ? "purple" : "black", borderBottom:view=== "all" ? "2px solid purple" : "" }}>전체</T>
                         <T onClick={showMyPosts} style={{ color: view === "myPosts" ? "purple" : "black", borderBottom:view=== "myPosts" ? " 2px solid purple" : "" }}>내가 작성한</T>
                         <T onClick={showMyScraps} style={{ color: view === "myScraps" ? "purple" : "black", borderBottom:view=== "myScraps" ? "2px solid purple" : "" }}>스크랩</T>
-                        <WButton><a href="/WritePosts" style={{ textDecoration: "none", color: "white" }}>+ 포스팅하기</a></WButton>
+                        <WButton><a href="/write" style={{ textDecoration: "none", color: "white" }}>+ 포스팅하기</a></WButton>
                     </Head>
                     <Wrapper>
                         {view === "myPosts" ? (

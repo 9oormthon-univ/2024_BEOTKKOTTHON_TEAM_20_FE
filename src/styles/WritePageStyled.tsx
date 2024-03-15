@@ -5,7 +5,7 @@ export const BackG = styled.div`
     display:flex;
     justify-content:center;
     width:100%;
-    height:2000px;
+    height:1800px;
 
 `;
 export const WBoard = styled.div`
@@ -51,7 +51,7 @@ export const SummaryB = styled.button`
     font-size:large;
     border-radius:5px;
 `;
-export const Title =styled.textarea`
+export const WTitle =styled.textarea`
 border:none;
 resize:none;
 &:focus{
@@ -62,7 +62,7 @@ font-weight:600;
     width:99%;
     height:4%;
 `;
-export const Content = styled.textarea`
+export const WContent = styled.textarea`
     font-size:20px;
     width:99%;
     height:80%;
