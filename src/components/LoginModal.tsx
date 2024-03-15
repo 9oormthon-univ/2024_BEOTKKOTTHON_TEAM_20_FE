@@ -1,10 +1,11 @@
 import React from "react";
-import ReactModal from "react-modal";
+// import ReactModal from "react-modal";
 import {
     StyledModal,
     Container,
     customStyles,
 } from "../styles/LoginModalStyled";
+import { REST_API_KEY, REDIRECT_URI } from "../KakaoLoginData";
 
 interface ModalProps {
     isOpen: boolean;
@@ -12,8 +13,11 @@ interface ModalProps {
 }
 
 const LoginModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
+    const KAKAO_AUTH_URI = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code`;
+    const loginHandler = () => {
+        window.location.href = KAKAO_AUTH_URI;
+    };
     const handleModalClick = () => {
-        console.log("모달이 클릭되었습니다");
         onClose();
     };
 
@@ -38,7 +42,9 @@ const LoginModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                         로그인하고 큐터디를 더 재밌게 즐겨보세요.
                     </p>
                 </div>
-                <div className="kakaoLogin">카카오로그인</div>
+                <div className="kakaoLogin" onClick={loginHandler}>
+                    카카오로그인
+                </div>
             </StyledModal>
         </Container>
     );
