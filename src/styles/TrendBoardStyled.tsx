@@ -9,7 +9,6 @@ export const Board = styled.div`
 export const BoardWrap = styled.div`
     width:65%;
     height:100%;
-    
 `;
 export const Div = styled.div`
     width:100%;
