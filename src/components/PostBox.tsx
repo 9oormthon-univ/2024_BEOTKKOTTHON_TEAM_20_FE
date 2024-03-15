@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Icon, Span, Wrapp } from "../styles/PostBoxStyled";
+import { Box, Icon, Span, Wrapp,A } from "../styles/PostBoxStyled";
 import TalkIcon from "../image/TalkIcon.png";
 import ScrapIcon2 from "../image/ScrapIcon2.png";
 
@@ -23,7 +23,7 @@ const PostBox = () => {
     const fillColor = isScrapped ? "opacity(0.1) drop-shadow(0 0 0 #F1AF14)" : "";
 
     return (
-        <Box>
+        <Box><A href="/read">
             <h3>{trimmedTitle}</h3>
             <p>{trimmedContent}</p>
             <Wrapp>
@@ -39,6 +39,7 @@ const PostBox = () => {
                     {/*스크랩수*/} 32
                 </div>
             </Wrapp>
+            </A>
         </Box>
     );
 };

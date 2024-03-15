@@ -7,6 +7,8 @@ export const Box = styled.div`
     border-radius:15px;
     padding:15px;
     position:relative;
+    box-shadow:5px 5px 15px 5px lightgray;
+    display:block;
 
 `;
 export const Wrapp = styled.div`
@@ -29,4 +31,8 @@ export const Icon =styled.img`
     height:25px;
     margin-left:15px;
     opacity:0.4;
+`;
+export const A=styled.a`
+    text-decoration:none;
+    color:black;
 `;

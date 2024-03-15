@@ -27,12 +27,29 @@ export const Nav = styled.a`
 `;
 
 export const Div = styled.div`
-    width:1400px;
+    width:800px;
     margin-left:100px;
     ${Nav}{
         margin-right:100px;
     }
     
+`;
+export const InputQ =styled.input`
+    width:400px;
+    height:40px;
+    margin-right:150px;
+    padding-left:50px;
+    border:1px solid lightgray;
+    border-radius:5px;
+    &:focus{
+        outline:none;
+    }
+    opacity:0.7;
+`;
+export const SIcon=styled.img`
+    width:20px;
+    height:20px;
+    margin-right:-30px;
 `;
 
 

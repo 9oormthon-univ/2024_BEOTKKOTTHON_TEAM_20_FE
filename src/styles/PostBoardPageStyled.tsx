@@ -1,7 +1,6 @@
 import styled from "styled-components";
 
 export const Frame2 = styled.div`
-    margin-top:100px;
     width:100%;
     height:auto;
     justify-content:center;
@@ -9,7 +8,6 @@ export const Frame2 = styled.div`
     margin-top:180px;
 `;
 export const WrapBoard =styled.div`
-    border:1px solid purple;
     width:65%;
     height:1300px;
     align-items:center;
@@ -21,6 +19,7 @@ flex-direction:row;
 height:50px;
 position:relative;
 align-items:center;
+padding-bottom:10px;
 `;
 export const T = styled.div`
     font-size:large;
@@ -39,7 +38,7 @@ export const WButton =styled.button`
     border:none;
 `;
 export const Wrapper =styled.div`
-
+    justify-content:center;
     width:100%;
     display:flex;
     flex-direction:column;
@@ -50,24 +49,26 @@ export const TagButton =styled.button`
     height:35px;
     margin-right:13px;
     border-radius:10px;
-    border:1px solid gray;
+    color:white;
+    border:none;
+    background-color:#dda0dd;
+    font-size:large;
+    font-weight:600;
 `;
 export const TagWrap =styled.div`
-    border:1px solid green;
     width:100%;
-    height:100px;
-    margin-top:30px;
+    height:120px;
     margin-bottom:30px;
     justify-content:center;
     align-items:center;
     display:flex;
+    flex-flow:row wrap;
 `;
 export const PostWrap =styled.div`
     display:flex;
     flex-flow: row wrap;
     justify-content:space-between;
     gap:20px;
-    border:1px solid orange;
     width:100%;
     height:auto;
 `;

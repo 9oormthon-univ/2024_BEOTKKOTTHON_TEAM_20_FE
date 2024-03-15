@@ -44,6 +44,7 @@ const PreferBoard = () => {
                             <PostBox></PostBox>
                             <PostBox></PostBox>
                             <PostBox></PostBox>
+                            <PostBox></PostBox>
 
                              {/*
             {interestPosts.slice(0, visiblePosts).map(post => (
