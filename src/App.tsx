@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import PostBoardPage from "./pages/PostBoardPage";
 import LoginPage from "./pages/LoginPage";
 import OAuth2RedirectHandler from "./pages/OAuth2RedirectHandler";
 
@@ -9,6 +10,8 @@ const App: React.FC = () => {
         <Router>
             <Routes>
                 <Route path="/" Component={MainPage} />
+
+                <Route path="/PostBoardPage" Component={PostBoardPage} />
                 <Route path="/login" Component={LoginPage} />
                 <Route
                     path="/auth/redirected/kakao"
