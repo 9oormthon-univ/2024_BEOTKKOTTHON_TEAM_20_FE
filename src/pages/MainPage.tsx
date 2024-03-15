@@ -5,16 +5,18 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Container, Slider,Question,Banner} from "../styles/MainPageStyled";
+import { Container, Slider,Question,Banner,Frame1} from "../styles/MainPageStyled";
 import NavBar from "../components/NavBar";
 import TrendBoard from "../components/TrendBoard";
 import PreferBoard from "../components/PreferBoard";
 
 
 
+
 const MainPage = () => {
     return <Container>
         <NavBar/>
+        <Frame1>
         <Slider>
             <Swiper modules={[Navigation, Pagination]}
     spaceBetween={50}
@@ -42,6 +44,7 @@ const MainPage = () => {
             <h2>자주 묻는 질문</h2>
             <h2>자주 묻는 질문</h2>
         </Question>
+        </Frame1>
     </Container>;
 };
 export default MainPage;
