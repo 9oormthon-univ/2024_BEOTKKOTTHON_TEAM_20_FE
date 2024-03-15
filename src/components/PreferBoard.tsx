@@ -1,6 +1,6 @@
 import React,{useState,useEffect} from "react";
 import { Board, BoardWrap,H1 } from "../styles/TrendBoardStyled";
-import { BoxWrap } from "../styles/PreferBoardStyled";
+import { BoxWrap, Hr, MoreButton, MoveDown } from "../styles/PreferBoardStyled";
 import PostBox from "./PostBox";
 
 const PreferBoard = () => {
@@ -8,6 +8,8 @@ const PreferBoard = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
 
     const [interestPosts, setInterestPosts] = useState([]);
+    
+    const [visiblePosts, setVisiblePosts] = useState(6);
 
     const fetchInterestPosts = async () => {
         try {
@@ -25,6 +27,9 @@ const PreferBoard = () => {
         fetchInterestPosts();
     }, []);
 
+    const MoreViewHandler =()=>{
+        setVisiblePosts(prev => prev+6);
+    }
     return <Board>
         <BoardWrap>
         {isLoggedIn ? (
@@ -41,14 +46,20 @@ const PreferBoard = () => {
                             <PostBox></PostBox>
 
                              {/*
-            {interestPosts.map(post => (
-                        <PostBox key={post.id} post={post} />
-            ))}
+            {interestPosts.slice(0, visiblePosts).map(post => (
+                                <PostBox key={post.id} post={post} />
+                            ))}
             */}
                         </BoxWrap>
                     </>
                 ) : (
-                    <h1>로그인이 필요합니다.</h1>
+                    <h1>소셜로그인 페이지로 이동</h1>
+                )}
+                {visiblePosts <= 18 && ( 
+                    <MoveDown>
+                        <Hr></Hr>
+                        <MoreButton onClick={MoreViewHandler}>더보기</MoreButton>
+                    </MoveDown>
                 )}
         </BoardWrap>
     </Board>
