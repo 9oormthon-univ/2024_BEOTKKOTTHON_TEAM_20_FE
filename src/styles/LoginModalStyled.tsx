@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import ReactModal from "react-modal";
+import theme from "./theme";
 
 export const customStyles = {
     overlay: {
@@ -45,7 +46,7 @@ export const StyledModal = styled(ReactModal)`
 
     .title {
         width: 340px;
-        color: #555555;
+        color: ${theme.colors.font1};
         font-size: 24px;
         font-weight: bold;
         margin-bottom: 15px;
@@ -53,7 +54,7 @@ export const StyledModal = styled(ReactModal)`
 
     .subTitle {
         width: 340px;
-        color: #7e7e7e;
+        color: ${theme.colors.font2};
         font-size: 16px;
     }
 
