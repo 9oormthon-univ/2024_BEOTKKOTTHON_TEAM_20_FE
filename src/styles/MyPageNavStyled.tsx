@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 import theme from "./theme";
 
 export const Container = styled.div`
@@ -61,7 +62,8 @@ export const Container = styled.div`
         color: ${theme.colors.font1};
     }
 
-    .nav:hover {
+    // 현재 페이지에 관련된 메뉴만 다른 색으로
+    .active {
         color: ${theme.colors.primary};
         background-color: #f6f7fb;
         border: 1px solid #f0f1f6;
@@ -82,4 +84,14 @@ export const Container = styled.div`
     }
 `;
 
-export default Container;
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
+`;
