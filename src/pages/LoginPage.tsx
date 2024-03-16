@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import LoginModal from "../components/LoginModal";
 
 interface ModalProps {
@@ -8,6 +8,11 @@ interface ModalProps {
 
 const LoginPage = () => {
     const [open, setOpen] = useState(true);
+
+    useEffect(() => {
+        setOpen(true);
+    }, []);
+
     const handleCloseModal = () => {
         setOpen(false);
     };
