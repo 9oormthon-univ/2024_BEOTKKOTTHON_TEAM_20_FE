@@ -4,6 +4,7 @@ import MainPage from "./pages/MainPage";
 import PostBoardPage from "./pages/PostBoardPage";
 import LoginPage from "./pages/LoginPage";
 import OAuth2RedirectHandler from "./pages/OAuth2RedirectHandler";
+import LogoutPage from "./pages/LogoutPage";
 import WritePage from "./pages/WritePage";
 import ReadPage from "./pages/ReadPage";
 
@@ -11,13 +12,14 @@ const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" Component={MainPage} />
+                <Route path="/" element={<MainPage />} />
+                <Route path="/login" element={<LoginPage />} />
                 <Route path="/postBoard" Component={PostBoardPage} />
-                <Route path="/login" Component={LoginPage} />
                 <Route
                     path="/auth/redirected/kakao"
-                    Component={OAuth2RedirectHandler}
+                    element={<OAuth2RedirectHandler />}
                 />
+                <Route path="/logout" element={<LogoutPage />} />
                 <Route path="/write" Component={WritePage}/>
                 <Route path="/read" Component={ReadPage}/>
             </Routes>
