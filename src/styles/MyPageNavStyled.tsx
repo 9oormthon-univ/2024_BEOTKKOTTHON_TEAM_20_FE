@@ -20,6 +20,7 @@ export const Container = styled.div`
     .top_title {
         margin-right: 3vw;
         font-size: 18px;
+        font-weight: bold;
         color: ${theme.colors.font1};
     }
 
@@ -59,6 +60,7 @@ export const Container = styled.div`
         border: 1px solid white;
         border-radius: 15px;
 
+        font-weight: bold;
         color: ${theme.colors.font1};
     }
 
