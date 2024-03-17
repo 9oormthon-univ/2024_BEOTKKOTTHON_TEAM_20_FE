@@ -1,5 +1,7 @@
 import React, { useEffect } from "react";
+import { Container } from "../styles/LodingStyled";
 import { useNavigate } from "react-router-dom";
+import Qudy from "../image/Qtudy_char.png";
 import axios from "axios";
 
 const OAuth2RedirectHandler = () => {
@@ -28,6 +30,11 @@ const OAuth2RedirectHandler = () => {
             login();
         }
     }, []);
-    return <h1>로그인 처리 중 화면 : 추후 로딩 화면으로 변경</h1>;
+    return (
+        <Container>
+            <div className="spinner"></div>
+            <img src={Qudy} alt="qudy_logo" className="qudy_logo"></img>
+        </Container>
+    );
 };
 export default OAuth2RedirectHandler;
