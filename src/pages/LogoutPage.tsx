@@ -8,9 +8,19 @@ const LogoutPage = () => {
     const logout = () => {
         axios
             .post(
-                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/auth/kakao/logout"
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/auth/kakao/logout",
+                {
+                    headers: {
+                        Authorization:
+                            "Bearer " +
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
             )
             .then((response) => {
+                console.log(
+                    "Bearer " + window.localStorage.getItem("accessToken")
+                );
                 localStorage.removeItem("accessToken");
                 navigate("/login"); // 로그인 후 이동할 페이지 경로 : 바로 이전 페이지
             })
