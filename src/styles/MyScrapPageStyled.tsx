@@ -21,7 +21,7 @@ export const Container = styled.div`
 
     .contentBox {
         width: 80vw;
-        height: 60vh;
+        height: 68vh;
 
         display: flex;
         justify-content: center;

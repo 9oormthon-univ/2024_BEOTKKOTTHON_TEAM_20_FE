@@ -1,6 +1,6 @@
 import React from "react";
 import { Container, StyledLink } from "../styles/MyPageNavStyled";
-import MainLogo from "../image/MainLogo.png";
+import MainLogo from "../image/Qtudy_logo_2.png";
 import { useLocation } from "react-router-dom";
 
 const MyPageNav = () => {
@@ -19,7 +19,13 @@ const MyPageNav = () => {
                 </StyledLink>
             </div>
             <div className="sideNav">
-                <img src={MainLogo} alt="mainlogo"></img>
+                <StyledLink to="/">
+                    <img
+                        src={MainLogo}
+                        alt="mainlogo"
+                        className="logoImg"
+                    ></img>
+                </StyledLink>
 
                 <div className="navBox">
                     <StyledLink to="/mypage">

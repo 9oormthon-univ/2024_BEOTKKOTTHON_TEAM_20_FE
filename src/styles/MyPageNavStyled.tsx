@@ -8,6 +8,7 @@ export const Container = styled.div`
         height: 10vh;
 
         background-color: white;
+        /* background-color: ${theme.colors.primary}; */
 
         position: fixed;
         top: 0;
@@ -22,6 +23,7 @@ export const Container = styled.div`
         font-size: 18px;
         font-weight: bold;
         color: ${theme.colors.font1};
+        /* color: white; */
     }
 
     .sideNav {
@@ -40,8 +42,8 @@ export const Container = styled.div`
         align-items: center;
     }
 
-    .sideNav > img {
-        width: 3vw;
+    .logoImg {
+        width: 6vw;
         margin-top: 2vh;
     }
 

@@ -2,7 +2,7 @@ import React from "react";
 import { Container } from "../styles/MyScrapPageStyled";
 import MyPageNav from "../components/MyPageNav";
 import BasicPagination from "../components/BasicPagination";
-import PostBox from "../components/PostBox";
+import PostCard from "../components/PostCard";
 
 const MyScrapPage = () => {
     return (
@@ -10,12 +10,12 @@ const MyScrapPage = () => {
             <MyPageNav />
             <Container>
                 <div className="contentBox">
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
                 </div>
                 <div className="paginationBox">
                     <BasicPagination />

@@ -1,8 +1,8 @@
 import React from "react";
 import { Container } from "../styles/MyPostPageStyled";
 import MyPageNav from "../components/MyPageNav";
-import PostBox from "../components/PostBox";
 import BasicPagination from "../components/BasicPagination";
+import PostCard from "../components/PostCard";
 
 const MyPostPage = () => {
     return (
@@ -10,12 +10,12 @@ const MyPostPage = () => {
             <MyPageNav />
             <Container>
                 <div className="contentBox">
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
-                    <PostBox />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
+                    <PostCard />
                 </div>
                 <div className="paginationBox">
                     <BasicPagination />
