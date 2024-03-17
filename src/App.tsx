@@ -13,6 +13,7 @@ import MyPostPage from "./pages/MyPostPage";
 import MyScrapPage from "./pages/MyScrapPage";
 import MyMistakeNotebookPage from "./pages/MyMistakeNotebookPage";
 import AiQuizPage from "./pages/AiQuizPage";
+import QuizPage from "./pages/QuizPage";
 
 const App: React.FC = () => {
     return (
@@ -39,6 +40,7 @@ const App: React.FC = () => {
                     element={<MyMistakeNotebookPage />}
                 />
                 <Route path="/aiQuiz" element={<AiQuizPage />} />
+                <Route path="/quiz" element={<QuizPage />} />
             </Routes>
         </Router>
     );

@@ -1,5 +1,5 @@
 import React from "react";
-import { Container } from "../styles/AiQuizPageStyled";
+import { Container, StyledLink } from "../styles/AiQuizPageStyled";
 import NavBar from "../components/NavBar";
 
 const AiQuizPage = () => {
@@ -26,9 +26,11 @@ const AiQuizPage = () => {
                         <option value="hashtag">#html/css</option>
                     </select>
                 </div>
-                <div className="quizStartBtn">
-                    <div className="btn">퀴즈 생성하기</div>
-                </div>
+                <StyledLink to="/quiz">
+                    <div className="quizStartBtn">
+                        <div className="btn">퀴즈 생성하기</div>
+                    </div>
+                </StyledLink>
             </Container>
         </>
     );

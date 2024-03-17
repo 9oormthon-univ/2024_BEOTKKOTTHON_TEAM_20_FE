@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "./theme";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     padding-top: 11.5vh; //  추후 네브바에 맞춰서 수정
@@ -88,5 +89,17 @@ export const Container = styled.div`
         background-color: ${theme.colors.primary};
         color: white;
         cursor: pointer;
+    }
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
     }
 `;
