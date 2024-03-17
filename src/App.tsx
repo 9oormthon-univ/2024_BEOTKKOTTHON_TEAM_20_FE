@@ -8,6 +8,10 @@ import OAuth2RedirectHandler from "./pages/OAuth2RedirectHandler";
 import LogoutPage from "./pages/LogoutPage";
 import WritePage from "./pages/WritePage";
 import ReadPage from "./pages/ReadPage";
+import MyPage from "./pages/MyPage";
+import MyPostPage from "./pages/MyPostPage";
+import MyScrapPage from "./pages/MyScrapPage";
+import MyMistakeNotebookPage from "./pages/MyMistakeNotebookPage";
 
 const App: React.FC = () => {
     return (
@@ -24,8 +28,15 @@ const App: React.FC = () => {
                     element={<OAuth2RedirectHandler />}
                 />
                 <Route path="/logout" element={<LogoutPage />} />
-                <Route path="/write" Component={WritePage}/>
-                <Route path="/read" Component={ReadPage}/>
+                <Route path="/write" Component={WritePage} />
+                <Route path="/read" Component={ReadPage} />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/mypost" element={<MyPostPage />} />
+                <Route path="/myscrap" element={<MyScrapPage />} />
+                <Route
+                    path="/myMistakeNotebook"
+                    element={<MyMistakeNotebookPage />}
+                />
             </Routes>
         </Router>
     );
