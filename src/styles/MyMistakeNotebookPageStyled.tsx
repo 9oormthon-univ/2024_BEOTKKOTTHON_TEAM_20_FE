@@ -11,6 +11,7 @@ export const Container = styled.div`
     left: 15vw;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 
@@ -20,11 +21,28 @@ export const Container = styled.div`
 
     .contentBox {
         width: 80vw;
-        height: 80vh;
+        height: 68vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: wrap;
 
         border-radius: 15px;
 
-        background-color: white;
+        /* background-color: white; */
+    }
+
+    .paginationBox {
+        width: 80vw;
+        height: 10vh;
+
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        /* align-items: center; */
+
+        /* background-color: red; */
     }
 `;
 
