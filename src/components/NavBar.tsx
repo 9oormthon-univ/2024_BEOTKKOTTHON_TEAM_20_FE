@@ -13,7 +13,7 @@ const NavBar = () => {
             </Div>
                 <SIcon src={SearchIcon}></SIcon>
                 <InputQ placeholder="검색어를 입력하세요"></InputQ>
-                <Nav>로그인</Nav>
+                <Nav href="/login">로그인</Nav>
     </Navigation>
 };
 export default NavBar;

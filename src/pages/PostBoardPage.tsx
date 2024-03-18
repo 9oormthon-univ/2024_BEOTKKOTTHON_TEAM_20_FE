@@ -5,11 +5,13 @@ import { Frame2, Head, WrapBoard, T, WButton, Wrapper, TagButton, TagWrap, PostW
 import PostBox from "../components/PostBox";
 import MyPostBoard from "../components/MyPostBoard";
 import ScrapBoard from "../components/ScrapBoard";
+import Pagination from '@mui/material/Pagination';
+
 
 const PostBoardPage = () => {
     const tags=["경영학","교육","광고 및 미디어","법학","사회과학","식품 및 체육",
     "언어 및 문학","인문학","의학","예술 및 디자인","자연과학","전기 및 전자공학",
-    "컴퓨터공학","환경"]
+    "컴퓨터공학","환경","정치 및 외교"]
     
     const [view, setView] = useState("all");
 
@@ -58,6 +60,7 @@ const PostBoardPage = () => {
                                     <PostBox /><PostBox /><PostBox />
                                     <PostBox /><PostBox />
                                 </PostWrap>
+                                <Pagination count={10} />
                             </>
                         )}
                     </Wrapper>

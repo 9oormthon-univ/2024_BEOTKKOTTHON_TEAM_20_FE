@@ -1,7 +1,8 @@
 import React,{useState,useEffect} from "react";
 import { Board, BoardWrap,H1 } from "../styles/TrendBoardStyled";
-import { BoxWrap, Hr, MoreButton, MoveDown } from "../styles/PreferBoardStyled";
+import { BoxWrap, MoreButton} from "../styles/PreferBoardStyled";
 import PostBox from "./PostBox";
+import MoreView from "../image/MoreView.png";
 
 const PreferBoard = () => {
     const [userInfo, setUserInfo] = useState('');
@@ -42,9 +43,7 @@ const PreferBoard = () => {
                             <PostBox></PostBox>
                             <PostBox></PostBox>
                             <PostBox></PostBox>
-                            <PostBox></PostBox>
-                            <PostBox></PostBox>
-                            <PostBox></PostBox>
+                            
 
                              {/*
             {interestPosts.slice(0, visiblePosts).map(post => (
@@ -57,10 +56,7 @@ const PreferBoard = () => {
                     <h1>소셜로그인 페이지로 이동</h1>
                 )}
                 {visiblePosts <= 18 && ( 
-                    <MoveDown>
-                        <Hr></Hr>
-                        <MoreButton onClick={MoreViewHandler}>더보기</MoreButton>
-                    </MoveDown>
+                        <MoreButton src={MoreView} onClick={MoreViewHandler}/>
                 )}
         </BoardWrap>
     </Board>

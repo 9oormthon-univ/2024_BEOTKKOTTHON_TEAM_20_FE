@@ -24,10 +24,10 @@ export const WFrame = styled.div`
 `;
 export const HeadOpt = styled.div`
     display:flex;
-    flex-direction:row;
     height:40px;
     justify-content:space-between;
     margin-bottom:80px;
+    flex-flow: row wrap;
 `;
 export const Opt1 = styled.div`
     font-size:20px;
@@ -47,9 +47,10 @@ export const TagInput=styled.input`
 export const SummaryB = styled.button`
     width:200px;
     color:white;
-    background-color:purple;
+    background-color:#7B3FF6;
     font-size:large;
     border-radius:5px;
+    border:none;
 `;
 export const WTitle =styled.textarea`
 border:none;
