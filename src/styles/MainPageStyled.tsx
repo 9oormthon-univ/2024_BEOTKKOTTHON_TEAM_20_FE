@@ -19,18 +19,28 @@ export const Frame1 = styled.div`
 export const Slider = styled.div`
     width:100%;
     height:750px;
-    border:1px solid gray;
-    margin-bottom:100px;
 `;
 export const Question = styled.div`
     width:100%;
-    height:400px;
-    background-color:#f1dcff;
-    margin-top:200px;
+    height:150px;
+    background-color:lightgray;
+    margin-top:400px;
     padding:100px;
     opacity:0.2;
+    display:flex;
+    flex-direction:row;
+    justify-content:space-around;
+    div{
+        display:flex;
+        flex-direction:column;
+        width:30%;
+    }
+    
 `;
 export const Banner = styled.img`
     width:100%;
     height:100%;
+`;
+export const GoButton=styled.img`
+    width:33.3%;
 `;
