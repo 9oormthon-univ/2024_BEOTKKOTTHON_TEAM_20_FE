@@ -8,8 +8,8 @@ export const Frame2 = styled.div`
     margin-top:180px;
 `;
 export const WrapBoard =styled.div`
-    width:65%;
-    height:1300px;
+    width:75%;
+    height:1500px;
     align-items:center;
 `;
 export const Head = styled.div`
@@ -29,7 +29,7 @@ export const T = styled.div`
 export const WButton =styled.button`
     position:absolute;
     right:0;
-    background-color:#906AA5;
+    background-color:#7B3FF6;
     font-size:large;
     font-weight:600;
     width:150px;
@@ -42,24 +42,25 @@ export const Wrapper =styled.div`
     width:100%;
     display:flex;
     flex-direction:column;
-    height:1100px;
+    height:auto;
+    margin-top:30px;
     
 `;
 export const TagButton =styled.button`
     height:35px;
     margin-right:13px;
-    border-radius:10px;
-    color:white;
+    border-radius:5px;
     border:none;
-    background-color:#dda0dd;
+    border:1px solid gray;
     font-size:large;
     font-weight:600;
+    background-color:white;
+    color:gray;
 `;
 export const TagWrap =styled.div`
     width:100%;
     height:120px;
     margin-bottom:30px;
-    justify-content:center;
     align-items:center;
     display:flex;
     flex-flow:row wrap;
@@ -68,7 +69,7 @@ export const PostWrap =styled.div`
     display:flex;
     flex-flow: row wrap;
     justify-content:space-between;
-    gap:20px;
+    gap:18px;
     width:100%;
     height:auto;
 `;

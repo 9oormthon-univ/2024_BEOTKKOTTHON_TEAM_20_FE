@@ -1,5 +1,9 @@
 import React,{ useState, useEffect }  from "react";
-import { Board, BoardWrap, Div,H1 } from "../styles/TrendBoardStyled";
+import { Board, BoardWrap, Div,H1,DivWrap,SDiv,QButton } from "../styles/TrendBoardStyled";
+import Trend1 from "../image/Trend1.png";
+import Trend2 from "../image/Trend2.png";
+import Trend3 from "../image/Trend3.png";
+import QuizButton from "../image/QuizButton.png";
 
 const TrendBoard = () => {
   const [topPosts, setTopPosts] = useState([]);
@@ -21,36 +25,30 @@ const TrendBoard = () => {
 
     return <Board>
         <BoardWrap>
-        <H1>요즘 뜨는 트렌드</H1>
+        <H1>요즘 뜨는 트렌드 TOP 3</H1>
+        <DivWrap>
         <Div>
-          <h3>1위</h3>
-          <h3>제목제목제목제목제목</h3>
-        </Div>
-        <Div>
-          <h3>2위</h3>
-          <h3>제목제목제목제목제목</h3>
-        </Div>
-        <Div>
-          <h3>3위</h3>
-          <h3>제목제목제목제목제목</h3>
+          <img src={Trend1}/>
+          <SDiv>
+            <h1>분야명</h1>
+            <QButton src={QuizButton}/>
+          </SDiv>
         </Div>
         <Div>
-          <h3>4위</h3>
-          <h3>제목제목제목제목제목</h3>
+          <img src={Trend2}/>
+          <SDiv>
+          <h1>분야명</h1>
+          <QButton src={QuizButton}/>
+          </SDiv>
         </Div>
         <Div>
-          <h3>5위</h3>
-          <h3>제목제목제목제목제목</h3>
+          <img src={Trend3}/>
+          <SDiv>
+          <h1>분야명</h1>
+          <QButton src={QuizButton}/>
+          </SDiv>
         </Div>
-
-        {/*
-        {topPosts.map(post => (
-        <Div key={post.id}>
-          <h3>{post.id}</h3>
-          <p>{post.title}</p>
-        </Div>
-      ))}
-      */}
+        </DivWrap>
       </BoardWrap>
     </Board>
 };

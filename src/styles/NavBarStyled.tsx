@@ -13,6 +13,7 @@ export const Navigation = styled.nav`
     left:0;
     right:0;
     background-color:white;
+    z-index:99;
 `;
 export const Logo = styled.img`
     width:60px;

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
-import { Box, Icon, Span, Wrapp,A } from "../styles/PostBoxStyled";
+import { Box, Icon, Span, Wrapp,A,Countt, MinDiv } from "../styles/PostBoxStyled";
 import TalkIcon from "../image/TalkIcon.png";
 import ScrapIcon2 from "../image/ScrapIcon2.png";
 
 const PostBox = () => {
-    const title = "제목";
-    const content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용";
+    const title = "제목제목";
+    const content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용";
 
     const titleMaxLength = 18;
-    const contentMaxLength = 65;
+    const contentMaxLength = 83;
 
     const trimmedTitle = title.length > titleMaxLength ? title.slice(0, titleMaxLength) + "..." : title;
     const trimmedContent = content.length > contentMaxLength ? content.slice(0, contentMaxLength) + "..." : content;
@@ -24,20 +24,23 @@ const PostBox = () => {
 
     return (
         <Box><A href="/read">
-            <h3>{trimmedTitle}</h3>
-            <p>{trimmedContent}</p>
+            <MinDiv>
+            <h2>{trimmedTitle}</h2>
+            <p>분야</p>
+            </MinDiv>
+            <p style={{fontSize:"20px"}}>{trimmedContent}</p>
             <Wrapp>
                 <div>
-                    <Span>태그</Span>
-                    <Span>태그</Span>
-                    <Span>태그</Span>
+                    <Span>#태그</Span>
+                    <Span>#태그</Span>
+                    <Span>#태그</Span>
                 </div>
-                <div>
+                <Countt>
                     <Icon src={TalkIcon} />
                     {/*댓글수*/} 56
                     <Icon src={ScrapIcon2} onClick={scrapHandler} style={{ filter: fillColor }} />
                     {/*스크랩수*/} 32
-                </div>
+                </Countt>
             </Wrapp>
             </A>
         </Box>

@@ -1,16 +1,20 @@
 import React from "react";
-import { Navigation, Pagination } from 'swiper/modules';
+import { Navigation, Pagination,Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Container, Slider,Question,Banner,Frame1} from "../styles/MainPageStyled";
+import { Container, Slider,Question,Banner,Frame1, GoButton} from "../styles/MainPageStyled";
 import NavBar from "../components/NavBar";
 import TrendBoard from "../components/TrendBoard";
 import PreferBoard from "../components/PreferBoard";
-
-
+import Banner1 from "../image/Banner1.png";
+import Banner2 from "../image/Banner2.png";
+import GoQuiz from "../image/GoQuiz.png";
+import GoPost from "../image/GoPost.png";
+import GoNote from "../image/GoNote.png";
+import MainLogo from "../image/MainLogo.png";
 
 
 const MainPage = () => {
@@ -19,30 +23,45 @@ const MainPage = () => {
         <Frame1>
         <Slider>
             <Swiper modules={[Navigation, Pagination]}
-    spaceBetween={50}
-    slidesPerView={3}
-    navigation
-    pagination={{ clickable: true }}
-    scrollbar={{ draggable: true }}
-          >
+            spaceBetween={50}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            scrollbar={{ draggable: true }}
+            loop={true}
+            autoplay={{delay:3000}}
+            >
                 <SwiperSlide>
-                    <Banner src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F8WQ5N%2Fbtshy5kxPYn%2FVJqr5MTjba7vLROZucajuk%2Fimg.png"></Banner>
+                    <Banner src={Banner1}></Banner>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Banner src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F1J1Il%2FbtshzBDtGf9%2F6h8SzcjwurvggUYcRO7UaK%2Fimg.png"></Banner>
+                    <Banner src={Banner2}></Banner>
                 </SwiperSlide>
                 <SwiperSlide>
-                    <Banner src="https://img1.daumcdn.net/thumb/R1280x0/?scode=mtistory2&fname=https%3A%2F%2Fblog.kakaocdn.net%2Fdn%2F3Rru3%2FbtshBmSUExv%2FRLgXbEOZhK4KVvs5TqsBKK%2Fimg.png"></Banner>
+                    <Banner src=""></Banner>
                 </SwiperSlide>
             </Swiper>
         </Slider>
         <TrendBoard/>
+        <div>
+            <GoButton src={GoQuiz}/>
+            <GoButton src={GoPost}/>
+            <GoButton src={GoNote}/>
+        </div>
         <PreferBoard/>
         <Question>
-            <h2>자주 묻는 질문</h2>
-            <h2>자주 묻는 질문</h2>
-            <h2>자주 묻는 질문</h2>
-            <h2>자주 묻는 질문</h2>
+            <div>
+                <img style={{width:"50px",height:"50px"}} src={MainLogo}></img>
+                <p>Copyright ⓒ Qtudy. All rights reserved.</p>
+            </div>
+            <div>
+                <p>Contact</p>
+                <p>문의하기</p>
+            </div>
+            <div>
+            <p>이용약관</p>
+                <p>개인정보처리방침</p>
+            </div>
         </Question>
         </Frame1>
     </Container>;
