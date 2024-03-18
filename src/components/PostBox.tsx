@@ -8,7 +8,7 @@ const PostBox = () => {
     const content = "내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용내용";
 
     const titleMaxLength = 18;
-    const contentMaxLength = 83;
+    const contentMaxLength = 98;
 
     const trimmedTitle = title.length > titleMaxLength ? title.slice(0, titleMaxLength) + "..." : title;
     const trimmedContent = content.length > contentMaxLength ? content.slice(0, contentMaxLength) + "..." : content;

@@ -14,6 +14,7 @@ export const Navigation = styled.nav`
     right:0;
     background-color:white;
     z-index:99;
+    
 `;
 export const Logo = styled.img`
     width:60px;
@@ -25,6 +26,7 @@ export const Nav = styled.a`
     text-decoration:none;
     font-weight:600;
     font-size: large;
+    width:100px;
 `;
 
 export const Div = styled.div`
