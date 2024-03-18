@@ -2,14 +2,14 @@ import styled from "styled-components";
 
 export const Frame2 = styled.div`
     width:100%;
-    height:auto;
+    height:1700px;
     justify-content:center;
     display:flex;
     margin-top:180px;
 `;
 export const WrapBoard =styled.div`
     width:75%;
-    height:1500px;
+    height:auto;
     align-items:center;
 `;
 export const Head = styled.div`
@@ -44,6 +44,7 @@ export const Wrapper =styled.div`
     flex-direction:column;
     height:auto;
     margin-top:30px;
+    align-items:center;
     
 `;
 export const TagButton =styled.button`
@@ -72,4 +73,6 @@ export const PostWrap =styled.div`
     gap:18px;
     width:100%;
     height:auto;
+    margin-bottom:35px;
+    margin-top:30px;
 `;
