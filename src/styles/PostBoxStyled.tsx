@@ -24,6 +24,10 @@ export const Box = styled.div`
     @media screen and (max-width: 480px) {
         width: calc(100% - 30px); /* 화면 크기가 더 작아졌을 때 너비 설정 */
     }
+    .A{
+        text-decoration:none;
+    color:black;
+    }
 `;
 
 export const MinDiv=styled.div`
@@ -56,10 +60,7 @@ export const Icon =styled.img`
     margin-left:15px;
     opacity:0.4;
 `;
-export const A=styled.a`
-    text-decoration:none;
-    color:black;
-`;
+
 export const Countt=styled.div`
     margin-right:50px;
 `;

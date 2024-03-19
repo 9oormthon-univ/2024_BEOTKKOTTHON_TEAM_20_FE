@@ -39,7 +39,10 @@ position:relative;
 export const TalkBoard=styled.div`
     border:1px solid red;
     height:auto;
-    
+    .div{
+        display:flex;
+        justify-content:center;
+    }
 `;
 export const DetailInfo=styled.div`
     width:100%;

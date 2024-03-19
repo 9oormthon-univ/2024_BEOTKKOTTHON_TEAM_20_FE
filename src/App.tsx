@@ -32,7 +32,7 @@ const App: React.FC = () => {
                 />
                 <Route path="/logout" element={<LogoutPage />} />
                 <Route path="/write" Component={WritePage} />
-                <Route path="/read" Component={ReadPage} />
+                <Route path="/read/:postId" element={<ReadPage />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/mypost" element={<MyPostPage />} />
                 <Route path="/myscrap" element={<MyScrapPage />} />

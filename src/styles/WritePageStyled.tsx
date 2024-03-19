@@ -79,3 +79,6 @@ position:absolute;
 right:0;
 bottom:0;
 `;
+export const CategoryButton=styled.option`
+    padding-left:5px;
+`;

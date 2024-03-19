@@ -45,7 +45,7 @@ const MainPage = () => {
         <TrendBoard/>
         <div>
             <GoButton src={GoQuiz}/>
-            <GoButton src={GoPost}/>
+            <a href="/write"><GoButton src={GoPost}/></a>
             <GoButton src={GoNote}/>
         </div>
         <PreferBoard/>
