@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, ProgressBar, Progress } from "../styles/QuizPageStyled";
 import NavBar from "../components/NavBar";
+import axios from "axios";
 
 // interface ProgressBarProps {
 //     progress: number; // 진도율을 나타내는 값 (0에서 100 사이)
