@@ -67,15 +67,8 @@ const ReadPage = () => {
                             Authorization: window.localStorage.getItem("accessToken"),
                         },
                     });
-
-                    if (Array.isArray(response.data)) {
-                        setCommentList(response.data);
-                        setTotalPages(response.data.length);
-                    } else {
-                        console.log("API 응답 데이터가 배열이 아닙니다.");
-                        setCommentList([]);
-                        setTotalPages(1);
-                    }
+                    setCommentList(response.data.commentList);
+                    setTotalPages(response.data.totalPages);
                     console.log(response.data);
                 }
             } catch (error) {

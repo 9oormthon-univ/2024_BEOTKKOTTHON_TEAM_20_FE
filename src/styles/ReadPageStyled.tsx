@@ -37,11 +37,11 @@ height:auto;
 position:relative;
 `;
 export const TalkBoard=styled.div`
-    border:1px solid red;
     height:auto;
     .div{
         display:flex;
         justify-content:center;
+        margin-top:20px;
     }
 `;
 export const DetailInfo=styled.div`
