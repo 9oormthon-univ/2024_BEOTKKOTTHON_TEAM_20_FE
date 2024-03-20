@@ -1,10 +1,13 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Div, Navigation,Logo, Nav,InputQ,SIcon } from "../styles/NavBarStyled";
 import MainLogo from "../image/MainLogo.png";
 import PostBoardPage from "../pages/PostBoardPage";
 import SearchIcon from "../image/SearchIcon.png";
+import axios from "axios";
 
 const NavBar = () => {
+    const [search,setSearch]=useState();
+
     return <Navigation>
                 <a href="/"><Logo src={MainLogo} alt="mainlogo"></Logo></a>
             <Div>
