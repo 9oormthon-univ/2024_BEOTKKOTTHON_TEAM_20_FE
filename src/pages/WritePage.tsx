@@ -1,15 +1,18 @@
 import React, { useState, ChangeEvent } from "react";
+import { useNavigate } from 'react-router-dom';
 import NavBar from "../components/NavBar";
 import { Container } from "../styles/MainPageStyled";
-import { BackG, WBoard, WFrame, HeadOpt, Opt1, SummaryB, WContent, WTitle, Count, Selector, TagInput, CategoryButton } from "../styles/WritePageStyled";
+import { BackG, WBoard, WFrame, HeadOpt, Opt1, SummaryB, WContent, WTitle, Count, Selector, TagInput, CategoryButton,Prompt, BackBtn, GoBtn } from "../styles/WritePageStyled";
 import axios from "axios";
+import NoticeIcon from "../image/NoticeIcon.png";
 
 const WritePage = () => {
     const [inputCount, setInputCount] = useState(0);
     const [title, setTitle] = useState("");
     const [content, setContent] = useState("");
     const [tags, setTags] = useState<string[]>([]);
-    const [categoryId, setCategoryId] = useState(1); // 기본값으로 1 설정
+    const [categoryId, setCategoryId] = useState(1); 
+    const navigate = useNavigate();
 
     const categories = ["경영학", "교육", "광고 및 미디어", "법학", "사회과학", "식품 및 체육", "언어 및 문학", "인문학", "의학", "예술 및 디자인", "자연과학", "전기 및 전자공학", "컴퓨터공학", "환경", "정치 및 외교"];
 
@@ -42,13 +45,22 @@ const WritePage = () => {
                 Authorization: window.localStorage.getItem("accessToken"),
             },
         });
-            console.log(response.data); // 작성된 게시물의 응답 데이터 출력
+            navigate('/postBoard');
+            console.log(response.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('error fetching :',error.response);
-              }
+            }
         }
     };
+
+    const handleGoBack = () => {
+		navigate(-1);
+	}
+
+	const handleGoBoard = () => {
+		navigate('/postBoard');
+	}
 
     return (
         <Container>
@@ -79,6 +91,17 @@ const WritePage = () => {
                     </WFrame>
                 </WBoard>
             </BackG>
+            {/* 페이지를 벗어나려는 시도가 있을 때 적용 
+            <Prompt>
+                <img style={{width:"40px",height:"40px"}} src={NoticeIcon}></img>
+                <p>포스팅을 그만두시겠어요?</p>
+                <p>페이지를 벗어나면 지금까지 작성한 내용은 모두 사라져요!</p>
+                <div>
+                <BackBtn name="back" onClick={handleGoBack}>취소</BackBtn>
+                <GoBtn name="go" onClick={handleGoBoard}>확인</GoBtn>
+                </div>
+            </Prompt>
+            */}
         </Container>
     );
 };

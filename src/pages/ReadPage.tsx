@@ -1,8 +1,8 @@
-import React, { useState, useEffect,ChangeEvent } from "react";
+import React, { useState, useEffect, ChangeEvent } from "react";
 import { Container } from "../styles/MainPageStyled";
 import NavBar from "../components/NavBar";
 import { HeadOpt, Opt1 } from "../styles/WritePageStyled";
-import { TagOutput, Refactor, Delete, RTitle, RContent, TalkBoard, Wrapping, RBoard, RFrame, BackG2, AISummary, SummaryContent, Img, Talk, ProfileImg, TalkInfo, Datee, TalkForm, TalkWrap, CheckBtn, Logoo, DetailInfo, Dateee } from "../styles/ReadPageStyled";
+import { TagOutput, Refactor, Delete, RTitle, RContent, TalkBoard, Wrapping, RBoard, RFrame, BackG2, AISummary, SummaryContent, Img, Talk, ProfileImg, TalkInfo, Datee, TalkForm, TalkWrap, CheckBtn, Logoo, DetailInfo, Dateee, Opt0 } from "../styles/ReadPageStyled";
 import QuizGo from "../image/QuizGo.png";
 import QudyLogo from "../image/QudyLogo.png";
 import { Countt, Icon } from "../styles/PostBoxStyled";
@@ -10,50 +10,60 @@ import TalkIcon from "../image/TalkIcon.png";
 import ScrapIcon2 from "../image/ScrapIcon2.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
-import { Post } from "../components/post";
+import { DetailPost } from "../components/post";
 import { Comment } from "../components/comment";
 import { Pagination } from "@mui/material";
 
 const ReadPage = () => {
-    const [post, setPost] = useState<Post | null>(null);
-    const [comments, setComments] = useState<Comment[]>([]);
+    const [post, setPost] = useState<DetailPost | null>(null);
+    const [commentList, setCommentList] = useState<Comment[]>([]);
     const { postId } = useParams<{ postId: string }>();
-    const [inputComment,setInputComment]=useState("");
+    const [inputComment, setInputComment] = useState("");
     const [totalPages, setTotalPages] = useState<number>(1);
 
     useEffect(() => {
         const fetchPost = async () => {
             try {
                 if (postId) {
-                    const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts?postId=${postId}`,{
+                    const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts?postId=${postId}`, {
                         headers: {
                             Authorization: window.localStorage.getItem("accessToken"),
                         },
                     });
-                    setPost(response.data.post);
+                    setPost(response.data);
+                    console.log(response.data);
                 }
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching :',error.response);
-                  }
+                }
             }
         };
+
         const fetchComments = async () => {
             try {
                 if (postId) {
-                    const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/${postId}/comments/all`,{
-                    //params: { page: 1 },    
-                    headers: {
+                    const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/comments/all?postId=${postId}`, {
+                        params: { page: 0 },
+                        headers: {
                             Authorization: window.localStorage.getItem("accessToken"),
                         },
                     });
-                    setComments(response.data.comments);
-                    setTotalPages(response.data.totalPages);
+
+                    if (Array.isArray(response.data)) {
+                        setCommentList(response.data);
+                        setTotalPages(response.data.length);
+                    } else {
+                        console.log("API 응답 데이터가 배열이 아닙니다.");
+                        setCommentList([]);
+                        setTotalPages(1);
+                    }
+                    console.log(response.data);
                 }
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching :',error.response);
-                  }
+                }
             }
         };
 
@@ -62,15 +72,20 @@ const ReadPage = () => {
     }, [postId]);
 
     const handlePageChange = async (event: React.ChangeEvent<unknown>, page: number) => {
-        try{
-                const response =await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/${postId}/comments/all`,{
-                    params:{page},
-                    headers:{
-                        Authorization: window.localStorage.getItem("accessToken"),
-                    },
-                });
-                setComments(response.data.commentList);
-        }catch (error) {
+        try {
+            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/comments/all?postId=${postId}`, {
+                params: { page },
+                headers: {
+                    Authorization: window.localStorage.getItem("accessToken"),
+                },
+            });
+            if (Array.isArray(response.data)) {
+                setCommentList(response.data);
+            } else {
+                console.log("API 응답 데이터가 배열이 아닙니다.");
+            }
+            console.log(response.data);
+        } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('error fetching :',error.response);
             }
@@ -83,37 +98,34 @@ const ReadPage = () => {
         const value = e.target.value;
         if (e.target.name === "comment") {
             setInputComment(value);
-        } 
+        }
     };
 
     const SendCommetHandler = async () => {
         try {
-            const response = await axios.post(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/${postId}/comments`, {
-                content: inputComment
+            const currentDate = new Date().toLocaleString();
+            const response = await axios.post(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/comments?postId=${postId}`, {
+                content: inputComment,
+                createdAt: currentDate
             }, {
                 headers: {
                     Authorization: window.localStorage.getItem("accessToken"),
                 }
             });
-            console.log(response.data);
-    
-            // 새로운 comment 객체 생성
             const newComment = {
                 commentId: response.data.commentId,
                 content: inputComment,
-                createdAt: new Date().toLocaleString(), 
+                createdAt: currentDate
             };
-    
-            // 기존 comments 배열에 새로운 comment 추가
-            setComments(prevComments => [...prevComments, newComment]);
+            setCommentList(prevComments => [...prevComments, newComment]);
+            setInputComment('');
+            console.log(response.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                console.log('error fetching :', error.response);
+                console.log('error fetching :',error.response);
             }
         }
     };
-    
-    
 
     return (
         <Container>
@@ -123,16 +135,16 @@ const ReadPage = () => {
                     <RBoard>
                         <RFrame>
                             <HeadOpt>
-                                <Opt1>글 분류
+                                <Opt0>글 분류
                                     <span>{post ? categories[post.categoryId - 1] : ""}</span>
-                                </Opt1>
-                                <Opt1>해쉬태그 설정
+                                </Opt0>
+                                <Opt0>해쉬태그 설정
                                     <div>
                                         {post?.tag.map((tag, index) => (
                                             <TagOutput key={index}>#{tag}</TagOutput>
                                         ))}
                                     </div>
-                                </Opt1>
+                                </Opt0>
                                 <Opt1>
                                     <Refactor>수정</Refactor>
                                     <Delete>삭제</Delete>
@@ -149,20 +161,18 @@ const ReadPage = () => {
                                     {post?.scrapCount}
                                 </Countt>
                                 <Dateee>{post?.createdAt ? new Date(post.createdAt).toLocaleString() : ''}</Dateee>
-                                <Dateee>{post?.updatedAt ? new Date(post.updatedAt).toLocaleString() : ''}</Dateee>
                             </DetailInfo>
                             <hr />
-                            {/* AI 요약 문장 띄우기*/}
                             <AISummary>
                                 큐디가 요약한 표스팅의 내용이에요!
-                                <SummaryContent>{post?.aiScript}</SummaryContent>
+                                <SummaryContent>{}</SummaryContent>
                                 <Logoo src={QudyLogo}></Logoo>
                                 <Img src={QuizGo}></Img>
                             </AISummary>
                             <hr />
                             <TalkBoard>
                                 <h2>댓글</h2>
-                                {comments.map(comment => (
+                                {commentList.map(comment => (
                                     <Talk key={comment.commentId}>
                                         <ProfileImg></ProfileImg>
                                         <TalkInfo>
@@ -173,7 +183,7 @@ const ReadPage = () => {
                                     </Talk>
                                 ))}
                                 <div className="div">
-                                <Pagination count={totalPages} onChange={handlePageChange}/>
+                                    <Pagination count={totalPages} onChange={handlePageChange} />
                                 </div>
                             </TalkBoard>
                             <TalkWrap>
@@ -181,7 +191,6 @@ const ReadPage = () => {
                                 <TalkForm name="comment" onChange={onInputHandler}></TalkForm>
                                 <CheckBtn onClick={SendCommetHandler}>등록</CheckBtn>
                             </TalkWrap>
-
                         </RFrame>
                     </RBoard>
                 </Wrapping>

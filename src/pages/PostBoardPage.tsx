@@ -12,26 +12,34 @@ import { Post } from "../components/post";
 const PostBoardPage = () => {
     const [postList, setPostList] = useState<Post[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
+    const [category, setCategory] = useState<string | null>(null);
+    const [selectedCategory,setSelectedCategory]=useState<string |null>(null);
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
-                const response = await axios.get('https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts',{
-                    params: { page: 1 },
+                let url = 'https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all';
+                if (category) {
+                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${category}`;
+                }
+                const response = await axios.get(url, {
+                    params: { page: 0 },
                     headers: {
                         Authorization: window.localStorage.getItem("accessToken"),
                     },
                 });
-                setPostList(response.data.postList); // response.data.postList에서 실제 포스트 데이터를 가져옴
+                setPostList(response.data.postList); 
                 setTotalPages(response.data.totalPages);
+                console.log(response.data);
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching :',error.response);
-                  }
+                }
             }
         };
+
         fetchPosts();
-    }, []);
+    }, [category]);
 
     const categories = ["경영학", "교육", "광고 및 미디어", "법학", "사회과학", "식품 및 체육", "언어 및 문학", "인문학", "의학", "예술 및 디자인", "자연과학", "전기 및 전자공학", "컴퓨터공학", "환경", "정치 및 외교"];
 
@@ -39,6 +47,7 @@ const PostBoardPage = () => {
 
     const showAllPosts = () => {
         setView("all");
+        setCategory(null);
     };
 
     const showMyPosts = () => {
@@ -51,7 +60,7 @@ const PostBoardPage = () => {
 
     const handlePageChange = async (event: React.ChangeEvent<unknown>, page: number) => {
         try {
-            const response = await axios.get("https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/posts", {
+            const response = await axios.get("https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all", {
                 params: { page },
                 headers: {
                     Authorization: window.localStorage.getItem("accessToken"),
@@ -63,6 +72,12 @@ const PostBoardPage = () => {
                 console.log('error fetching :',error.response);
             }
         }
+    };
+
+    const handleCategoryClick = (categoryName: string) => {
+        setView("all");
+        setCategory(categoryName);
+        setSelectedCategory(categoryName);
     };
 
     return (
@@ -84,13 +99,11 @@ const PostBoardPage = () => {
                         ) : (
                             <>
                                 <TagWrap>
-                                    {/* 전체 태그 가져오기 */}
-                                    {categories.map((category, index) => (
-                                        <TagButton key={index}>{category}</TagButton>
+                                    {categories.map((categoryName, index) => (
+                                        <TagButton key={index} onClick={() => handleCategoryClick(categoryName)} style={{color:selectedCategory===categoryName?"white":"",backgroundColor:selectedCategory===categoryName?"#7B3FF6":"white"}}>{categoryName}</TagButton>
                                     ))}
                                 </TagWrap>
                                 <PostWrap>
-                                    {/* 전체 포스트 가져오기 */}
                                     {postList.map(post => (
                                         <PostBox key={post.postId} post={post} />
                                     ))}

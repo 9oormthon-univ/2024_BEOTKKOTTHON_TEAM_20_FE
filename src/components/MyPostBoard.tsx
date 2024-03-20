@@ -13,13 +13,14 @@ const MyPostBoard = () => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get("https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/my-post-list",  {
-                    params: { page: 1 },
+                    params: { page: 0 },
                     headers: {
                         Authorization: window.localStorage.getItem("accessToken"),
                     },
                 }); 
                 setPostList(response.data.postList);
-                setTotalPages(response.data.totalPages); // 총 페이지 수 설정
+                setTotalPages(response.data.totalPages); 
+                console.log(response.data);
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching :',error.response);

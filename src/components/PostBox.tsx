@@ -10,13 +10,13 @@ interface PostBoxProps {
 }
 
 const PostBox: React.FC<PostBoxProps> = ({ post }) => {
-    const { title, content, scrapCount, commentCount, tag,postId,categoryId } = post;
+    const { title, summary, scrapCount, commentCount, tag,postId,categoryId } = post;
 
     const titleMaxLength = 18;
     const contentMaxLength = 98;
 
     const trimmedTitle = title.length > titleMaxLength ? title.slice(0, titleMaxLength) + "..." : title;
-    const trimmedContent = content.length > contentMaxLength ? content.slice(0, contentMaxLength) + "..." : content;
+    const trimmedContent = summary.length > contentMaxLength ? summary.slice(0, contentMaxLength) + "..." : summary;
 
     const [isScrapped, setIsScrapped] = useState<boolean>(false);
 

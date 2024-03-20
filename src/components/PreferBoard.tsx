@@ -14,28 +14,8 @@ const PreferBoard = () => {
     const [interestPosts, setInterestPosts] = useState([]);
     const [visiblePosts, setVisiblePosts] = useState(6);
 
-    const fetchInterestPosts = async () => {
-        try {
-            const response = await axios.get('/interest-posts'); // axios를 사용하여 GET 요청 보내기
-            setInterestPosts(response.data); // 응답 데이터를 상태에 설정
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.log(error.response);
-              }
-        }
-    };
-
-    useEffect(() => {
-        setIsLoggedIn(true);
-        fetchInterestPosts();
-    }, []);
-
-    const MoreViewHandler = () => {
-        setVisiblePosts(prev => prev + 6);
-    };
-    
-    useEffect(()=>{
-        const fetchInterest = async()=>{
+    // 관심 분야 가져오기
+    const fetchInterest = async()=>{
             try{
                 const response=await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests`,{
                     headers: {
@@ -49,9 +29,29 @@ const PreferBoard = () => {
                   }
             }
         };
-        fetchInterest();
-    })
+    
+    // 분야별 post 조회    
+    const fetchInterestPosts = async () => {
+        try {
+            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list`); // axios를 사용하여 GET 요청 보내기
+            setInterestPosts(response.data); // 응답 데이터를 상태에 설정
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log(error.response);
+              }
+        }
+    };
 
+    useEffect(() => {
+        setIsLoggedIn(true);
+        fetchInterest();
+        fetchInterestPosts();
+    }, []);
+
+    const MoreViewHandler = () => {
+        setVisiblePosts(prev => prev + 6);
+    };
+    
     return (
         <Board>
             <BoardWrap>

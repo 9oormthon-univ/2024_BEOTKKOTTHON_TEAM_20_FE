@@ -109,6 +109,19 @@ export const Img=styled.img`
 position:absolute;
 right:0;
 `;
+export const Opt0=styled.div`
+font-size:20px;
+    font-weight:600;
+    height:auto;
+    span{
+        margin-left:20px;
+    }
+    div{
+        display:flex;
+    flex-flow:row wrap;
+    gap:10px;
+    }
+`;
 export const Talk=styled.div`
     display:flex;
     flex-direction:row;

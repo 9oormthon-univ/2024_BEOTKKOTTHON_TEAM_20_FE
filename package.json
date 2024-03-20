@@ -57,5 +57,5 @@
     "devDependencies": {
         "@types/styled-components": "^5.1.34"
     },
-    "proxy" : "https://localhost:8000"
+    "proxy": "https://localhost:8000"
 }

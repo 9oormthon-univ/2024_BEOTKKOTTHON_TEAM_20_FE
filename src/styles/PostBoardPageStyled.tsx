@@ -57,6 +57,10 @@ export const TagButton =styled.button`
     font-weight:600;
     background-color:white;
     color:gray;
+    &:hover{
+        border:1px solid #7B3FF6;
+        color:#7B3FF6;
+    }
 `;
 export const TagWrap =styled.div`
     width:100%;
@@ -69,7 +73,6 @@ export const TagWrap =styled.div`
 export const PostWrap =styled.div`
     display:flex;
     flex-flow: row wrap;
-    justify-content:space-between;
     gap:18px;
     width:100%;
     height:auto;
