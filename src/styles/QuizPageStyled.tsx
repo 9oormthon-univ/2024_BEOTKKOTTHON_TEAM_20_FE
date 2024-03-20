@@ -81,12 +81,12 @@ export const Container = styled.div`
         border: 1px solid white;
     }
 
-    .quiz_choice:hover {
+    /* .quiz_choice:hover {
         border: 1px solid ${theme.colors.line1};
         border-radius: 10px;
         background-color: ${theme.colors.line2};
         color: ${theme.colors.primary};
-    }
+    } */
 
     .btns {
         width: 54vw;
@@ -113,6 +113,14 @@ export const Container = styled.div`
 
     .icon {
         margin: 0 1vw;
+    }
+
+    // 선택한 답안
+    .select {
+        border: 1px solid ${theme.colors.line1};
+        border-radius: 10px;
+        background-color: ${theme.colors.line2};
+        color: ${theme.colors.primary};
     }
 `;
 
