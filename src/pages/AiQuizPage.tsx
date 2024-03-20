@@ -12,22 +12,27 @@ interface Data {
     quizList: any;
 }
 
+interface Tag {
+    name: string;
+    count: number;
+}
+
 const AiQuizPage = () => {
     const [selectCategory, setSelectCategory] = useState<string | undefined>();
     const [data, setData] = useState<Data[]>([]);
+    const [hashtags, setHashtags] = useState<Tag[]>([]);
 
-    const getData = async () => {
-        console.log("요청");
+    const getHashtag = async () => {
         try {
             const response = await axios.get(
-                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz/tag-quiz",
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/tag",
                 {
-                    params: { tagName: "AI" },
+                    params: { categoryId: 1 },
                 }
             );
 
-            console.log(response.data);
-            setData(response.data);
+            console.log(response.data.tagList);
+            setHashtags(response.data.tagList);
         } catch (error) {
             console.log(error);
         }
@@ -42,13 +47,12 @@ const AiQuizPage = () => {
     // div에 onClick을 했으니 HTMLDivElement로 타입을 정의한다.
     const createQuiz = (event: React.MouseEvent<HTMLDivElement>) => {
         // console.log(selectCategory);
-        getData();
         console.log("클릭해서 요청 보냄");
     };
 
-    // useEffect(() => {
-    //     // getData();
-    // }, []);
+    useEffect(() => {
+        getHashtag();
+    }, []);
 
     return (
         <>
@@ -72,10 +76,9 @@ const AiQuizPage = () => {
                         ))}
                     </select>
                     <select>
-                        <option value="hashtag">#react</option>
-                        <option value="hashtag">#typescript</option>
-                        <option value="hashtag">#javascript</option>
-                        <option value="hashtag">#html/css</option>
+                        {hashtags.map((hashtag) => (
+                            <option value={hashtag.name}>{hashtag.name}</option>
+                        ))}
                     </select>
                 </div>
                 <StyledLink to="/quiz">

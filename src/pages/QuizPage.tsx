@@ -6,8 +6,37 @@ import axios from "axios";
 // interface ProgressBarProps {
 //     progress: number; // 진도율을 나타내는 값 (0에서 100 사이)
 // }
+interface Data {
+    code: string;
+    message: string;
+    answerList: string;
+    quizIdList: any;
+    quizList: any;
+}
 
 const QuizPageStyled = () => {
+    const [data, setData] = useState<Data[]>([]);
+
+    const getData = async () => {
+        try {
+            const response = await axios.get(
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz/tag-quiz",
+                {
+                    params: { tagName: "test1" },
+                }
+            );
+
+            console.log(response.data);
+            // setHashtags(response.data.tagList);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <>
             <NavBar />
