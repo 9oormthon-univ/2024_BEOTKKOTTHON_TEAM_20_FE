@@ -1,57 +1,58 @@
 import React, { useState, useEffect } from "react";
-import { Board, BoardWrap,H1 } from "../styles/TrendBoardStyled";
-import { BoxWrap, MoreButton} from "../styles/PreferBoardStyled";
+import { Board, BoardWrap, H1 } from "../styles/TrendBoardStyled";
+import { BoxWrap, MoreButton } from "../styles/PreferBoardStyled";
 import PostBox from "./PostBox";
 import MoreView from "../image/MoreView.png";
-import axios from 'axios'; // axios import
+import axios from 'axios';
 import { Post } from "./post";
 
 const PreferBoard = () => {
-    const [userInfo, setUserInfo] = useState('');
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    const [postList, setPostList] = useState<Post[]>([]);
-
-    const [interestPosts, setInterestPosts] = useState([]);
+    const [interestPosts, setInterestPosts] = useState<Post[]>([]);
     const [visiblePosts, setVisiblePosts] = useState(6);
 
-    // 관심 분야 가져오기
-    const fetchInterest = async()=>{
-            try{
-                const response=await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests`,{
+    useEffect(() => {
+        const fetchInterest = async () => {
+            try {
+                const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests`, {
                     headers: {
                         Authorization: window.localStorage.getItem("accessToken"),
                     },
                 });
-                setInterestPosts(response.data.interestPosts);
-            }catch (error) {
+                const interestCategories = response.data.interests;
+                fetchInterestPosts(interestCategories);
+                setIsLoggedIn(true);
+            } catch (error) {
                 if (axios.isAxiosError(error)) {
-                    console.log('error fetching :',error.response);
-                  }
+                    console.log('error fetching:', error.response);
+                }
             }
         };
-    
-    // 분야별 post 조회    
-    const fetchInterestPosts = async () => {
+
+        fetchInterest();
+    }, []);
+
+    const fetchInterestPosts = async (interestCategories: number[]) => {
         try {
-            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list`); // axios를 사용하여 GET 요청 보내기
-            setInterestPosts(response.data); // 응답 데이터를 상태에 설정
+            const postPromises = interestCategories.map(async (categoryId) => {
+                const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${categoryId}`);
+                return response.data.postList;
+            });
+
+            const posts = await Promise.all(postPromises);
+            const flattenedPosts = posts.flat();
+            setInterestPosts(flattenedPosts);
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                console.log(error.response);
-              }
+                console.log('error fetching:', error.response);
+            }
         }
     };
-
-    useEffect(() => {
-        setIsLoggedIn(true);
-        fetchInterest();
-        fetchInterestPosts();
-    }, []);
 
     const MoreViewHandler = () => {
         setVisiblePosts(prev => prev + 6);
     };
-    
+
     return (
         <Board>
             <BoardWrap>
@@ -59,7 +60,7 @@ const PreferBoard = () => {
                     <>
                         <H1>님의 관심사에 맞춘 포스팅</H1>
                         <BoxWrap>
-                            {postList.map(post => (
+                            {interestPosts.slice(0, visiblePosts).map(post => (
                                 <PostBox key={post.postId} post={post} />
                             ))}
                         </BoxWrap>
@@ -67,8 +68,8 @@ const PreferBoard = () => {
                 ) : (
                     <h1>소셜로그인 페이지로 이동</h1>
                 )}
-                {visiblePosts <= 18 && ( 
-                    <MoreButton src={MoreView} onClick={MoreViewHandler}/>
+                {visiblePosts <= interestPosts.length && (
+                    <MoreButton src={MoreView} onClick={MoreViewHandler} />
                 )}
             </BoardWrap>
         </Board>

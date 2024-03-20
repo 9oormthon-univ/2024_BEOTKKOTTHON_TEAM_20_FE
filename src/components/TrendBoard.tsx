@@ -7,7 +7,7 @@ import QuizButton from "../image/QuizButton.png";
 import axios from "axios";
 
 const TrendBoard = () => {
-  const [topPosts, setTopPosts] = useState([]);
+  const [topPosts, setTopPosts] = useState<{ name: string; count: number }[]>([]);
 
   useEffect(() => {
     const fetchTrend = async () => {
