@@ -2,9 +2,10 @@ import styled from "styled-components";
 import theme from "./theme";
 
 export const Container = styled.div`
+    margin: 5px;
     .interest {
-        width: 160px;
-        height: 160px;
+        width: 150px;
+        height: 150px;
 
         position: relative;
         display: inline-block;
@@ -14,6 +15,7 @@ export const Container = styled.div`
         align-items: center;
         font-size: 80px;
 
+        border: 8px solid white;
         background-color: white;
         border-radius: 50%;
     }
@@ -25,25 +27,47 @@ export const Container = styled.div`
         transform: translate(-50%, -50%);
         font-size: 80px;
         opacity: 1;
-        transition: opacity 0.3s ease;
-    }
+        transition: opacity 0.2s ease-in-out;
 
-    .text {
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 24px;
-        color: ${theme.colors.primary};
+    }
+
+    .icon > img {
+        width: 80px;
+    }
+
+    .text {
+        width: 150px;
+        height: 150px;
+        background-color: #000000bb;
+        border-radius: 50%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 20px;
+        font-weight: bold;
+        color: white;
         opacity: 0;
         transition: opacity 0.3s ease;
     }
 
     .interest:hover .text {
         opacity: 1;
+        z-index: 1;
     }
 
     .interest:hover .icon {
-        opacity: 0;
+        opacity: 0.2;
+        z-index: 0;
+    }
+
+    // 선택했을때
+    .select {
+        border-color: #96f3d7;
+        color: #96f3d7;
     }
 `;
 
