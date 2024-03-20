@@ -20,34 +20,32 @@ const PreferBoard = () => {
                     },
                 });
                 const interestCategories = response.data.interests;
+                console.log(interestCategories);
                 fetchInterestPosts(interestCategories);
-                setIsLoggedIn(true);
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching:', error.response);
                 }
             }
         };
-
+    
         fetchInterest();
     }, []);
-
+    
     const fetchInterestPosts = async (interestCategories: number[]) => {
         try {
-            const postPromises = interestCategories.map(async (categoryId) => {
-                const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${categoryId}`);
-                return response.data.postList;
-            });
-
-            const posts = await Promise.all(postPromises);
-            const flattenedPosts = posts.flat();
-            setInterestPosts(flattenedPosts);
+            // categoryId들을 파라미터로 사용하여 쿼리스트링을 생성
+            const queryString = interestCategories.map(categoryId => `categoryId=${categoryId}`).join('&');
+            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?${queryString}`);
+            const posts = response.data.postList;
+            setInterestPosts(posts);
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('error fetching:', error.response);
             }
         }
     };
+    
 
     const MoreViewHandler = () => {
         setVisiblePosts(prev => prev + 6);
@@ -56,18 +54,12 @@ const PreferBoard = () => {
     return (
         <Board>
             <BoardWrap>
-                {isLoggedIn ? (
-                    <>
                         <H1>님의 관심사에 맞춘 포스팅</H1>
                         <BoxWrap>
                             {interestPosts.slice(0, visiblePosts).map(post => (
                                 <PostBox key={post.postId} post={post} />
                             ))}
                         </BoxWrap>
-                    </>
-                ) : (
-                    <h1>소셜로그인 페이지로 이동</h1>
-                )}
                 {visiblePosts <= interestPosts.length && (
                     <MoreButton src={MoreView} onClick={MoreViewHandler} />
                 )}

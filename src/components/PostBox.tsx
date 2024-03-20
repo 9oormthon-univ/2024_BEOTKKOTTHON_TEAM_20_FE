@@ -4,6 +4,7 @@ import TalkIcon from "../image/TalkIcon.png";
 import ScrapIcon2 from "../image/ScrapIcon2.png";
 import { Post } from "./post";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 interface PostBoxProps {
     post: Post;
@@ -20,8 +21,20 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
 
     const [isScrapped, setIsScrapped] = useState<boolean>(false);
 
-    const scrapHandler = () => {
+    const scrapHandler = async() => {
+        try{
+            const response=await axios.put(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/scrap?postId=${postId}`,{
+            headers: {
+                Authorization: window.localStorage.getItem("accessToken"),
+            },
+        })
+        console.log(response.data);
         setIsScrapped(!isScrapped); 
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log('error fetching :',error.response);
+        }
+    }
     };
     const categories = ["경영학", "교육", "광고 및 미디어", "법학", "사회과학", "식품 및 체육", "언어 및 문학", "인문학", "의학", "예술 및 디자인", "자연과학", "전기 및 전자공학", "컴퓨터공학", "환경", "정치 및 외교"];
 
@@ -35,6 +48,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
                     <p>{categories[categoryId-1]}</p>
                 </MinDiv>
                 <p style={{ fontSize: "20px" }}>{trimmedContent}</p>
+                </Link>
                 <Wrapp>
                     <div>
                         {tag.map((tag, index) => (
@@ -48,7 +62,7 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
                         {scrapCount}
                     </Countt>
                 </Wrapp>
-            </Link>
+            
         </Box>
     );
 };
