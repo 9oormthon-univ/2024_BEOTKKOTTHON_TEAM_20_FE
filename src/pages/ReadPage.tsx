@@ -20,6 +20,7 @@ const ReadPage = () => {
     const { postId } = useParams<{ postId: string }>();
     const [inputComment, setInputComment] = useState("");
     const [totalPages, setTotalPages] = useState<number>(1);
+    const [summary,setSummary]=useState();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -31,6 +32,23 @@ const ReadPage = () => {
                         },
                     });
                     setPost(response.data);
+                    console.log(response.data);
+                }
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.log('error fetching :',error.response);
+                }
+            }
+        };
+        const fetchSummary = async () => {
+            try {
+                if (postId) {
+                    const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/summary?postId=${postId}`, {
+                        headers: {
+                            Authorization: window.localStorage.getItem("accessToken"),
+                        },
+                    });
+                    setSummary(response.data.summary);
                     console.log(response.data);
                 }
             } catch (error) {
@@ -68,6 +86,7 @@ const ReadPage = () => {
         };
 
         fetchPost();
+        fetchSummary();
         fetchComments();
     }, [postId]);
 
@@ -165,7 +184,7 @@ const ReadPage = () => {
                             <hr />
                             <AISummary>
                                 큐디가 요약한 표스팅의 내용이에요!
-                                <SummaryContent>{}</SummaryContent>
+                                <SummaryContent>{summary}</SummaryContent>
                                 <Logoo src={QudyLogo}></Logoo>
                                 <Img src={QuizGo}></Img>
                             </AISummary>
