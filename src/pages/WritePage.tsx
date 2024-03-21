@@ -35,24 +35,50 @@ const WritePage = () => {
 
     const handleSubmit = async () => {
         try {
-            const response = await axios.post('https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts', {
+            // 게시글 전달 
+            const postResponse = await axios.post('https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts', {
                 title: title,
-                content: content,
+                content: content, 
                 tag: tags,
-                categoryId: categoryId
+                categoryId: categoryId 
             },
             { headers: {
                 Authorization: window.localStorage.getItem("accessToken"),
-            },
-        });
+            }});
+            console.log(postResponse.data);
+            const postId = postResponse.data.postId; // 응답에서 postId 가져옴
+    
+            // postId를 사용하여 요약본을 조회하는 /summary 엔드포인트에 요청을 보냄
+            const summaryResponse = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/summary?postId=${postId}`, {
+                headers: {
+                    Authorization: window.localStorage.getItem("accessToken"),
+                },
+            });
+    
+            const summary = summaryResponse.data.summary; // 응답에서 summary 가져옴
+    
+            // tag, postId와 summary 포함하여 /quiz 엔드포인트에 데이터를 보냄
+            const quizResponse = await axios.post(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz`, {
+                postId: postId,
+                tag: tags, 
+                summary: summary 
+            }, {
+                headers: {
+                    Authorization: window.localStorage.getItem("accessToken"),
+                },
+            });
+    
+            console.log(quizResponse.data);
+    
+            // 성공적으로 요청을 보낸 후 게시판 페이지로 이동
             navigate('/postBoard');
-            console.log(response.data);
         } catch (error) {
             if (axios.isAxiosError(error)) {
-                console.log('error fetching :',error.response);
+                console.log('에러 발생:', error.response);
             }
         }
     };
+    
 
     const handleGoBack = () => {
 		navigate(-1);

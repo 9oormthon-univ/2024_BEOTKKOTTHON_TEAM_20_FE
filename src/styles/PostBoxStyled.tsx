@@ -32,10 +32,25 @@ export const Box = styled.div`
 
 export const MinDiv=styled.div`
     display:flex;
-    flex-direction:row;
     justify-content:space-between;
-    margin-top:-10px;
-    margin-bottom:-20px;
+    margin-bottom:15px;
+    height:80px;
+    
+    .headinfo{
+        align-items:center;
+        h2{
+            margin-top:-5px;
+        }
+    }
+    .createdAt{
+        position:relative;
+        width:25%;
+        div{
+            position:absolute;
+            bottom:0;
+            height:30px;
+        }
+    }
 `;
 export const Wrapp = styled.div`
     display:flex;
@@ -44,7 +59,8 @@ export const Wrapp = styled.div`
     position:absolute;
     bottom:0;
     margin-bottom:15px;
-    width:100%;
+    width:95%;
+    height:25px;
 
 `;
 export const Span =styled.span`
@@ -62,5 +78,18 @@ export const Icon =styled.img`
 `;
 
 export const Countt=styled.div`
-    margin-right:50px;
+    height:auto;
+    width:40%;
+    display:flex;
+    flex-direction:row;
+    div{
+        display:flex;
+    flex-direction:row;
+    margin-left:5px;
+    align-items:center;
+    text-align:center;
+    p{
+     margin-left:7px;
+    }
+    }
 `;
