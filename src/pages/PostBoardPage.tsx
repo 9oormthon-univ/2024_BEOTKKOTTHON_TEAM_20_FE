@@ -14,6 +14,7 @@ const PostBoardPage = () => {
     const [totalPages, setTotalPages] = useState<number>(1);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
+    const [searchWord, setSearchWord] = useState("");
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -81,9 +82,28 @@ const PostBoardPage = () => {
         setSelectedButton(index);
     };    
 
+    const handleSearchWordChange = async (searchWord: string) => {
+    try {
+        const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/search-list?searchWord=${searchWord}`, {
+            params: { page: 0 },
+            headers: {
+                Authorization: window.localStorage.getItem("accessToken"),
+            },
+        });
+        setSearchWord(searchWord);
+        setPostList(response.data.postList);
+        console.log(response.data);
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log('error fetching :', error.response);
+        }
+    }
+}
+
+
     return (
         <Container>
-            <NavBar />
+            <NavBar onSearchWordChange={handleSearchWordChange}/>
             <Frame2>
                 <WrapBoard>
                     <Head>
