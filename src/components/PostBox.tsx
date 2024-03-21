@@ -11,7 +11,7 @@ interface PostBoxProps {
 }
 
 const PostBox: React.FC<PostBoxProps> = ({ post }) => {
-    const { title, summary, scrapCount, commentCount, tag,postId,categoryId } = post;
+    const { title, summary, scrapCount, commentCount, tag,postId,categoryId, createdAt } = post;
 
     const titleMaxLength = 18;
     const contentMaxLength = 98;
@@ -44,8 +44,13 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
         <Box>
             <Link className="A" to={`/read/${postId}`}>
                 <MinDiv>
+                    <div className="headinfo">
+                    <p style={{color:"#7B3FF6",fontWeight:"bold"}}>{categories[categoryId-1]}</p>
                     <h2>{trimmedTitle}</h2>
-                    <p>{categories[categoryId-1]}</p>
+                    </div>
+                    <div className="createdAt">
+                        <div>{new Date(createdAt).toLocaleDateString()}</div>
+                    </div>
                 </MinDiv>
                 <p style={{ fontSize: "20px" }}>{trimmedContent}</p>
                 </Link>
@@ -56,10 +61,14 @@ const PostBox: React.FC<PostBoxProps> = ({ post }) => {
                         ))}
                     </div>
                     <Countt>
+                        <div>
                         <Icon src={TalkIcon} />
-                        {commentCount}
+                        <p>{commentCount}</p>
+                        </div>
+                        <div>
                         <Icon src={ScrapIcon2} onClick={scrapHandler} style={{ filter: fillColor }} />
-                        {scrapCount}
+                        <p>{scrapCount}</p>
+                        </div>
                     </Countt>
                 </Wrapp>
             
