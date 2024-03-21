@@ -13,6 +13,7 @@ import { useParams } from "react-router-dom";
 import { DetailPost } from "../components/post";
 import { Comment } from "../components/comment";
 import { Pagination } from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
 const ReadPage = () => {
     const [post, setPost] = useState<DetailPost | null>(null);
@@ -21,6 +22,7 @@ const ReadPage = () => {
     const [inputComment, setInputComment] = useState("");
     const [totalPages, setTotalPages] = useState<number>(1);
     const [summary,setSummary]=useState();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -138,10 +140,13 @@ const ReadPage = () => {
             }
         }
     };
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
 
     return (
         <Container>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <BackG2>
                 <Wrapping>
                     <RBoard>

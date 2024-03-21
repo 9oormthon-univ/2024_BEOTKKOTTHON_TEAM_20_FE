@@ -3,11 +3,18 @@ import { Container, StyledLink } from "../styles/QuizReviewPageStyled";
 import NavBar from "../components/NavBar";
 import Review from "../components/Review";
 import Errata from "../components/Errata";
+import { useNavigate } from "react-router-dom";
 
 const QuizReviewPage = () => {
+    const navigate=useNavigate();
+
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return (
         <>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <Container>
                 <div className="errataBox">
                     <div className="score">70 / 100</div>

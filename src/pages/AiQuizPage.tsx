@@ -1,11 +1,18 @@
 import React from "react";
 import { Container, StyledLink } from "../styles/AiQuizPageStyled";
 import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 const AiQuizPage = () => {
+    const navigate=useNavigate();
+
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return (
         <>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <Container>
                 <div className="titleBox">
                     <p className="title">AI Quiz 트렌디하게 공부하기</p>

@@ -87,10 +87,13 @@ const WritePage = () => {
 	const handleGoBoard = () => {
 		navigate('/postBoard');
 	}
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
 
     return (
         <Container>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <BackG>
                 <WBoard>
                     <WFrame>
