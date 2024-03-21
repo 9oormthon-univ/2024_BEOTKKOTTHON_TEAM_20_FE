@@ -19,9 +19,24 @@ const PreferBoard = () => {
                         Authorization: window.localStorage.getItem("accessToken"),
                     },
                 });
+               
+                console.log(response.data);
                 const interestCategories = response.data.interests;
-                console.log(interestCategories);
                 fetchInterestPosts(interestCategories);
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.log('error fetching:', error.response);
+                }
+            }
+        };
+
+        const fetchInterestPosts = async (interestCategories: number[]) => {
+            try {
+                // categoryId들을 파라미터로 사용하여 쿼리스트링을 생성
+                const queryString = interestCategories.map(categoryId => `category=${categoryId}`).join('&');
+                const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?${queryString}`);
+                const posts = response.data.postList;
+                setInterestPosts(posts);
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching:', error.response);
@@ -32,19 +47,6 @@ const PreferBoard = () => {
         fetchInterest();
     }, []);
     
-    const fetchInterestPosts = async (interestCategories: number[]) => {
-        try {
-            // categoryId들을 파라미터로 사용하여 쿼리스트링을 생성
-            const queryString = interestCategories.map(categoryId => `categoryId=${categoryId}`).join('&');
-            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?${queryString}`);
-            const posts = response.data.postList;
-            setInterestPosts(posts);
-        } catch (error) {
-            if (axios.isAxiosError(error)) {
-                console.log('error fetching:', error.response);
-            }
-        }
-    };
     
 
     const MoreViewHandler = () => {

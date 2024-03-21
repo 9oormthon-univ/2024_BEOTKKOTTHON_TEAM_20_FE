@@ -7,13 +7,15 @@ import QuizGo from "../image/QuizGo.png";
 import QudyLogo from "../image/QudyLogo.png";
 import { Countt, Icon } from "../styles/PostBoxStyled";
 import TalkIcon from "../image/TalkIcon.png";
-import ScrapIcon2 from "../image/ScrapIcon2.png";
+import ScrapIcon from "../image/ScrapIcon.png";
+import NoScrapIcon from "../image/NoScrapIcon.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { DetailPost } from "../components/post";
 import { Comment } from "../components/comment";
 import { Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const ReadPage = () => {
     const [post, setPost] = useState<DetailPost | null>(null);
@@ -144,6 +146,32 @@ const ReadPage = () => {
         navigate(`/postBoard?search=${searchWord}`);
     };
 
+    const scrapHandler = async () => {
+        try {
+            // 서버에 스크랩 상태를 전송합니다.
+            await axios.put(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/scrap?postId=${postId}`, {}, {
+                headers: {
+                    Authorization: window.localStorage.getItem("accessToken"),
+                },
+            });
+            // 포스트의 스크랩 상태를 업데이트합니다.
+            if (post) {
+                const updatedPost: DetailPost = {
+                    ...post,
+                    //isScrapped: !post.isScrapped,
+                };
+                setPost(updatedPost);
+            }
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('error fetching :',error.response);
+            }
+        }
+    };
+    
+    
+
+    
     return (
         <Container>
             <NavBar onSearchWordChange={goToPostBoardPage}/>
@@ -174,7 +202,7 @@ const ReadPage = () => {
                                 <Countt>
                                     <Icon src={TalkIcon} />
                                     {post?.commentCount}
-                                    <Icon src={ScrapIcon2} />
+                                    <Icon src={NoScrapIcon} onClick={scrapHandler} />
                                     {post?.scrapCount}
                                 </Countt>
                                 <Dateee>{post?.createdAt ? new Date(post.createdAt).toLocaleString() : ''}</Dateee>
@@ -184,7 +212,7 @@ const ReadPage = () => {
                                 큐디가 요약한 표스팅의 내용이에요!
                                 <SummaryContent>{summary}</SummaryContent>
                                 <Logoo src={QudyLogo}></Logoo>
-                                <Img src={QuizGo}></Img>
+                                <Link to={`/quiz?postId=${postId}`}><Img src={QuizGo}></Img></Link>
                             </AISummary>
                             <hr />
                             <TalkBoard>
