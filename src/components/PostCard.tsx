@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Container, Icon } from "../styles/PostCardStyled";
 import TalkIcon from "../image/TalkIcon.png";
-import ScrapIcon2 from "../image/ScrapIcon2.png";
+import ScrapIcon from "../image/ScrapIcon.png";
 
 const PostCard = () => {
     const [isScrapped, setIsScrapped] = useState(false);
@@ -38,7 +38,7 @@ const PostCard = () => {
                     <div className="reaction">
                         <div className="icon">
                             <Icon
-                                src={ScrapIcon2}
+                                src={ScrapIcon}
                                 onClick={scrapHandler}
                                 style={{ filter: fillColor }}
                             />

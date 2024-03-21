@@ -79,3 +79,34 @@ position:absolute;
 right:0;
 bottom:0;
 `;
+export const CategoryButton=styled.option`
+    padding-left:5px;
+`;
+export const Prompt =styled.div`
+    border:1px solid purple;
+    display:flex;
+    justify-content:center;
+    flex-direction: column;
+    width:30%;
+    align-items:center;
+    div{
+        margin-top:30px;
+        border:1px solid #7B3FF6;
+        display:flex;
+        justify-content:space-between;
+    }
+
+`;
+export const BackBtn=styled.button`
+    width:100px;
+    height:30px;
+    border:1px solid #7B3FF6;
+    color:#7B3FF6;
+    background-color:white;
+`;
+export const GoBtn=styled.button`
+width:100px;
+height:30px;
+    color:white;
+    background-color:#7B3FF6;
+`;

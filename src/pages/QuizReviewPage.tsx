@@ -80,7 +80,7 @@ const QuizReviewPage = () => {
 
     return (
         <>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <Container>
                 <div className="errataBox">
                     <div className="score">{score} / 100</div>

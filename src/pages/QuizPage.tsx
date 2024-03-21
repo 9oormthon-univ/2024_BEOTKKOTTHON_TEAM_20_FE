@@ -13,6 +13,7 @@ import PreventPageChange from "../components/PreventPageChange";
 import { useNavigate } from "react-router-dom";
 import ErrorModal from "../components/ErrorModal";
 
+
 interface Quiz {
     answer: string;
     explantion: string;
@@ -146,9 +147,10 @@ const QuizPageStyled = () => {
         getData();
     }, []);
 
+
     return (
         <>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <Container>
                 <div className="quizBox">
                     <div className="progressBox">
