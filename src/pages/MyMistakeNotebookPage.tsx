@@ -17,9 +17,7 @@ const MyMistakeNotebookPage = () => {
                     <QuizCard percent={30} />
                     <QuizCard percent={20} />
                 </div>
-                <div className="paginationBox">
-                    <BasicPagination />
-                </div>
+                <div className="paginationBox">{/* <BasicPagination /> */}</div>
             </Container>
         </>
     );
