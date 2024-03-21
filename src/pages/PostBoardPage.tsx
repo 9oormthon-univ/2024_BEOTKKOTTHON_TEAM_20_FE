@@ -12,15 +12,15 @@ import { Post } from "../components/post";
 const PostBoardPage = () => {
     const [postList, setPostList] = useState<Post[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
-    const [category, setCategory] = useState<string | null>(null);
-    const [selectedCategory,setSelectedCategory]=useState<string |null>(null);
+    const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [selectedButton, setSelectedButton] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchPosts = async () => {
             try {
                 let url = 'https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all';
-                if (category) {
-                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${category}`;
+                if (selectedCategory !== null) {
+                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${selectedCategory}`;
                 }
                 const response = await axios.get(url, {
                     params: { page: 0 },
@@ -31,6 +31,7 @@ const PostBoardPage = () => {
                 setPostList(response.data.postList); 
                 setTotalPages(response.data.totalPages);
                 console.log(response.data);
+        
             } catch (error) {
                 if (axios.isAxiosError(error)) {
                     console.log('error fetching :',error.response);
@@ -39,7 +40,7 @@ const PostBoardPage = () => {
         };
 
         fetchPosts();
-    }, [category]);
+    }, [selectedCategory]);
 
     const categories = ["경영학", "교육", "광고 및 미디어", "법학", "사회과학", "식품 및 체육", "언어 및 문학", "인문학", "의학", "예술 및 디자인", "자연과학", "전기 및 전자공학", "컴퓨터공학", "환경", "정치 및 외교"];
 
@@ -47,7 +48,7 @@ const PostBoardPage = () => {
 
     const showAllPosts = () => {
         setView("all");
-        setCategory(null);
+        setSelectedCategory(null);
     };
 
     const showMyPosts = () => {
@@ -74,15 +75,34 @@ const PostBoardPage = () => {
         }
     };
 
-    const handleCategoryClick = (categoryName: string) => {
+    const handleCategoryClick = (index: number) => {
         setView("all");
-        setCategory(categoryName);
-        setSelectedCategory(categoryName);
-    };
+        setSelectedCategory(index+1); 
+        setSelectedButton(index);
+    };    
+
+    const handleSearchWordChange = async (searchWord: string) => {
+    try {
+        const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/search-list?searchWord=${searchWord}`, {
+            params: { page: 0 },
+            headers: {
+                Authorization: window.localStorage.getItem("accessToken"),
+            },
+        });
+        
+        setPostList(response.data.postList);
+        console.log(response.data);
+    } catch (error) {
+        if (axios.isAxiosError(error)) {
+            console.log('error fetching :', error.response);
+        }
+    }
+}
+
 
     return (
         <Container>
-            <NavBar />
+            <NavBar onSearchWordChange={handleSearchWordChange}/>
             <Frame2>
                 <WrapBoard>
                     <Head>
@@ -100,7 +120,10 @@ const PostBoardPage = () => {
                             <>
                                 <TagWrap>
                                     {categories.map((categoryName, index) => (
-                                        <TagButton key={index} onClick={() => handleCategoryClick(categoryName)} style={{color:selectedCategory===categoryName?"white":"",backgroundColor:selectedCategory===categoryName?"#7B3FF6":"white"}}>{categoryName}</TagButton>
+                                        <TagButton key={index} onClick={() => handleCategoryClick(index)} style={{
+                                            color: selectedButton === index ? "white" : "", 
+                                            backgroundColor: selectedButton === index ? "#7B3FF6" : "white" 
+                                        }}>{categoryName}</TagButton>
                                     ))}
                                 </TagWrap>
                                 <PostWrap>

@@ -87,20 +87,24 @@ const WritePage = () => {
 	const handleGoBoard = () => {
 		navigate('/postBoard');
 	}
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
 
     return (
         <Container>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <BackG>
                 <WBoard>
                     <WFrame>
                         <HeadOpt>
                             <Opt1>글 분류
-                                <Selector>
-                                    {categories.map((category, index) => (
-                                        <CategoryButton key={index} onClick={() => handleCategoryChange(index + 1)}>{category}</CategoryButton>
-                                    ))}
-                                </Selector>
+                            <Selector onChange={(e) => handleCategoryChange(parseInt(e.target.value))}>
+                            {categories.map((category, index) => (
+                                <CategoryButton key={index} value={index+1}>{category}</CategoryButton>
+                            ))}
+                            </Selector>
+
                             </Opt1>
                             <Opt1>해쉬태그 설정
                                 <TagInput name="tags" placeholder="최대 3개" onChange={onInputHandler} />

@@ -15,11 +15,17 @@ import GoQuiz from "../image/GoQuiz.png";
 import GoPost from "../image/GoPost.png";
 import GoNote from "../image/GoNote.png";
 import MainLogo from "../image/MainLogo.png";
-
+import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+    const navigate = useNavigate();
+
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return <Container>
-        <NavBar/>
+        <NavBar onSearchWordChange={goToPostBoardPage}/>
         <Frame1>
         <Slider>
             <Swiper modules={[Navigation, Pagination]}

@@ -1,15 +1,22 @@
 import React from "react";
 import { Container, ProgressBar, Progress } from "../styles/QuizPageStyled";
 import NavBar from "../components/NavBar";
+import { useNavigate } from "react-router-dom";
 
 // interface ProgressBarProps {
 //     progress: number; // 진도율을 나타내는 값 (0에서 100 사이)
 // }
 
 const QuizPageStyled = () => {
+    const navigate=useNavigate();
+
+    const goToPostBoardPage = (searchWord:string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return (
         <>
-            <NavBar />
+            <NavBar onSearchWordChange={goToPostBoardPage}/>
             <Container>
                 <div className="quizBox">
                     <div className="progressBox">
