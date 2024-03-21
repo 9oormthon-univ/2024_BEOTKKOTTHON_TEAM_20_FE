@@ -11,4 +11,8 @@ export const Container = styled.div`
 
     font-size: 16px;
     color: ${theme.colors.font1};
+
+    img {
+        width: 1rem;
+    }
 `;

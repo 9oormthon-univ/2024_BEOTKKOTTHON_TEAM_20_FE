@@ -1,38 +1,104 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Container, StyledLink } from "../styles/QuizReviewPageStyled";
 import NavBar from "../components/NavBar";
 import Review from "../components/Review";
 import Errata from "../components/Errata";
+import { useLocation } from "react-router-dom";
+import axios from "axios";
+
+interface GradeList {
+    answer: string;
+    correct: boolean;
+    explanation: string;
+    options: string[];
+    question: string;
+    userAnswer: string;
+}
+
+interface ApiResponseData {
+    gradeList: GradeList[];
+}
 
 const QuizReviewPage = () => {
+    const location = useLocation();
+    const { grade } = location.state || {};
+    console.log(grade);
+
+    const [gradeList, setGradeList] = useState<GradeList[]>();
+    const [score, setScore] = useState<number>();
+
+    const handleApiResponse = (responseData: ApiResponseData) => {
+        const newGradeList: GradeList[] = responseData.gradeList.map((item) => {
+            return {
+                answer: item.answer,
+                correct: item.correct,
+                explanation: item.explanation,
+                options: item.options,
+                question: item.question,
+                userAnswer: item.userAnswer as string,
+            };
+        });
+
+        setGradeList(newGradeList);
+    };
+
+    const getData = async () => {
+        try {
+            const numberUserAnswerArray = grade.userAnswerList.map(Number);
+            console.log(window.localStorage.getItem("accessToken"));
+
+            const response = await axios.post(
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz/grade",
+                {
+                    type: grade.type,
+                    quizIdList: grade.quizId,
+                    answerList: grade.answersList,
+                    userAnswerList: numberUserAnswerArray,
+                },
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
+
+            handleApiResponse(response.data);
+            setScore(response.data.score);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    const test = (event: React.MouseEvent<HTMLDivElement>) => {
+        console.log(gradeList);
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
+
     return (
         <>
             <NavBar />
             <Container>
                 <div className="errataBox">
-                    <div className="score">70 / 100</div>
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
-                    <Errata />
+                    <div className="score">{score} / 100</div>
+                    {gradeList?.map((grade, index) => (
+                        <Errata quizIndex={index + 1} correct={grade.correct} />
+                    ))}
                 </div>
-                <div className="reviewArea">
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
-                    <Review />
+                <div className="reviewArea" onClick={test}>
+                    {gradeList?.map((grade, index) => (
+                        <Review
+                            quizIndex={index + 1}
+                            question={grade.question}
+                            options={grade.options}
+                            answer={grade.answer}
+                            userAnswer={grade.userAnswer}
+                            explanation={grade.explanation}
+                        />
+                    ))}
                 </div>
             </Container>
         </>
