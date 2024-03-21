@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import { Container } from "../styles/MainPageStyled";
 import NavBar from "../components/NavBar";
 import { HeadOpt, Opt1 } from "../styles/WritePageStyled";
-import { TagOutput, Refactor, Delete, RTitle, RContent, TalkBoard, Wrapping, RBoard, RFrame, BackG2, AISummary, SummaryContent, Img, Talk, ProfileImg, TalkInfo, Datee, TalkForm, TalkWrap, CheckBtn, Logoo, DetailInfo, Dateee, Opt0 } from "../styles/ReadPageStyled";
+import { TagOutput, Refactor, Delete, RTitle, RContent, TalkBoard, Wrapping, RBoard, RFrame, BackG2, AISummary, SummaryContent, Img, Talk, ProfileImg, TalkInfo, Datee, TalkForm, TalkWrap, CheckBtn, Logoo, DetailInfo, Dateee, Opt0,Iconi,Countti } from "../styles/ReadPageStyled";
 import QuizGo from "../image/QuizGo.png";
 import QudyLogo from "../image/QudyLogo.png";
 import { Countt, Icon } from "../styles/PostBoxStyled";
@@ -25,6 +25,17 @@ const ReadPage = () => {
     const [totalPages, setTotalPages] = useState<number>(1);
     const [summary,setSummary]=useState();
     const navigate = useNavigate();
+    const [profileNickname, setProfileNickname]=useState("");
+    const [profileImg, setProfileImg]=useState(null);
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const storedToken = window.localStorage.getItem("accessToken");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      }, []);
 
     useEffect(() => {
         const fetchPost = async () => {
@@ -169,8 +180,43 @@ const ReadPage = () => {
         }
     };
     
+    useEffect(()=>{
+        const fetchProfile =async()=>{
+        try{
+            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my`,{
+                headers: {
+                    Authorization: window.localStorage.getItem("accessToken"),
+                },
+            });
+                console.log(response.data);
+                setProfileNickname(response.data.name);
+                setProfileImg(response.data.profileImageUrl);
+        }catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.log('error fetching:', error.response);
+                }
+            }
+        }
+        fetchProfile();
+    })
+    const handleEditPost = async() => {
+       
+    };
     
-
+    const handleDeletePost = async () => {
+        try {
+            await axios.delete(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts?postId=${postId}`, {
+                headers: {
+                    Authorization: window.localStorage.getItem("accessToken"),
+                },
+            });
+            navigate("/");
+        } catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log('error deleting post:', error.response);
+            }
+        }
+    };
     
     return (
         <Container>
@@ -191,20 +237,21 @@ const ReadPage = () => {
                                     </div>
                                 </Opt0>
                                 <Opt1>
-                                    <Refactor>수정</Refactor>
-                                    <Delete>삭제</Delete>
+                                <Link to={`/edit/${postId}`}><Refactor onClick={handleEditPost}>수정</Refactor></Link>
+                                    <Delete onClick={handleDeletePost}>삭제</Delete>
                                 </Opt1>
+
                             </HeadOpt>
                             <RTitle>{post?.title}</RTitle>
                             <hr />
                             <RContent>{post?.content}</RContent>
                             <DetailInfo>
-                                <Countt>
-                                    <Icon src={TalkIcon} />
-                                    {post?.commentCount}
-                                    <Icon src={NoScrapIcon} onClick={scrapHandler} />
-                                    {post?.scrapCount}
-                                </Countt>
+                                <Countti>
+                                    <Iconi src={TalkIcon} />
+                                    <p>{post?.commentCount}</p> 
+                                    <Iconi src={NoScrapIcon} onClick={scrapHandler} />
+                                    <p>{post?.scrapCount}</p> 
+                                </Countti>
                                 <Dateee>{post?.createdAt ? new Date(post.createdAt).toLocaleString() : ''}</Dateee>
                             </DetailInfo>
                             <hr />
@@ -221,10 +268,10 @@ const ReadPage = () => {
                                     <Talk key={comment.commentId}>
                                         <ProfileImg></ProfileImg>
                                         <TalkInfo>
-                                            <h3>닉네임</h3>
+                                            <h3>{comment.commentId}</h3>
                                             <p>{comment.content}</p>
                                         </TalkInfo>
-                                        <Datee>작성일: {comment.createdAt}</Datee>
+                                        <Datee>{comment.createdAt}</Datee>
                                     </Talk>
                                 ))}
                                 <div className="div">
@@ -232,7 +279,7 @@ const ReadPage = () => {
                                 </div>
                             </TalkBoard>
                             <TalkWrap>
-                                사용자 닉네임
+                                <p style={{marginLeft:"10px"}}>{profileNickname}</p>
                                 <TalkForm name="comment" onChange={onInputHandler}></TalkForm>
                                 <CheckBtn onClick={SendCommetHandler}>등록</CheckBtn>
                             </TalkWrap>

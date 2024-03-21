@@ -152,6 +152,32 @@ export const Dateee=styled.div`
 width:auto;
 
 `;
+export const Iconi=styled.img`
+width:25px;
+    height:25px;
+    margin-left:15px;
+    opacity:0.4;
+    margin-top:5px;
+    
+`;
+export const Countti=styled.div`
+height:30px;
+width:40%;
+display:flex;
+flex-direction:row;
+width:15%;
+text-align:center;
+p{
+    margin-right:10px;
+    margin-left:10px;
+    margin-top:10px;
+}
+`;
+export const P=styled.p`
+    margin-left:10px;
+    margin-right:10px;
+
+`;
 export const TalkForm=styled.textarea`
     width:90%;
     min-height:150px;
