@@ -29,8 +29,8 @@ const WritePage = () => {
         }
     };
 
-    const handleCategoryChange = (categoryId: number) => {
-        setCategoryId(categoryId);
+    const handleCategoryChange = (index: number) => {
+        setCategoryId(index+1);
     };
 
     const handleSubmit = async () => {
@@ -98,7 +98,7 @@ const WritePage = () => {
                             <Opt1>글 분류
                                 <Selector>
                                     {categories.map((category, index) => (
-                                        <CategoryButton key={index} onClick={() => handleCategoryChange(index + 1)}>{category}</CategoryButton>
+                                        <CategoryButton key={index} onClick={() => handleCategoryChange(index+1)}>{category}</CategoryButton>
                                     ))}
                                 </Selector>
                             </Opt1>

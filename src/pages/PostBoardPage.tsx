@@ -13,6 +13,7 @@ const PostBoardPage = () => {
     const [postList, setPostList] = useState<Post[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
+    const [selectedButton, setSelectedButton] = useState<number | null>(null);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -76,7 +77,8 @@ const PostBoardPage = () => {
 
     const handleCategoryClick = (index: number) => {
         setView("all");
-        setSelectedCategory(index); 
+        setSelectedCategory(index+1); 
+        setSelectedButton(index);
     };    
 
     return (
@@ -99,7 +101,10 @@ const PostBoardPage = () => {
                             <>
                                 <TagWrap>
                                     {categories.map((categoryName, index) => (
-                                        <TagButton key={index} onClick={() => handleCategoryClick(index)} style={{color:selectedCategory===index?"white":"",backgroundColor:selectedCategory===index?"#7B3FF6":"white"}}>{categoryName}</TagButton>
+                                        <TagButton key={index} onClick={() => handleCategoryClick(index)} style={{
+                                            color: selectedButton === index ? "white" : "", 
+                                            backgroundColor: selectedButton === index ? "#7B3FF6" : "white" 
+                                        }}>{categoryName}</TagButton>
                                     ))}
                                 </TagWrap>
                                 <PostWrap>
