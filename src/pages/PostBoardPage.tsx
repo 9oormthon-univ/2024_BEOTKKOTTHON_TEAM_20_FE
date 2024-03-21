@@ -14,7 +14,6 @@ const PostBoardPage = () => {
     const [totalPages, setTotalPages] = useState<number>(1);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
-    const [searchWord, setSearchWord] = useState("");
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -90,7 +89,7 @@ const PostBoardPage = () => {
                 Authorization: window.localStorage.getItem("accessToken"),
             },
         });
-        setSearchWord(searchWord);
+        
         setPostList(response.data.postList);
         console.log(response.data);
     } catch (error) {
