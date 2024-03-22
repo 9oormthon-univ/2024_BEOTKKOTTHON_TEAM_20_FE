@@ -5,28 +5,24 @@ import axios from "axios";
 const LogoutPage = () => {
     const navigate = useNavigate();
 
-    const logout = () => {
-        axios
-            .post(
+    const logout = async () => {
+        try {
+            const response = await axios.post(
                 "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/auth/kakao/logout",
+                {},
                 {
                     headers: {
                         Authorization:
-                            "Bearer " +
                             window.localStorage.getItem("accessToken"),
                     },
                 }
-            )
-            .then((response) => {
-                console.log(
-                    "Bearer " + window.localStorage.getItem("accessToken")
-                );
-                localStorage.removeItem("accessToken");
-                navigate("/login"); // 로그인 후 이동할 페이지 경로 : 바로 이전 페이지
-            })
-            .catch((error) => {
-                console.error(error);
-            });
+            );
+            console.log(response);
+            localStorage.removeItem("accessToken");
+            navigate("/login"); // 로그인 후 이동할 페이지 경로 : 바로 이전 페이지
+        } catch (error) {
+            console.log(error);
+        }
     };
     return <div onClick={logout}>logout</div>;
 };
