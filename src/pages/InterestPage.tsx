@@ -92,7 +92,7 @@ const InterestPage = () => {
             console.log(response.data);
 
             // 요청이 성공적으로 완료되면 페이지 이동
-            navigate("/");
+            navigate("/mypage");
         } catch (error) {
             console.log(error);
         }
@@ -155,7 +155,7 @@ const InterestPage = () => {
                 </div>
             </div>
             <div className="saveBtn" onClick={saveToInterest}>
-                큐터디 시작하기
+                {newMember ? "큐터디 시작하기" : "관심사 수정하기"}
             </div>
             {isModal ? (
                 <StyledModal

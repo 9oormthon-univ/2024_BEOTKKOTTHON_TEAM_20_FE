@@ -141,6 +141,10 @@ export const Container = styled.div`
         background-color: ${theme.colors.line2};
     }
 
+    .interesIconImg {
+        width: 4rem;
+    }
+
     .interest_text {
         margin-top: 3vh;
         font-size: 16px;

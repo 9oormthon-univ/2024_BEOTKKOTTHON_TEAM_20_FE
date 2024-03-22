@@ -102,13 +102,15 @@ const MyPage = () => {
                                     <div className="interest_icon">
                                         <img
                                             src={
-                                                categories[interest].categoryImg
+                                                categories[interest - 1]
+                                                    .categoryImg
                                             }
                                             alt="interestIcon"
+                                            className="interesIconImg"
                                         />
                                     </div>
                                     <div className="interest_text">
-                                        {categories[interest].category}
+                                        {categories[interest - 1].category}
                                     </div>
                                 </div>
                             ))}
