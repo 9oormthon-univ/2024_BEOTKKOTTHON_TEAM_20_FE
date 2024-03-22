@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
@@ -35,9 +35,9 @@ const MainPage = () => {
         // 로컬 스토리지에서 토큰 가져오기
         const storedToken = window.localStorage.getItem("accessToken");
         if (storedToken) {
-          setToken(storedToken);
+            setToken(storedToken);
         }
-      }, []);
+    }, []);
 
     return (
         <Container>

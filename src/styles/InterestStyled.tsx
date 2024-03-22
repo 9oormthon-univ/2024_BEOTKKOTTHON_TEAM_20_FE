@@ -18,6 +18,8 @@ export const Container = styled.div`
         border: 8px solid white;
         background-color: white;
         border-radius: 50%;
+
+        box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1);
     }
 
     .icon {

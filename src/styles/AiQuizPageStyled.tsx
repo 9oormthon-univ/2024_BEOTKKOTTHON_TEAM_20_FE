@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import theme from "./theme";
 import { Link } from "react-router-dom";
+import interest_background from "../image/interest_background.png";
 
 export const Container = styled.div`
     padding-top: 11.5vh; //  추후 네브바에 맞춰서 수정
@@ -12,6 +13,10 @@ export const Container = styled.div`
     flex-direction: column;
     justify-content: center;
     align-content: center;
+
+    background-image: url(${interest_background});
+    background-size: cover;
+    background-repeat: no-repeat;
 
     p {
         margin: 0;
@@ -67,6 +72,7 @@ export const Container = styled.div`
         font-size: 20px;
         color: ${theme.colors.font1};
         border-radius: 15px;
+        box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1);
     }
 
     .quizStartBtn {
@@ -83,6 +89,8 @@ export const Container = styled.div`
         font-weight: bold;
         border: 1px solid white;
         border-radius: 15px;
+
+        box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1);
     }
 
     .btn:hover {
