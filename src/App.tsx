@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
+import MainPage2 from "./pages/MainPage2";
 import InterestPage from "./pages/InterestPage";
 import PostBoardPage from "./pages/PostBoardPage";
 import LoginPage from "./pages/LoginPage";
@@ -21,10 +22,10 @@ const App: React.FC = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/" Component={MainPage} />
+                <Route path="/" Component={MainPage2} />
                 <Route path="/interest" Component={InterestPage} />
                 <Route path="/login" Component={LoginPage} />
-                <Route path="/" element={<MainPage />} />
+                <Route path="/" element={<MainPage2 />} />
                 <Route path="/login" element={<LoginPage />} />
                 <Route path="/postBoard" Component={PostBoardPage} />
                 <Route

@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const TagOutput =styled.p`
+
 `;
 export const Refactor=styled.button`
     width:100px;
@@ -109,16 +110,22 @@ position:absolute;
 right:0;
 `;
 export const Opt0=styled.div`
-font-size:20px;
+font-size:17px;
     font-weight:600;
-    height:auto;
-    span{
-        margin-left:20px;
+    height:40px;
+    display:flex;
+    flex-direction:column;
+    
+    width:10px;
+    .tagwrap{
+        margin-top:-17px;
     }
     div{
-        display:flex;
-    flex-flow:row wrap;
+       
     gap:10px;
+    }
+    .font{
+        width:20%;
     }
 `;
 export const Talk=styled.div`
@@ -129,8 +136,13 @@ export const Talk=styled.div`
     border-bottom:1px solid gray;
     align-items:center;
     padding-bottom:20px;
+    .profileImg{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }
 `;
-export const ProfileImg=styled.img`
+export const ProfileImg=styled.div`
     border:1px solid gray;
     border-radius:30px;
     width:60px;
@@ -138,12 +150,15 @@ export const ProfileImg=styled.img`
     margin-right:40px;
 `;
 export const TalkInfo=styled.div`
-
+margin-left:100px;
 height:auto;
 width:800px;
 .editform{
     resize: none;
     width:90%;
+    &focus{
+        outline:none;
+    }
 }
 `;
 export const Datee=styled.div`

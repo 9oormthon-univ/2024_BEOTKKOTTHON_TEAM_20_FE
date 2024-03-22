@@ -122,7 +122,8 @@ const WritePage = () => {
                     <WBoard>
                         <WFrame>
                             <HeadOpt>
-                                <Opt1>글 분류
+                                <div>
+                                <Opt1><p>글 분류</p>
                                 <Selector onChange={(e) => handleCategoryChange(parseInt(e.target.value))}>
                                         {categories.map((category, index) => (
                                             <CategoryButton key={index} value={index + 1}>{category}</CategoryButton>
@@ -130,9 +131,10 @@ const WritePage = () => {
                                         </Selector>
     
                                     </Opt1>
-                                    <Opt1>해쉬태그 설정
-                                        <TagInput name="tags" placeholder="최대 3개" onChange={onInputHandler} />
+                                    <Opt1><p>해쉬태그 설정</p>
+                                        <TagInput name="tags" placeholder="최대 3개 (예시) #자격증" onChange={onInputHandler} />
                                     </Opt1>
+                                    </div>
                                     <SummaryB onClick={handleSubmit}>저장 후 AI 요약하기</SummaryB>
                                 </HeadOpt>
                                 <WTitle name="title" placeholder="제목" onChange={onInputHandler} />

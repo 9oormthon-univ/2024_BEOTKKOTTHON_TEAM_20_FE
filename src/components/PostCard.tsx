@@ -4,6 +4,7 @@ import TalkIcon from "../image/commentIcon.png";
 import ScrapIcon from "../image/isScrapIcon.png";
 import { MyPostProps } from "../pages/MyPostPage";
 import { categories } from "./category";
+import { Link } from "react-router-dom";
 
 const PostCard: React.FC<MyPostProps> = ({
     postId,
@@ -16,6 +17,7 @@ const PostCard: React.FC<MyPostProps> = ({
     scrapCount,
 }) => {
     // 스크랩
+
     const [isScrapped, setIsScrapped] = useState(false);
     const scrapHandler = () => {
         setIsScrapped(!isScrapped); // toggle
@@ -23,10 +25,10 @@ const PostCard: React.FC<MyPostProps> = ({
     const fillColor = isScrapped
         ? "opacity(0.1) drop-shadow(0 0 0 #F1AF14)"
         : "";
-    return (
+    return (<Link style={{textDecoration:"none"}} to={`/read/${postId}`}>
         <Container>
             <div className="categoryBox">
-                <p className="category">{categories[categoryId].category}</p>
+                {/*<p className="category">{categories[categoryId].category}</p>*/}
             </div>
             <div className="titleBox">
                 <p className="title">{title}</p>
@@ -65,6 +67,7 @@ const PostCard: React.FC<MyPostProps> = ({
                 </div>
             </div>
         </Container>
+        </Link>
     );
 };
 export default PostCard;

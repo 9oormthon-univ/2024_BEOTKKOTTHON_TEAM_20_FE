@@ -4,9 +4,11 @@ import PostBox from "./PostBox";
 import Pagination from '@mui/material/Pagination';
 import axios from 'axios'; 
 import { Post } from "./post";
+import PostCard from "./PostCard";
+import { MyPostProps } from "../pages/MyPostPage";
 
 const MyPostBoard = () => {
-    const [postList, setPostList] = useState<Post[]>([]);
+    const [postList, setPostList] = useState<MyPostProps[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1); // 초기값은 1로 설정
 
     useEffect(() => {
@@ -50,7 +52,17 @@ const MyPostBoard = () => {
             <PostWrap>
                 {/*내가 쓴 포스트 가져오기*/}
                 {postList.map(post => (
-                    <PostBox key={post.postId} post={post} />
+                     <PostCard
+                     key={post.postId}
+                     postId={post.postId}
+                     categoryId={post.categoryId}
+                     title={post.title}
+                     createdAt={post.createdAt}
+                     summary={post.summary}
+                     tag={post.tag}
+                     commentCount={post.commentCount}
+                     scrapCount={post.scrapCount}
+                 />
                 ))}
             </PostWrap>
             <Pagination count={totalPages} onChange={handlePageChange} />
