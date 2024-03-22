@@ -3,6 +3,7 @@ import { Container, StyledLink } from "../styles/AiQuizPageStyled";
 import NavBar from "../components/NavBar";
 import axios from "axios";
 import { categories } from "../components/category";
+import { useNavigate } from "react-router-dom";
 
 interface Tag {
     name: string;
@@ -51,9 +52,15 @@ const AiQuizPage = () => {
         getHashtag("1"); // 기본값 1로 초기화. 이게 없으면 첫번째가 원하는 해시태그라 아무것도 선택하지 않고 요청했을 때 null
     }, []);
 
+    const navigate = useNavigate();
+
+    const goToPostBoardPage = (searchWord: string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return (
         <>
-            {/* <NavBar onSearchWordChange={goToPostBoardPage}/> */}
+            <NavBar onSearchWordChange={goToPostBoardPage} />
             <Container>
                 <div className="titleBox">
                     <p className="title">AI Quiz 트렌디하게 공부하기</p>

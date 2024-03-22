@@ -3,8 +3,9 @@ import { Container, StyledLink } from "../styles/QuizReviewPageStyled";
 import NavBar from "../components/NavBar";
 import Review from "../components/Review";
 import Errata from "../components/Errata";
-import { useLocation, useSearchParams } from "react-router-dom";
+import { useLocation, useNavigate, useSearchParams } from "react-router-dom";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 interface GradeList {
     answer: string;
@@ -34,6 +35,7 @@ const QuizReviewPage = () => {
 
     const [gradeList, setGradeList] = useState<GradeList[]>();
     const [score, setScore] = useState<number>();
+    const [loading, setLoading] = useState<boolean>(true);
 
     const handleApiResponse = (responseData: ApiResponseData) => {
         console.log(responseData);
@@ -49,6 +51,7 @@ const QuizReviewPage = () => {
         });
 
         setGradeList(newGradeList);
+        setLoading(false);
     };
 
     const handleApiResponse2 = (responseData: ApiResponseData2) => {
@@ -67,6 +70,7 @@ const QuizReviewPage = () => {
         );
 
         setGradeList(newGradeList);
+        setLoading(false);
     };
 
     const getData = async () => {
@@ -129,29 +133,42 @@ const QuizReviewPage = () => {
         else getReview();
     }, []);
 
+    const navigate = useNavigate();
+
+    const goToPostBoardPage = (searchWord: string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return (
         <>
-            {/* <NavBar onSearchWordChange={goToPostBoardPage}/> */}
-            <Container>
-                <div className="errataBox">
-                    <div className="score">{score} / 100</div>
-                    {gradeList?.map((grade, index) => (
-                        <Errata quizIndex={index + 1} correct={grade.correct} />
-                    ))}
-                </div>
-                <div className="reviewArea" onClick={test}>
-                    {gradeList?.map((grade, index) => (
-                        <Review
-                            quizIndex={index + 1}
-                            question={grade.question}
-                            options={grade.options}
-                            answer={grade.answer}
-                            userAnswer={grade.userAnswer}
-                            explanation={grade.explanation}
-                        />
-                    ))}
-                </div>
-            </Container>
+            <NavBar onSearchWordChange={goToPostBoardPage} />
+            {loading ? (
+                <Loading />
+            ) : (
+                <Container>
+                    <div className="errataBox">
+                        <div className="score">{score} / 100</div>
+                        {gradeList?.map((grade, index) => (
+                            <Errata
+                                quizIndex={index + 1}
+                                correct={grade.correct}
+                            />
+                        ))}
+                    </div>
+                    <div className="reviewArea" onClick={test}>
+                        {gradeList?.map((grade, index) => (
+                            <Review
+                                quizIndex={index + 1}
+                                question={grade.question}
+                                options={grade.options}
+                                answer={grade.answer}
+                                userAnswer={grade.userAnswer}
+                                explanation={grade.explanation}
+                            />
+                        ))}
+                    </div>
+                </Container>
+            )}
         </>
     );
 };
