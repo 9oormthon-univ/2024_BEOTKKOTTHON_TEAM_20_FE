@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "./theme";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     width: 20vw;
@@ -113,4 +114,16 @@ export const Container = styled.div`
 export const Icon = styled.img`
     width: 1rem;
     height: 1rem;
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
 `;

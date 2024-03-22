@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container, Icon } from "../styles/PostCardStyled";
+import { Container, Icon, StyledLink } from "../styles/PostCardStyled";
 import TalkIcon from "../image/commentIcon.png";
 import ScrapIcon from "../image/isScrapIcon.png";
 import notScrapIcon from "../image/notScrapIcon.png";
@@ -70,53 +70,62 @@ const PostCard: React.FC<MyPostProps> = ({
     useEffect(() => {
         getData();
     }, []);
-    return ( 
-        <Container>
-            <div className="categoryBox">
-                <p className="category">{categories[categoryId].category}</p>
-            </div>
-            <div className="titleBox">
-                <p className="title">
-                    {title.length > 10 ? title.slice(0, 10) + " ..." : title}
-                </p>
-                <p className="date">{createdAt.slice(0, 10)}</p>
-            </div>
-            <div className="PostBox">
-                <p className="post">
-                    {summary.length > 280
-                        ? summary.slice(0, 280) + "..."
-                        : summary}
-                </p>
-            </div>
-            <div className="additionalBox">
-                <div className="hashtagBox">
-                    {tag.map((tagName) => (
-                        <p className="hashtag">#{tagName}</p>
-                    ))}
+    return (
+        <StyledLink to={`/read/${postId}`}>
+            <Container>
+                <div className="categoryBox">
+                    <p className="category">
+                        {categories[categoryId].category}
+                    </p>
                 </div>
-                <div className="reactionBox">
-                    <div className="reaction">
-                        <div className="icon">
-                            <Icon src={TalkIcon} />
-                        </div>
-                        <p className="count">{commentCount}</p>
+                <div className="titleBox">
+                    <p className="title">
+                        {title.length > 10
+                            ? title.slice(0, 10) + " ..."
+                            : title}
+                    </p>
+                    <p className="date">{createdAt.slice(0, 10)}</p>
+                </div>
+                <div className="PostBox">
+                    <p className="post">
+                        {summary.length > 280
+                            ? summary.slice(0, 280) + "..."
+                            : summary}
+                    </p>
+                </div>
+                <div className="additionalBox">
+                    <div className="hashtagBox">
+                        {tag.map((tagName) => (
+                            <p className="hashtag">#{tagName}</p>
+                        ))}
                     </div>
-                    <div className="reaction">
-                        <div className="icon">
-                            {isScrapped ? (
-                                <Icon src={ScrapIcon} onClick={scrapHandler} />
-                            ) : (
-                                <Icon
-                                    src={notScrapIcon}
-                                    onClick={scrapHandler}
-                                />
-                            )}
+                    <div className="reactionBox">
+                        <div className="reaction">
+                            <div className="icon">
+                                <Icon src={TalkIcon} />
+                            </div>
+                            <p className="count">{commentCount}</p>
                         </div>
-                        <p className="count">{scrapCount}</p>
+                        <div className="reaction">
+                            <div className="icon">
+                                {isScrapped ? (
+                                    <Icon
+                                        src={ScrapIcon}
+                                        onClick={scrapHandler}
+                                    />
+                                ) : (
+                                    <Icon
+                                        src={notScrapIcon}
+                                        onClick={scrapHandler}
+                                    />
+                                )}
+                            </div>
+                            <p className="count">{scrapCount}</p>
+                        </div>
                     </div>
                 </div>
-            </div>
-        </Container>
+            </Container>
+        </StyledLink>
     );
 };
 export default PostCard;
