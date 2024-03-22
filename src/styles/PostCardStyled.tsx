@@ -8,11 +8,25 @@ export const Container = styled.div`
 
     background-color: white;
     border-radius: 15px;
+    box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.05);
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    .categoryBox {
+        width: inherit;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .category {
+        font-size: 0.8rem;
+        margin-bottom: 0.4rem;
+        color: ${theme.colors.primary};
+    }
 
     .titleBox {
         width: inherit;
@@ -22,24 +36,24 @@ export const Container = styled.div`
     }
 
     .title {
-        font-size: 18px;
+        font-size: 1.125rem;
         font-weight: bold;
         color: ${theme.colors.font1};
     }
 
-    .category {
-        font-size: 14px;
+    .date {
+        font-size: 0.8rem;
         color: ${theme.colors.font3};
     }
 
     .PostBox {
         width: 20vw;
-        height: 20vh;
+        height: 18vh;
         margin: 1vh 0;
     }
 
     .post {
-        font-size: 14px;
+        font-size: 0.8rem;
         color: ${theme.colors.font2};
     }
 
@@ -83,7 +97,7 @@ export const Container = styled.div`
     }
 
     .icon {
-        margin-right: 2px;
+        margin-right: 0.25rem;
 
         display: flex;
         justify-content: center;
@@ -91,13 +105,12 @@ export const Container = styled.div`
     }
 
     .count {
-        font-size: 12px;
+        font-size: 0.75rem;
         color: ${theme.colors.font3};
     }
 `;
 
 export const Icon = styled.img`
-    width: 16px;
-    height: 16px;
-    opacity: 0.4;
+    width: 1rem;
+    height: 1rem;
 `;

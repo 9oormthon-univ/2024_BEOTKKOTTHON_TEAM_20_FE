@@ -3,7 +3,7 @@ import { Container, StyledLink } from "../styles/QuizReviewPageStyled";
 import NavBar from "../components/NavBar";
 import Review from "../components/Review";
 import Errata from "../components/Errata";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 interface GradeList {
@@ -19,15 +19,24 @@ interface ApiResponseData {
     gradeList: GradeList[];
 }
 
+interface ApiResponseData2 {
+    reviewList: GradeList[];
+}
+
 const QuizReviewPage = () => {
     const location = useLocation();
     const { grade } = location.state || {};
-    console.log(grade);
+    // console.log(grade);
+
+    const query = new URLSearchParams(location.search);
+    const reviewId = query.get("reviewId");
+    // console.log(reviewId);
 
     const [gradeList, setGradeList] = useState<GradeList[]>();
     const [score, setScore] = useState<number>();
 
     const handleApiResponse = (responseData: ApiResponseData) => {
+        console.log(responseData);
         const newGradeList: GradeList[] = responseData.gradeList.map((item) => {
             return {
                 answer: item.answer,
@@ -38,6 +47,24 @@ const QuizReviewPage = () => {
                 userAnswer: item.userAnswer as string,
             };
         });
+
+        setGradeList(newGradeList);
+    };
+
+    const handleApiResponse2 = (responseData: ApiResponseData2) => {
+        console.log(responseData);
+        const newGradeList: GradeList[] = responseData.reviewList.map(
+            (item) => {
+                return {
+                    answer: item.answer,
+                    correct: item.correct,
+                    explanation: item.explanation,
+                    options: item.options,
+                    question: item.question,
+                    userAnswer: item.userAnswer as string,
+                };
+            }
+        );
 
         setGradeList(newGradeList);
     };
@@ -74,8 +101,32 @@ const QuizReviewPage = () => {
         console.log(gradeList);
     };
 
+    const getReview = async () => {
+        console.log("퀴즈 다시보기");
+        try {
+            const response = await axios.get(
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/quiz",
+                {
+                    params: { reviewId: reviewId },
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
+
+            // const gradeList = response.data.reviewList;
+            console.log(response.data);
+            handleApiResponse2(response.data);
+            setScore(response.data.totalScore);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
     useEffect(() => {
-        getData();
+        if (grade) getData();
+        else getReview();
     }, []);
 
     return (
