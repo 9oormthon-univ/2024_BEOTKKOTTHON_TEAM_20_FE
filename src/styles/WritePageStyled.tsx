@@ -83,18 +83,27 @@ export const CategoryButton=styled.option`
     padding-left:5px;
 `;
 export const Prompt =styled.div`
-    border:1px solid purple;
+    background-color:white;
+    border-radius:15px;
     display:flex;
     justify-content:center;
     flex-direction: column;
-    width:30%;
+    width:25%;
+    height:300px;
+    margin-top:300px;
     align-items:center;
+    z-index:99;
+    .notice{
+        font-size:large;
+        font-weight:bold;
+    }
     div{
         margin-top:30px;
-        border:1px solid #7B3FF6;
         display:flex;
         justify-content:space-between;
+        width:60%;
     }
+
 
 `;
 export const BackBtn=styled.button`
@@ -103,10 +112,12 @@ export const BackBtn=styled.button`
     border:1px solid #7B3FF6;
     color:#7B3FF6;
     background-color:white;
+    border-radius:5px;
 `;
 export const GoBtn=styled.button`
 width:100px;
 height:30px;
     color:white;
     background-color:#7B3FF6;
+    border-radius:5px;
 `;

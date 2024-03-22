@@ -25,11 +25,19 @@ import MainLogo from "../image/Qtudy_logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+    const [token, setToken] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const storedToken = window.localStorage.getItem("accessToken");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      }, []);
 
     return (
         <Container>
