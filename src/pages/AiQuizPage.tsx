@@ -53,7 +53,7 @@ const AiQuizPage = () => {
 
     return (
         <>
-            <NavBar onSearchWordChange={goToPostBoardPage}/>
+            {/* <NavBar onSearchWordChange={goToPostBoardPage}/> */}
             <Container>
                 <div className="titleBox">
                     <p className="title">AI Quiz 트렌디하게 공부하기</p>
