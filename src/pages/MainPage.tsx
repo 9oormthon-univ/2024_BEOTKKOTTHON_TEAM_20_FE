@@ -5,7 +5,7 @@ import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 import 'swiper/css/scrollbar';
-import { Container, Slider,Question,Banner,Frame1, GoButton} from "../styles/MainPageStyled";
+import { Container, Slider,Question,Banner,Frame1, GoButton, NoPrefer} from "../styles/MainPageStyled";
 import NavBar from "../components/NavBar";
 import TrendBoard from "../components/TrendBoard";
 import PreferBoard from "../components/PreferBoard";
@@ -61,7 +61,9 @@ const MainPage = () => {
         </div>
         {token?<>
         <PreferBoard/> </>:<>
-        로그인을 해주세요!</>}
+        <NoPrefer>
+        <h1>로그인을 해주세요!</h1>
+        </NoPrefer></>}
         <Question>
             <div>
                 <img style={{width:"50px",height:"50px"}} src={MainLogo}></img>

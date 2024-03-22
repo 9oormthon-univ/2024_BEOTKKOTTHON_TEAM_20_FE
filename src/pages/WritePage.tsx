@@ -13,36 +13,16 @@ const WritePage = () => {
     const [tags, setTags] = useState<string[]>([]);
     const [categoryId, setCategoryId] = useState(1);
     const navigate = useNavigate();
-    const [showPrompt, setShowPrompt] = useState(false);
-    const [isPageLeaving, setIsPageLeaving] = useState(false);
+    const location = useLocation();
+    const [showPrompt, setShowPrompt] = useState();
 
-    
-    useEffect(() => {
-        const handleBeforeUnload = (event: BeforeUnloadEvent) => {
-            if (isPageLeaving) {
-                event.preventDefault();
-                event.returnValue = ''; 
-                setShowPrompt(true);
-            }
-        };
-
-        window.addEventListener('beforeunload', handleBeforeUnload);
-
-        return () => {
-            window.removeEventListener('beforeunload', handleBeforeUnload);
-        };
-    }, [isPageLeaving]);
   
 
     const handleCancel = () => {
-        setIsPageLeaving(false);
-        setShowPrompt(false); // Hide the prompt when cancelled
         navigate(-1);
     };
 
     const handleConfirm = () => {
-        setIsPageLeaving(true);
-        setShowPrompt(false); // Hide the prompt when confirmed
         navigate('/postBoard');
     };
 
@@ -138,6 +118,7 @@ const WritePage = () => {
                         </div>
                     </Prompt>
                  )}
+
                     <WBoard>
                         <WFrame>
                             <HeadOpt>

@@ -59,7 +59,7 @@ align-items:center;
 justify-content:space-between;
 float:right;
 `;
-export const ImgProfile=styled.img`
+export const ImgProfile=styled.div`
     border:1px solid gray;
     width:45px;
     height:45px;

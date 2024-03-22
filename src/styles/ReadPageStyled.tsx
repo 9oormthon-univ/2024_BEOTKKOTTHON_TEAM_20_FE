@@ -141,11 +141,22 @@ export const TalkInfo=styled.div`
 
 height:auto;
 width:800px;
+.editform{
+    resize: none;
+    width:90%;
+}
 `;
 export const Datee=styled.div`
 width:auto;
 position:absolute;
 right:0;
+
+button{
+    border:none;
+    background-color:white;
+    font-size:medium;
+    margin-left:40px;
+}
 `;
 export const Dateee=styled.div`
 width:auto;

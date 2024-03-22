@@ -46,3 +46,11 @@ export const Banner = styled.img`
 export const GoButton=styled.img`
     width:33.3%;
 `;
+export const NoPrefer=styled.div`
+    width:100%;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    display:flex;
+    margin-top:200px;
+`;
