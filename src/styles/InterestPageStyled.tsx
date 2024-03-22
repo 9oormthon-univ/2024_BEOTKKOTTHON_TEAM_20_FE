@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import theme from "./theme";
+import interest_background from "../image/interest_background.png";
+import ReactModal from "react-modal";
 
 export const Container = styled.div`
     width: 100vw;
@@ -11,7 +13,8 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-color: ${theme.colors.primary};
+    background-image: url(${interest_background});
+    background-size: 100vw;
 
     p {
         margin: 0;
@@ -21,6 +24,10 @@ export const Container = styled.div`
         position: absolute;
         top: 30px;
         left: 100px;
+    }
+
+    .logo > img {
+        width: 100px;
     }
 
     .titleBox {
@@ -52,8 +59,9 @@ export const Container = styled.div`
     }
 
     .interests {
-        width: 900px;
+        width: 1000px;
         display: flex;
+        flex-wrap: wrap;
         justify-content: space-evenly;
         margin: 1vh 0;
     }
@@ -83,4 +91,42 @@ export const Container = styled.div`
     }
 `;
 
-export default Container;
+export const customStyles = {
+    overlay: {
+        background: "rgba(0, 0, 0, 0.2)",
+    },
+};
+
+export const StyledModal = styled(ReactModal)`
+    width: 440px;
+    height: 250px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .closeBtn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+
+        color: ${theme.colors.primary};
+        cursor: pointer;
+    }
+
+    .error {
+        font-size: 16px;
+        font-weight: bold;
+        color: ${theme.colors.font1};
+    }
+`;

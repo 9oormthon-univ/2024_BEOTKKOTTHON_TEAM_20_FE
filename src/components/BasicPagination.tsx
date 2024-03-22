@@ -2,18 +2,22 @@ import * as React from "react";
 import Pagination from "@mui/material/Pagination";
 import theme from "../styles/theme";
 
-export default function BasicPagination() {
-    const [page, setPage] = React.useState(1);
+interface BasicPaginationProps {
+    count: number; // 총 페이지 수
+    page: number; // 현재 페이지 번호
+    onChange: (event: React.ChangeEvent<unknown>, page: number) => void; // 페이지 변경 이벤트 핸들러
+}
 
-    const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        setPage(value);
-    };
-
+const BasicPagination: React.FC<BasicPaginationProps> = ({
+    count,
+    page,
+    onChange,
+}) => {
     return (
         <Pagination
-            count={10}
+            count={count}
             page={page}
-            onChange={handleChange}
+            onChange={onChange}
             sx={{
                 "& .MuiPaginationItem-root": {
                     color: theme.colors.font3, // 원하는 색상
@@ -28,4 +32,6 @@ export default function BasicPagination() {
             }}
         />
     );
-}
+};
+
+export default BasicPagination;

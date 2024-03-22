@@ -1,39 +1,56 @@
 import React, { useState } from "react";
 import { Container, Icon } from "../styles/PostCardStyled";
-import TalkIcon from "../image/TalkIcon.png";
-import ScrapIcon from "../image/ScrapIcon.png";
+import TalkIcon from "../image/commentIcon.png";
+import ScrapIcon from "../image/isScrapIcon.png";
+import { MyPostProps } from "../pages/MyPostPage";
+import { categories } from "./category";
 
-const PostCard = () => {
+const PostCard: React.FC<MyPostProps> = ({
+    postId,
+    categoryId,
+    title,
+    createdAt,
+    summary,
+    tag,
+    commentCount,
+    scrapCount,
+}) => {
+    // 스크랩
     const [isScrapped, setIsScrapped] = useState(false);
-
     const scrapHandler = () => {
-        setIsScrapped(!isScrapped); // 토글 기능 - 클릭할 때마다 상태 변경
+        setIsScrapped(!isScrapped); // toggle
     };
-
     const fillColor = isScrapped
         ? "opacity(0.1) drop-shadow(0 0 0 #F1AF14)"
         : "";
-
     return (
         <Container>
+            <div className="categoryBox">
+                <p className="category">{categories[categoryId].category}</p>
+            </div>
             <div className="titleBox">
-                <p className="title">자료구조 스터디</p>
-                <p className="category">컴퓨터공학</p>
+                <p className="title">{title}</p>
+                <p className="date">{createdAt.slice(0, 10)}</p>
             </div>
             <div className="PostBox">
-                <p className="post">내용~ ...</p>
+                <p className="post">
+                    {summary.length > 280
+                        ? summary.slice(0, 280) + "..."
+                        : summary}
+                </p>
             </div>
             <div className="additionalBox">
                 <div className="hashtagBox">
-                    <p className="hashtag">#자료구조</p>
-                    <p className="hashtag">#코딩</p>
+                    {tag.map((tagName) => (
+                        <p className="hashtag">#{tagName}</p>
+                    ))}
                 </div>
                 <div className="reactionBox">
                     <div className="reaction">
                         <div className="icon">
                             <Icon src={TalkIcon} />
                         </div>
-                        <p className="count">100</p>
+                        <p className="count">{commentCount}</p>
                     </div>
                     <div className="reaction">
                         <div className="icon">
@@ -43,7 +60,7 @@ const PostCard = () => {
                                 style={{ filter: fillColor }}
                             />
                         </div>
-                        <p className="count">200</p>
+                        <p className="count">{scrapCount}</p>
                     </div>
                 </div>
             </div>

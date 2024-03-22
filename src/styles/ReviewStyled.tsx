@@ -63,8 +63,8 @@ export const Container = styled.div`
 
     .explanationBox {
         width: 43vw;
-        height: 20vh;
-        padding: 0 1vw;
+        /* height: 20vh; */
+        padding: 0.5rem 1vw;
         margin: 5vh 0 3vh 0;
         border-radius: 10px;
         background-color: ${theme.colors.line2};

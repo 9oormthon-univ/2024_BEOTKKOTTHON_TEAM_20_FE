@@ -1,5 +1,6 @@
 import React, { useState,useEffect } from "react";
 import { Div, Navigation, Logo, Nav, InputQ, SIcon,ImgProfile, SideDiv, AnimationDiv, InfoWrap } from "../styles/NavBarStyled";
+
 import MainLogo from "../image/MainLogo.png";
 import SearchIcon from "../image/SearchIcon.png";
 import DownArrow from "../image/DownArrow.png";
@@ -51,7 +52,7 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
 
     const handleKeyPress = (event: React.KeyboardEvent<HTMLInputElement>) => {
         // 입력 필드에서 Enter 키를 누르면 검색 실행
-        if (event.key === 'Enter') {
+        if (event.key === "Enter") {
             search();
         }
     };
@@ -62,19 +63,31 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
     };
 
 
+
     const animationHandler = () => {
     setViewOption((prevViewOption) => !prevViewOption); // 이전 상태의 반대값으로 업데이트
 };
 
+    const isLogin = window.localStorage.getItem("accessToken");
+    console.log(isLogin);
+
+
     return (
         <Navigation>
-            <a href="/"><Logo src={MainLogo} alt="mainlogo" /></a>
+            <a href="/">
+                <Logo src={MainLogo} alt="mainlogo" />
+            </a>
             <Div>
                 <Nav href="/postBoard">스터디 포스팅</Nav>
-                <Nav>AI 퀴즈</Nav>
+                <Nav href="/aiQuiz">AI 퀴즈</Nav>
             </Div>
             <SIcon src={SearchIcon}></SIcon>
-            <InputQ placeholder="검색어를 입력하세요" value={searchWord} onChange={handleInputChange} onKeyPress={handleKeyPress}></InputQ>
+            <InputQ
+                placeholder="검색어를 입력하세요"
+                value={searchWord}
+                onChange={handleInputChange}
+                onKeyPress={handleKeyPress}
+            ></InputQ>
             {token?<>
             <InfoWrap>
             <SideDiv>

@@ -44,8 +44,8 @@ export const Container = styled.div`
     }
 
     .profile_img {
-        width: 160px;
-        height: 160px;
+        width: 10rem;
+        height: 10rem;
 
         display: flex;
         justify-content: center;
@@ -53,7 +53,17 @@ export const Container = styled.div`
 
         border-radius: 50%;
 
-        background-color: gray;
+        background-color: ${theme.colors.line2};
+    }
+
+    .profileImg {
+        width: 10rem;
+        height: 10rem;
+        border-radius: 50%;
+    }
+
+    .qudyImg {
+        width: 5rem;
     }
 
     .username {
@@ -79,7 +89,7 @@ export const Container = styled.div`
 
     .interestTitle {
         display: flex;
-        justify-content: center;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -90,6 +100,17 @@ export const Container = styled.div`
     }
 
     .linkToInterest {
+        display: flex;
+        justify-content: center;
+        align-content: center;
+    }
+
+    .linkToInterest > img {
+        width: 1rem;
+        margin-left: 0.3rem;
+    }
+
+    .linkTitle {
         font-size: 14px;
         color: ${theme.colors.font3};
     }
@@ -117,7 +138,11 @@ export const Container = styled.div`
         justify-content: center;
         align-items: center;
 
-        background-color: gray;
+        background-color: ${theme.colors.line2};
+    }
+
+    .interesIconImg {
+        width: 4rem;
     }
 
     .interest_text {

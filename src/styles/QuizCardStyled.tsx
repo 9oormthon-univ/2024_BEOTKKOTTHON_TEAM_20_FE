@@ -11,8 +11,11 @@ export const Container = styled.div`
     border-radius: 15px;
 
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
+
+    box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.05);
 
     .quizBox {
         width: 11vw;
@@ -23,9 +26,21 @@ export const Container = styled.div`
         align-items: center;
     }
 
-    .sourceBox {
+    .userBox {
         display: flex;
-        justify-content: center;
+        align-items: center;
+    }
+
+    .quizReview {
+        width: 22vw;
+        display: flex;
+    }
+
+    .sourceBox {
+        width: 21vw;
+        margin-bottom: 1.5rem;
+        display: flex;
+        justify-content: space-between;
         align-items: center;
     }
 
@@ -35,22 +50,31 @@ export const Container = styled.div`
         margin-right: 0.5vw;
         border-radius: 50%;
 
-        background-color: gray;
+        background-color: ${theme.colors.line1};
 
         display: flex;
         justify-content: center;
         align-items: center;
     }
 
+    .qudyImg {
+        width: 1rem;
+    }
+
     .source_name {
-        font-size: 14px;
+        font-size: 0.8rem;
+        color: ${theme.colors.font2};
+    }
+
+    .date {
+        font-size: 0.8rem;
         color: ${theme.colors.font3};
     }
 
     .hashtagBox {
         width: 11vw;
         height: 10vh;
-        margin: 1vh 0;
+        margin-bottom: 1rem;
 
         display: flex;
         flex-direction: column;
@@ -58,10 +82,17 @@ export const Container = styled.div`
         align-items: center;
     }
 
+    .categoryName {
+        font-size: 1.15rem;
+        font-weight: bold;
+        color: ${theme.colors.font1};
+        margin-bottom: 0.5rem;
+    }
+
     .hashtag {
         margin: 0.5vh 0;
-        font-weight: bold;
-        font-size: 16px;
+        /* font-weight: bold; */
+        font-size: 0.8rem;
         color: ${theme.colors.font1};
     }
 
@@ -75,6 +106,7 @@ export const Container = styled.div`
     }
 
     .icon {
+        width: 0.8rem;
         margin-right: 0.5vw;
     }
 

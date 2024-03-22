@@ -23,17 +23,28 @@ export const StyledModal = styled(ReactModal)`
 
     display: flex;
     flex-direction: column;
-    justify-content: space-evenly;
+    justify-content: center;
     align-items: center;
 
-    over p {
+    box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1);
+
+    p {
         margin: 0;
     }
 
     .headBox {
-        width: 340px;
+        width: 21rem;
         display: flex;
         justify-content: space-between;
+        align-items: center;
+    }
+
+    .logo > img {
+        width: 4rem;
+    }
+
+    .close > img {
+        width: 1.5rem;
     }
 
     .close:hover {
@@ -41,31 +52,36 @@ export const StyledModal = styled(ReactModal)`
     }
 
     .titleBox {
-        width: 340px;
+        width: 21rem;
+        margin: 2.5rem 0;
     }
 
     .title {
-        width: 340px;
+        width: 21rem;
         color: ${theme.colors.font1};
-        font-size: 24px;
+        font-size: 1.4rem;
         font-weight: bold;
-        margin-bottom: 15px;
+        margin-bottom: 0.5rem;
     }
 
     .subTitle {
-        width: 340px;
+        width: 21rem;
         color: ${theme.colors.font2};
-        font-size: 16px;
+        font-size: 1rem;
     }
 
     .kakaoLogin {
-        width: 340px;
-        height: 50px;
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: yellow;
-        border-radius: 10px;
+    }
+
+    .kakaoLogin:hover {
+        cursor: pointer;
+    }
+
+    .kakaoLogin > img {
+        width: 21rem;
     }
 `;
 
@@ -77,5 +93,6 @@ export const Container = styled.div`
     justify-content: center;
     align-items: center;
 
-    background-color: teal;
+    background-color: black;
+    opacity: 0.2;
 `;
