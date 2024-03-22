@@ -37,7 +37,7 @@ const ReadPage = () => {
           setToken(storedToken);
         }
       }, []);
-      
+
       useEffect(() => {
         const scrollToTop = () => {
             window.scrollTo(0, 0); // 페이지의 가장 상단으로 스크롤 이동
@@ -218,7 +218,7 @@ const ReadPage = () => {
                     Authorization: window.localStorage.getItem("accessToken"),
                 },
             });
-            navigate("/");
+            navigate("/postBoard");
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('error deleting post:', error.response);
