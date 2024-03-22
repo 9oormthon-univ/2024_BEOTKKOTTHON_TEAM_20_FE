@@ -79,7 +79,7 @@ const WritePage = () => {
                     Authorization: window.localStorage.getItem("accessToken"),
                 },
             });
-    
+            console.log(summaryResponse.data);
             const summary = summaryResponse.data.summary; // 응답에서 summary 가져옴
     
             // tag, postId와 summary 포함하여 /quiz 엔드포인트에 데이터를 보냄
@@ -92,9 +92,7 @@ const WritePage = () => {
                     Authorization: window.localStorage.getItem("accessToken"),
                 },
             });
-    
             console.log(quizResponse.data);
-    
             // 성공적으로 요청을 보낸 후 게시판 페이지로 이동
             navigate('/postBoard');
         } catch (error) {
@@ -120,6 +118,18 @@ const WritePage = () => {
         <Container>
             <NavBar onSearchWordChange={goToPostBoardPage}/>
             <BackG>
+            {showPrompt ? ( 
+                
+                <Prompt>
+                    <img style={{width:"40px",height:"40px"}} src={NoticeIcon} alt="Notice Icon" />
+                    <p>포스팅을 그만두시겠어요?</p>
+                    <p>페이지를 벗어나면 지금까지 작성한 내용은 모두 사라져요!</p>
+                    <div>
+                        <BackBtn name="back" onClick={handleCancel}>취소</BackBtn>
+                        <GoBtn name="go" onClick={handleConfirm}>확인</GoBtn>
+                    </div>
+                </Prompt>
+            ):(<>
                 <WBoard>
                     <WFrame>
                         <HeadOpt>
@@ -145,18 +155,8 @@ const WritePage = () => {
                         </Count>
                     </WFrame>
                 </WBoard>
+            </>)}
             </BackG>
-            {showPrompt && ( 
-                <Prompt>
-                    <img style={{width:"40px",height:"40px"}} src={NoticeIcon} alt="Notice Icon" />
-                    <p>포스팅을 그만두시겠어요?</p>
-                    <p>페이지를 벗어나면 지금까지 작성한 내용은 모두 사라져요!</p>
-                    <div>
-                        <BackBtn name="back" onClick={handleCancel}>취소</BackBtn>
-                        <GoBtn name="go" onClick={handleConfirm}>확인</GoBtn>
-                    </div>
-                </Prompt>
-            )}
         </Container>
     );
 };

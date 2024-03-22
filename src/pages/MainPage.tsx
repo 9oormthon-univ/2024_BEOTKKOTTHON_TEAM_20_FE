@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useEffect,useState} from "react";
 import { Navigation, Pagination,Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -18,11 +18,19 @@ import MainLogo from "../image/MainLogo.png";
 import { useNavigate } from "react-router-dom";
 
 const MainPage = () => {
+    const [token, setToken] = useState<string | null>(null);
     const navigate = useNavigate();
 
     const goToPostBoardPage = (searchWord:string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const storedToken = window.localStorage.getItem("accessToken");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      }, []);
 
     return <Container>
         <NavBar onSearchWordChange={goToPostBoardPage}/>
@@ -48,13 +56,15 @@ const MainPage = () => {
                 </SwiperSlide>
             </Swiper>
         </Slider>
-        <TrendBoard/>
+            <TrendBoard/>
         <div>
             <GoButton src={GoQuiz}/>
             <a href="/write"><GoButton src={GoPost}/></a>
             <GoButton src={GoNote}/>
         </div>
-        <PreferBoard/>
+        {token?<>
+        <PreferBoard/> </>:<>
+        로그인을 해주세요!</>}
         <Question>
             <div>
                 <img style={{width:"50px",height:"50px"}} src={MainLogo}></img>

@@ -68,12 +68,15 @@ const PostBoardPage = () => {
                 },
             });
             setPostList(response.data.postList);
+            // 페이지 변경 후 화면의 위쪽으로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('error fetching :',error.response);
             }
         }
     };
+    
 
     const handleCategoryClick = (index: number) => {
         setView("all");

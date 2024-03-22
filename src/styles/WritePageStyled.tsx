@@ -95,6 +95,7 @@ export const Prompt =styled.div`
         display:flex;
         justify-content:space-between;
     }
+    
 
 `;
 export const BackBtn=styled.button`

@@ -28,6 +28,7 @@ const ReadPage = () => {
     const [profileNickname, setProfileNickname]=useState("");
     const [profileImg, setProfileImg]=useState(null);
     const [token, setToken] = useState<string | null>(null);
+    const [isEditable, setIsEditable] = useState(false);
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
