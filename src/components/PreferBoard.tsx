@@ -38,8 +38,13 @@ const PreferBoard = () => {
         const fetchInterestPosts = async (interestCategories: number[]) => {
             try {
                 // categoryId들을 파라미터로 사용하여 쿼리스트링을 생성
-                const queryString = interestCategories.map(categoryId => `category=${categoryId}`).join('&');
-                const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?${queryString}`);
+                const queryString = interestCategories.map(categoryId => `categoryId=${categoryId}`).join('&');
+                const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?${queryString}`,{
+                    params: { page :0}, 
+                    headers: {
+                        Authorization: window.localStorage.getItem("accessToken"),
+                    },
+                });
                 const posts = response.data.postList;
                 setInterestPosts(posts);
             } catch (error) {
