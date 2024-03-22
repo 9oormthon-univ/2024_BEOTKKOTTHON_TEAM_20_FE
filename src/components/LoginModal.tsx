@@ -1,11 +1,14 @@
 import React from "react";
-// import ReactModal from "react-modal";
 import {
     StyledModal,
     Container,
     customStyles,
 } from "../styles/LoginModalStyled";
 import { REST_API_KEY, REDIRECT_URI } from "../KakaoLoginData";
+import kakao_login from "../image/kakao_login_large.png";
+import logoImg from "../image/Qtudy_logo_2.png";
+import closeIcon from "../image/closeIcon.png";
+import { Link } from "react-router-dom";
 
 interface ModalProps {
     isOpen: boolean;
@@ -31,10 +34,14 @@ const LoginModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                 style={customStyles}
             >
                 <div className="headBox">
-                    <div className="logo">로고이미지</div>
-                    <div className="close" onClick={handleModalClick}>
-                        X
+                    <div className="logo">
+                        <img src={logoImg} alt="logo" />
                     </div>
+                    <Link to="/">
+                        <div className="close" onClick={handleModalClick}>
+                            <img src={closeIcon} alt="close" />
+                        </div>
+                    </Link>
                 </div>
                 <div className="titleBox">
                     <p className="title">큐터디에 오신 것을 환영해요!</p>
@@ -43,7 +50,7 @@ const LoginModal: React.FC<ModalProps> = ({ isOpen, onClose }) => {
                     </p>
                 </div>
                 <div className="kakaoLogin" onClick={loginHandler}>
-                    카카오로그인
+                    <img src={kakao_login} alt="kakao_login" />
                 </div>
             </StyledModal>
         </Container>
