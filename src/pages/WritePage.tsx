@@ -71,7 +71,8 @@ const WritePage = () => {
         } else if (e.target.name === "tags") {
             const tagArray = value
                 .split("#")
-                .filter((tag) => tag.trim() !== "");
+                .map((tag) => tag.trim()) // 여기에서 각 태그를 trim하여 양쪽 공백을 제거합니다.
+                .filter((tag) => tag !== ""); // trim된 결과를 바탕으로 빈 문자열이 아닌 태그만 필터링합니다.
             setTags(tagArray);
         }
     };
@@ -115,21 +116,16 @@ const WritePage = () => {
             const summary = summaryResponse.data.summary; // 응답에서 summary 가져옴
 
             // tag, postId와 summary 포함하여 /quiz 엔드포인트에 데이터를 보냄
-            const quizResponse = await axios.post(
+            let tagApi = tags.join(", ");
+            axios.post(
                 `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz`,
                 {
                     postId: postId,
-                    tag: tags,
+                    tags: tagApi,
                     summary: summary,
-                },
-                {
-                    headers: {
-                        Authorization:
-                            window.localStorage.getItem("accessToken"),
-                    },
                 }
             );
-            console.log(quizResponse.data);
+            // console.log(quizResponse.data);
             // 성공적으로 요청을 보낸 후 게시판 페이지로 이동
             navigate("/postBoard");
         } catch (error) {
