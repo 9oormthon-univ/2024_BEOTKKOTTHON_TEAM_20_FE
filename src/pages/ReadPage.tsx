@@ -160,10 +160,10 @@ const ReadPage = () => {
                             </DetailInfo>
                             <hr />
                             <AISummary>
-                                큐디가 요약한 표스팅의 내용이에요!
+                                큐디가 요약한 포스팅의 내용이에요!
                                 <SummaryContent>{summary}</SummaryContent>
                                 <Logoo src={QudyLogo}></Logoo>
-                                <Link to={`/quiz?postId=${postId}`}><Img src={QuizGo}></Img></Link>
+                                <Link to={"/quiz"} state={{ postId: postId }}><Img src={QuizGo}></Img></Link>
                             </AISummary>
                             <hr />
                            <CommentBoard postId={postId}/>

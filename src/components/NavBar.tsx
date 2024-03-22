@@ -1,49 +1,25 @@
-import React, { useState,useEffect } from "react";
-import { Div, Navigation, Logo, Nav, InputQ, SIcon,ImgProfile, SideDiv, AnimationDiv, InfoWrap } from "../styles/NavBarStyled";
-
-import MainLogo from "../image/MainLogo.png";
+import React, { useEffect, useState } from "react";
+import {
+    Div,
+    Navigation,
+    Logo,
+    Nav,
+    InputQ,
+    SIcon,
+} from "../styles/NavBarStyled";
+import MainLogo from "../image/Qtudy_logo_2.png";
 import SearchIcon from "../image/SearchIcon.png";
-import DownArrow from "../image/DownArrow.png";
-import UpArrow from "../image/UpArrow.png";
+import qudyImg from "../image/Qtudy_char.png";
 import axios from "axios";
-import mypageIcon from "../image/mypageIcon.png";
-import logoutIcon from "../image/logoutIcon.png";
+
+interface MyPageProps {
+    name: string;
+    email: string;
+    profileImage: any;
+}
 
 const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
-    const [token, setToken] = useState<string | null>(null);
-    const [profileNickname, setProfileNickname]=useState("");
-    const [profileImg, setProfileImg]=useState(null);
-    const [viewOption,setViewOption]=useState(false);
-
-    useEffect(() => {
-      // 로컬 스토리지에서 토큰 가져오기
-      const storedToken = window.localStorage.getItem("accessToken");
-      if (storedToken) {
-        setToken(storedToken);
-      }
-    }, []);
-
-    useEffect(()=>{
-        const fetchProfile =async()=>{
-        try{
-            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my`,{
-                headers: {
-                    Authorization: window.localStorage.getItem("accessToken"),
-                },
-            });
-                console.log(response.data);
-                setProfileNickname(response.data.name);
-                setProfileImg(response.data.profileImageUrl);
-        }catch (error) {
-                if (axios.isAxiosError(error)) {
-                    console.log('error fetching:', error.response);
-                }
-            }
-        }
-        fetchProfile();
-    })
-
-
+    const [data, setData] = useState<MyPageProps>();
     const [searchWord, setSearchWord] = useState("");
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -62,56 +38,80 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
         onSearchWordChange(searchWord);
     };
 
-
-
-    const animationHandler = () => {
-    setViewOption((prevViewOption) => !prevViewOption); // 이전 상태의 반대값으로 업데이트
-};
+    //     const animationHandler = () => {
+    //     setViewOption((prevViewOption) => !prevViewOption); // 이전 상태의 반대값으로 업데이트
+    // };
 
     const isLogin = window.localStorage.getItem("accessToken");
     console.log(isLogin);
 
+    const getData = async () => {
+        try {
+            const response = await axios.get(
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my",
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
+            // console.log(response.data);
+
+            setData(response.data);
+        } catch (error) {
+            console.log(error);
+        }
+    };
+
+    useEffect(() => {
+        getData();
+    }, []);
 
     return (
         <Navigation>
-            <a href="/">
-                <Logo src={MainLogo} alt="mainlogo" />
-            </a>
-            <Div>
-                <Nav href="/postBoard">스터디 포스팅</Nav>
-                <Nav href="/aiQuiz">AI 퀴즈</Nav>
-            </Div>
-            <SIcon src={SearchIcon}></SIcon>
-            <InputQ
-                placeholder="검색어를 입력하세요"
-                value={searchWord}
-                onChange={handleInputChange}
-                onKeyPress={handleKeyPress}
-            ></InputQ>
-            {token?<>
-            <InfoWrap>
-            <SideDiv>
-                <ImgProfile>{profileImg}</ImgProfile>
-                <h3>{profileNickname}</h3>
-                <img src={viewOption?UpArrow:DownArrow} onClick={animationHandler}/>
-                </SideDiv>
-                {viewOption&&<>
-                <AnimationDiv>
-                    <div>
-                    <img src={mypageIcon}/>
-                    <p>마이페이지</p>
+            <div className="navBox">
+                <a href="/">
+                    <Logo src={MainLogo} alt="mainlogo" />
+                </a>
+                <Div>
+                    <Nav href="/postBoard">스터디 포스팅</Nav>
+                    <Nav href="/aiQuiz">AI 퀴즈</Nav>
+                    <div className="searchBar">
+                        <SIcon src={SearchIcon}></SIcon>
+                        <input
+                            placeholder="검색어를 입력하세요"
+                            value={searchWord}
+                            onChange={handleInputChange}
+                            onKeyPress={handleKeyPress}
+                        ></input>
                     </div>
-                    <div>
-                    <img src={logoutIcon}/>
-                    <p>로그아웃</p>
-                    </div>
-                </AnimationDiv>
-                </>}
-                </InfoWrap>
-            </>
-            :<>
-            <Nav href="/login">로그인</Nav>
-            </>}
+                </Div>
+            </div>
+            <div className="userBox">
+                {isLogin ? (
+                    <Nav href="/mypage">
+                        <div className="userProfileImg">
+                            {data?.profileImage ? (
+                                <img
+                                    src={data.profileImage}
+                                    alt="default"
+                                    className="profileImg"
+                                />
+                            ) : (
+                                <img
+                                    src={qudyImg}
+                                    alt="default"
+                                    className="qudyImg"
+                                />
+                            )}
+                        </div>
+                        <div className="userName">{data && data.name} 님</div>
+                    </Nav>
+                ) : (
+                    <Nav href="/login">로그인</Nav>
+                )}
+            </div>
         </Navigation>
     );
 };

@@ -32,6 +32,7 @@ interface Grade {
 const QuizPageStyled = () => {
     const location = useLocation();
     let navigate = useNavigate();
+    console.log(location.state.postId);
 
     const [quiz, setQuiz] = useState<Quiz[]>([]);
     const [quizIndex, setQuixIndex] = useState(0);
@@ -89,7 +90,7 @@ const QuizPageStyled = () => {
                 response = await axios.get(
                     "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz/post-quiz",
                     {
-                        params: { posetId: location.state.postId },
+                        params: { postId: location.state.postId },
                     }
                 );
 
