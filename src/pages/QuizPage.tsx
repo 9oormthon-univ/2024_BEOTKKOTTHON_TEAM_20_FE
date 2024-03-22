@@ -146,9 +146,13 @@ const QuizPageStyled = () => {
         getData();
     }, []);
 
+    const goToPostBoardPage = (searchWord: string) => {
+        navigate(`/postBoard?search=${searchWord}`);
+    };
+
     return (
         <>
-            {/* <NavBar onSearchWordChange={goToPostBoardPage}/> */}
+            <NavBar onSearchWordChange={goToPostBoardPage} />
             <Container>
                 <div className="quizBox">
                     <div className="progressBox">
@@ -164,7 +168,24 @@ const QuizPageStyled = () => {
                         </p>
 
                         <div className="quiz_choices">
-                            <p
+                            {quiz[quizIndex]?.options.map(
+                                (option: any, index: number) => (
+                                    <p
+                                        key={index}
+                                        className={`quiz_choice ${
+                                            grade.userAnswerList[quizIndex] ===
+                                            String(index)
+                                                ? "select"
+                                                : ""
+                                        }`}
+                                        data-value={index}
+                                        onClick={handleAnswer}
+                                    >
+                                        {index + 1}. {option}
+                                    </p>
+                                )
+                            )}
+                            {/* <p
                                 className={
                                     grade.userAnswerList[quizIndex] === "0"
                                         ? "quiz_choice select"
@@ -207,7 +228,7 @@ const QuizPageStyled = () => {
                                 onClick={handleAnswer}
                             >
                                 4. {quiz[quizIndex]?.options[3]}
-                            </p>
+                            </p> */}
                         </div>
                     </div>
                     <div className="btns">

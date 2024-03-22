@@ -46,8 +46,12 @@ export const Container = styled.div`
     }
 
     .progress {
-        font-size: 16px;
+        width: 3.125rem;
+        font-size: 1rem;
         color: ${theme.colors.font1};
+
+        display: flex;
+        justify-content: center;
     }
 
     .quiz {
