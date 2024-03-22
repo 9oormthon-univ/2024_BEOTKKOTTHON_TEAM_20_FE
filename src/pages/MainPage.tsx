@@ -51,9 +51,6 @@ const MainPage = () => {
                 <SwiperSlide>
                     <Banner src={Banner2}></Banner>
                 </SwiperSlide>
-                <SwiperSlide>
-                    <Banner src=""></Banner>
-                </SwiperSlide>
             </Swiper>
         </Slider>
             <TrendBoard/>
