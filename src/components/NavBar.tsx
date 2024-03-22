@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState } from "react";
 import {
     Div,
@@ -39,11 +38,9 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
         onSearchWordChange(searchWord);
     };
 
-
-
-    const animationHandler = () => {
-    setViewOption((prevViewOption) => !prevViewOption); // 이전 상태의 반대값으로 업데이트
-};
+    //     const animationHandler = () => {
+    //     setViewOption((prevViewOption) => !prevViewOption); // 이전 상태의 반대값으로 업데이트
+    // };
 
     const isLogin = window.localStorage.getItem("accessToken");
     console.log(isLogin);
@@ -115,7 +112,6 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                     <Nav href="/login">로그인</Nav>
                 )}
             </div>
-
         </Navigation>
     );
 };
