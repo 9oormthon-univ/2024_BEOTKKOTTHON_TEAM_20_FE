@@ -15,6 +15,7 @@ import MyMistakeNotebookPage from "./pages/MyMistakeNotebookPage";
 import AiQuizPage from "./pages/AiQuizPage";
 import QuizPage from "./pages/QuizPage";
 import QuizReviewPage from "./pages/QuizReviewPage";
+import EditPostPage from "./pages/EditPostPage";
 
 const App: React.FC = () => {
     return (
@@ -32,6 +33,7 @@ const App: React.FC = () => {
                 />
                 <Route path="/logout" element={<LogoutPage />} />
                 <Route path="/write" Component={WritePage} />
+                <Route path="/edit/:postId" element={<EditPostPage />} />
                 <Route path="/read/:postId" element={<ReadPage />} />
                 <Route path="/mypage" element={<MyPage />} />
                 <Route path="/mypost" element={<MyPostPage />} />
