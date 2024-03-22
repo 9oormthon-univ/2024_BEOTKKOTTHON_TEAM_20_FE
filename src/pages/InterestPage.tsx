@@ -42,29 +42,27 @@ const InterestPage = () => {
 
     const postInterests = async () => {
         try {
-            // 각 카테고리에 대해 개별 요청을 생성
-            const requests = selectedCategories.map((category) =>
-                axios.patch(
-                    "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests",
-                    { interests: category }, // 각 요청에서 한 개의 카테고리만 전송
-                    {
-                        headers: {
-                            Authorization:
-                                window.localStorage.getItem("accessToken"),
-                        },
-                    }
-                )
+            // selectedCategories 배열을 쿼리 파라미터로 변환
+            const interestsQuery = selectedCategories
+                .map((category) => `interests=${encodeURIComponent(category)}`)
+                .join("&");
+
+            // 단일 요청에서 모든 카테고리를 쿼리 파라미터로 전송
+            const response = await axios.post(
+                `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests?${interestsQuery}`, // 쿼리 파라미터를 URL에 추가
+                {}, // PATCH 요청이므로 본문은 비워둠
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
             );
 
-            // 모든 요청이 완료될 때까지 기다림
-            const responses = await Promise.all(requests);
+            // 응답을 콘솔에 출력
+            console.log(response.data);
 
-            // 모든 응답을 콘솔에 출력
-            responses.forEach((response) => {
-                console.log(response.data);
-            });
-
-            // 모든 요청이 성공적으로 완료되면 페이지 이동
+            // 요청이 성공적으로 완료되면 페이지 이동
             navigate("/");
         } catch (error) {
             console.log(error);
@@ -73,29 +71,27 @@ const InterestPage = () => {
 
     const patchInterests = async () => {
         try {
-            // 각 카테고리에 대해 개별 요청을 생성
-            const requests = selectedCategories.map((category) =>
-                axios.patch(
-                    "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests",
-                    { interests: [category] }, // 각 요청에서 한 개의 카테고리만 전송
-                    {
-                        headers: {
-                            Authorization:
-                                window.localStorage.getItem("accessToken"),
-                        },
-                    }
-                )
+            // selectedCategories 배열을 쿼리 파라미터로 변환
+            const interestsQuery = selectedCategories
+                .map((category) => `interests=${encodeURIComponent(category)}`)
+                .join("&");
+
+            // 단일 요청에서 모든 카테고리를 쿼리 파라미터로 전송
+            const response = await axios.patch(
+                `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/interests?${interestsQuery}`, // 쿼리 파라미터를 URL에 추가
+                {}, // PATCH 요청이므로 본문은 비워둠
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
             );
 
-            // 모든 요청이 완료될 때까지 기다림
-            const responses = await Promise.all(requests);
+            // 응답을 콘솔에 출력
+            console.log(response.data);
 
-            // 모든 응답을 콘솔에 출력
-            responses.forEach((response) => {
-                console.log(response.data);
-            });
-
-            // 모든 요청이 성공적으로 완료되면 페이지 이동
+            // 요청이 성공적으로 완료되면 페이지 이동
             navigate("/");
         } catch (error) {
             console.log(error);
