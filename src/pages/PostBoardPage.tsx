@@ -8,9 +8,11 @@ import ScrapBoard from "../components/ScrapBoard";
 import Pagination from '@mui/material/Pagination';
 import axios from 'axios'; 
 import { Post } from "../components/post"; 
+import PostCard from "../components/PostCard";
+import { MyPostProps } from "./MyPostPage";
 
 const PostBoardPage = () => {
-    const [postList, setPostList] = useState<Post[]>([]);
+    const [postList, setPostList] = useState<MyPostProps[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
@@ -111,7 +113,6 @@ const PostBoardPage = () => {
     }
 }
 
-
     return (
         <Container>
             <NavBar onSearchWordChange={handleSearchWordChange}/>
@@ -145,7 +146,17 @@ const PostBoardPage = () => {
                                 </TagWrap>
                                 <PostWrap>
                                     {postList.map(post => (
-                                        <PostBox key={post.postId} post={post} />
+                                       <PostCard
+                                       key={post.postId}
+                                       postId={post.postId}
+                                       categoryId={post.categoryId}
+                                       title={post.title}
+                                       createdAt={post.createdAt}
+                                       summary={post.summary}
+                                       tag={post.tag}
+                                       commentCount={post.commentCount}
+                                       scrapCount={post.scrapCount}
+                                   />
                                     ))}
                                 </PostWrap>
                                 <Pagination count={totalPages} onChange={handlePageChange} />

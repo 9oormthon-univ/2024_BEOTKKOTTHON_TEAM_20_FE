@@ -7,11 +7,13 @@ import axios from 'axios';
 import { Post } from "./post";
 import DownArrow from "../image/DownArrow.png";
 import UpArrow from "../image/UpArrow.png";
+import PostCard from "./PostCard";
+import { MyPostProps } from "./MyPostProps";
 
 const PreferBoard = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     const [interests,setInterests]=useState([]);
-    const [interestPosts, setInterestPosts] = useState<Post[]>([]);
+    const [interestPosts, setInterestPosts] = useState<MyPostProps[]>([]);
     const [visiblePosts, setVisiblePosts] = useState(6);
     const [selectedCategories, setSelectedCategories] = useState<string[]>([]);
     const [profileNickname, setProfileNickname]=useState("");
@@ -93,24 +95,36 @@ const PreferBoard = () => {
     return (
         <Board2>
             <BoardWrap2>
+                <div className="head">
                         <H1>{profileNickname} 님의 관심사에 맞춘 포스팅</H1>
+                        </div>
                         <BoxWrap>
                             {interestPosts.slice(0, visiblePosts).map(post => (
-                                <PostBox key={post.postId} post={post} />
+                                <PostCard
+                                key={post.postId}
+                                postId={post.postId}
+                                categoryId={post.categoryId}
+                                title={post.title}
+                                createdAt={post.createdAt}
+                                summary={post.summary}
+                                tag={post.tag}
+                                commentCount={post.commentCount}
+                                scrapCount={post.scrapCount}
+                            />
                             ))}
                         </BoxWrap>
                         <MoreButton onClick={MoreViewHandler}>
                     {isExpanded ? (
                         <>
                             <div>
-                                <p>접기</p>
+                                <p className="font">접기</p>
                                 <img src={UpArrow} />
                             </div>
                         </>
                     ) : (
                         <>
                             <div>
-                                <p>더보기</p>
+                                <p className="font">더보기</p>
                                 <img src={DownArrow} />
                             </div>
                         </>

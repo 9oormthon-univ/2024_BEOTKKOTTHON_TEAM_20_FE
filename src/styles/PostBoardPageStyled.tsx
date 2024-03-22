@@ -2,10 +2,10 @@ import styled from "styled-components";
 
 export const Frame2 = styled.div`
     width:100%;
-    height:1700px;
+    height:1800px;
     justify-content:center;
     display:flex;
-    margin-top:180px;
+    margin-top:150px;
 `;
 export const WrapBoard =styled.div`
     width:75%;
@@ -50,10 +50,10 @@ export const Wrapper =styled.div`
 export const TagButton =styled.button`
     height:35px;
     margin-right:13px;
-    border-radius:5px;
+    border-radius:10px;
     border:none;
-    border:1px solid gray;
-    font-size:large;
+    border:1px solid lightgray;
+    font-size:medium;
     font-weight:600;
     background-color:white;
     color:gray;
@@ -65,7 +65,6 @@ export const TagButton =styled.button`
 export const TagWrap =styled.div`
     width:100%;
     height:120px;
-    margin-bottom:30px;
     align-items:center;
     display:flex;
     flex-flow:row wrap;

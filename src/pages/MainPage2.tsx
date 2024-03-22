@@ -15,23 +15,28 @@ import GoPost from "../image/GoPost.png";
 import GoNote from "../image/GoNote.png";
 import MainLogo from "../image/Qtudy_logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
-
+import { MoreButton,BoxWrap } from "../styles/PreferBoardStyled";
 import Trend1 from "../image/Trend1.png";
 import Trend2 from "../image/Trend2.png";
 import Trend3 from "../image/Trend3.png";
 import linkIcon from "../image/linkIcon.png";
 import axios from "axios";
+import { MyPostProps } from "../components/MyPostProps";
+import PostCard from "../components/PostCard";
+import DownArrow from "../image/DownArrow.png";
+import UpArrow from "../image/UpArrow.png";
 
-import { Post } from "../components/post";
 
 const MainPage2 = () => {
     const navigate = useNavigate();
-    const [interestPosts, setInterestPosts] = useState<Post[]>([]);
+    const [interestPosts, setInterestPosts] = useState<MyPostProps[]>([]);
     const [visiblePosts, setVisiblePosts] = useState(6);
+    const [isExpanded, setIsExpanded] = useState(false);
 
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
+
 
     useEffect(() => {
         const fetchInterest = async () => {
@@ -77,6 +82,16 @@ const MainPage2 = () => {
         fetchInterest();
     }, []);
 
+    const MoreViewHandler = () => {
+        if (isExpanded) {
+            setVisiblePosts(6);
+        } else {
+            setVisiblePosts(prev => prev + 6);
+        }
+        setIsExpanded(prev => !prev); // 버튼 클릭 시 "더보기" 상태와 "접기" 상태를 토글
+    };
+      
+      
     return (
         <Container>
             <NavBar onSearchWordChange={goToPostBoardPage} />
@@ -184,9 +199,8 @@ const MainPage2 = () => {
                     </Link>
                 </div>
 
-                <div className="preferBox">
-                    <p className="boxTitle">코끼리 님의 관심사에 맞춘 포스팅</p>
-                </div>
+                <PreferBoard/>
+                
             </div>
             <div className="footerBox">
                 <div className="footer_inner">

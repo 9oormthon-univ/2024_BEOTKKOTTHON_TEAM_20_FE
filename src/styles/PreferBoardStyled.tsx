@@ -4,8 +4,9 @@ export const BoxWrap = styled.div`
     display:flex;
     flex-flow:row wrap;
     height:auto;
-    justify-content:space-between;
-    border-bottom:1px solid gray;
+    border-bottom:1px solid lightgray;
+    width:100%;
+    padding-bottom:20px;
 `;
 
 export const MoreButton = styled.div`
@@ -22,10 +23,13 @@ export const MoreButton = styled.div`
     }
     p{
         font-weight:bold;
+        font-size:medium;
+        color:lightgray;
+        margin-top:10px;
     }
     img{
-        width:20px;
-        height:20px;
+        width:10px;
+        height:10px;
         margin-left:10px;
         margin-top:15px;
     }
@@ -39,7 +43,13 @@ justify-content:space-around;
 margin-top:200px;
 `;
 export const BoardWrap2=styled.div`
-width:85%;
+width:90%;
     height:100%;
+    margin-top:-300px;
+    margin-bottom:200px;
+    .head{
+        text-align:center;
+
+    }
 
 `;
