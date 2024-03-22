@@ -22,6 +22,7 @@ const TrendBoard = () => {
     };
     fetchTrend();
   }, []);
+  
 
     return <Board>
         <BoardWrap>

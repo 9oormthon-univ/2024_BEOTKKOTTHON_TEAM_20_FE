@@ -7,6 +7,7 @@ export const Container = styled.div`
     overflow-x:hidden;
     overflow-y:auto;
     justify-content:center;
+    height:auto;
 `;
 export const Frame1 = styled.div`
     margin-top:100px;
@@ -24,7 +25,7 @@ export const Question = styled.div`
     width:100%;
     height:150px;
     background-color:lightgray;
-    margin-top:400px;
+    margin-top:300px;
     padding:100px;
     opacity:0.2;
     display:flex;
@@ -35,6 +36,7 @@ export const Question = styled.div`
         flex-direction:column;
         width:30%;
     }
+
     
 `;
 export const Banner = styled.img`
@@ -43,4 +45,12 @@ export const Banner = styled.img`
 `;
 export const GoButton=styled.img`
     width:33.3%;
+`;
+export const NoPrefer=styled.div`
+    width:100%;
+    text-align:center;
+    align-items:center;
+    justify-content:center;
+    display:flex;
+    margin-top:200px;
 `;

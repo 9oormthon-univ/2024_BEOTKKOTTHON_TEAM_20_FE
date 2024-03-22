@@ -13,6 +13,7 @@ export const Navigation = styled.nav`
     right: 0;
     background-color: white;
     z-index:99;
+    justify-content:space-between;
 `;
 export const Logo = styled.img`
     width: 60px;
@@ -27,7 +28,7 @@ export const Nav = styled.a`
 `;
 
 export const Div = styled.div`
-    width: 800px;
+    width: 600px;
     margin-left: 100px;
     ${Nav} {
         margin-right: 100px;
@@ -48,5 +49,50 @@ export const InputQ = styled.input`
 export const SIcon = styled.img`
     width: 20px;
     height: 20px;
-    margin-right: -30px;
+    margin-right: -70px;
+`;
+export const SideDiv=styled.div`
+width:100%;
+display:flex;
+flex-direction:row;
+align-items:center;
+justify-content:space-between;
+float:right;
+`;
+export const ImgProfile=styled.div`
+    border:1px solid gray;
+    width:45px;
+    height:45px;
+    border-radius:30px;
+`;
+export const AnimationDiv=styled.div`
+    border-radius:10px;
+    box-shadow:1px 1px 7px 1px lightgray;
+    z-index:99;
+    width:80%;
+    height:auto;
+    position:absolute;
+    right:0;
+    margin-top:80px;
+    justify-content:center;
+    div{
+        display:flex;
+        flex-direction:row;
+        text-align:center;
+        align-items:center;
+        gap:20px;
+        height:40px;
+        margin-left:10px;
+        img{
+            width:20px;
+            height:20px;
+        }
+    }
+`;
+export const InfoWrap=styled.div`
+display:flex;
+flex-direction:column;
+margin-right:70px;
+width:10%;
+position:relative;
 `;
