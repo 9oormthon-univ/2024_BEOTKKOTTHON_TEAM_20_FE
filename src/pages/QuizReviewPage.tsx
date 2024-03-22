@@ -3,7 +3,7 @@ import { Container, StyledLink } from "../styles/QuizReviewPageStyled";
 import NavBar from "../components/NavBar";
 import Review from "../components/Review";
 import Errata from "../components/Errata";
-import { useLocation } from "react-router-dom";
+import { useLocation, useSearchParams } from "react-router-dom";
 import axios from "axios";
 
 interface GradeList {
@@ -23,6 +23,10 @@ const QuizReviewPage = () => {
     const location = useLocation();
     const { grade } = location.state || {};
     console.log(grade);
+
+    const searchParams = useSearchParams();
+    // const reviewId = searchParams.get("reviewId"); // 'id' 쿼리 파라미터 값
+    console.log(searchParams);
 
     const [gradeList, setGradeList] = useState<GradeList[]>();
     const [score, setScore] = useState<number>();

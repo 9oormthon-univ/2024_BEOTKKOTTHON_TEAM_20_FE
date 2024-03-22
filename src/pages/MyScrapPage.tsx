@@ -92,10 +92,9 @@ const MyScrapPage = () => {
                     ))}
                 </div>
                 <div className="paginationBox">
-                    {" "}
                     <BasicPagination
                         count={totalPages}
-                        page={page}
+                        page={page + 1}
                         onChange={handleChangePage}
                     />
                 </div>
