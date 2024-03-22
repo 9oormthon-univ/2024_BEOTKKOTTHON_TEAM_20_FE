@@ -116,15 +116,6 @@ export const StyledModal = styled(ReactModal)`
     justify-content: space-evenly;
     align-items: center;
 
-    .closeBtn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-
-        color: ${theme.colors.primary};
-        cursor: pointer;
-    }
-
     .error {
         font-size: 1.1rem;
         /* font-weight: bold; */

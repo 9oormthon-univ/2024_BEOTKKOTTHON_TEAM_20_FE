@@ -177,18 +177,33 @@ export const StyledModal = styled(ReactModal)`
     justify-content: space-evenly;
     align-items: center;
 
-    .closeBtn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-
-        color: ${theme.colors.primary};
-        cursor: pointer;
+    .error {
+        font-size: 1.1rem;
+        /* font-weight: bold; */
+        color: ${theme.colors.font1};
     }
 
-    .error {
-        font-size: 16px;
-        font-weight: bold;
-        color: ${theme.colors.font1};
+    .warningIcon {
+        width: 3rem;
+    }
+
+    .okBtn {
+        width: 5rem;
+        padding: 0.4rem;
+        border-radius: 0.3rem;
+        font-size: 0.9rem;
+        color: white;
+        background-color: ${theme.colors.primary};
+        border: 1px solid ${theme.colors.primary};
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .okBtn:hover {
+        color: ${theme.colors.primary};
+        background-color: white;
+        cursor: pointer;
     }
 `;
