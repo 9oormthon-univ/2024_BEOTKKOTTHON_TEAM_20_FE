@@ -91,9 +91,10 @@ const PostBoardPage = () => {
 
     const handleCategoryClick = (index: number) => {
         setView("all");
-        setSelectedCategory(index+1); 
+        setSelectedCategory(index);
         setSelectedButton(index);
-    };    
+    }; 
+      
 
     const handleSearchWordChange = async (searchWord: string) => {
     try {
