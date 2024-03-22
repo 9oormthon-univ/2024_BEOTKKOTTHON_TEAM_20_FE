@@ -6,11 +6,12 @@ import {
 } from "../styles/InterestPageStyled";
 import Interest from "../components/Interest";
 import { categories } from "../components/category";
-import Qtudy_char from "../image/Qtudy_char.png";
+import Qtudy_char from "../image/whiteLogo.png";
 import ErrorModal from "../components/ErrorModal";
 import Modal from "react-modal";
 import axios from "axios";
 import { useNavigate, useLocation } from "react-router-dom";
+import warningIcon from "../image/warningIcon.png";
 
 const InterestPage = () => {
     const navigate = useNavigate();
@@ -21,6 +22,7 @@ const InterestPage = () => {
     const [isModal, setIsModal] = useState<boolean>(false);
     const [userInterests, setUserInterests] = useState<number[]>();
     const [newMember, setNewMember] = useState<boolean>(false);
+    const [name, setName] = useState<string>();
 
     const handleInterestClick = (categoryId: any) => {
         setIsModal(false);
@@ -99,7 +101,7 @@ const InterestPage = () => {
     };
 
     const saveToInterest = (event: React.MouseEvent<HTMLDivElement>) => {
-        console.log(selectedCategories);
+        // console.log(selectedCategories);
         newMember ? postInterests() : patchInterests();
     };
 
@@ -122,6 +124,23 @@ const InterestPage = () => {
         } catch (error) {
             console.log(error);
         }
+
+        try {
+            const response = await axios.get(
+                "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my",
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
+            console.log(response.data);
+
+            setName(response.data.name);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     useEffect(() => {
@@ -134,7 +153,7 @@ const InterestPage = () => {
                 <img src={Qtudy_char} alt="logo" />
             </div>
             <div className="titleBox">
-                <p className="title">(사용자)님의 관심사를 선택해주세요!</p>
+                <p className="title">{name} 님의 관심사를 선택해주세요!</p>
                 <p className="subTitle">(최대 3개까지 선택 가능합니다.)</p>
             </div>
             <div className="interestBox">
@@ -164,11 +183,21 @@ const InterestPage = () => {
                     onRequestClose={() => setIsModal(false)}
                     style={customStyles}
                 >
-                    <div className="closeBtn" onClick={() => setIsModal(false)}>
-                        X
-                    </div>
+                    <img
+                        src={warningIcon}
+                        alt="warning"
+                        className="warningIcon"
+                    />
                     <div className="error">
-                        관심사는 최대 3개까지 설정할 수 있습니다.
+                        관심사는 최대 3개까지만 설정 가능합니다.
+                    </div>
+                    <div
+                        className="okBtn"
+                        onClick={(event: React.MouseEvent<HTMLDivElement>) =>
+                            setIsModal(false)
+                        }
+                    >
+                        확인
                     </div>
                 </StyledModal>
             ) : null}
