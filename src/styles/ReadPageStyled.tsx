@@ -54,7 +54,6 @@ export const DetailInfo=styled.div`
 export const Wrapping=styled.div`
     display:flex;
     flex-direction:column;
-    border:1px solid red;
     width:100%;
     justify-content:center;
     align-items:center;

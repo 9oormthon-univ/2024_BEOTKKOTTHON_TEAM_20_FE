@@ -14,6 +14,15 @@ const PostBoardPage = () => {
     const [totalPages, setTotalPages] = useState<number>(1);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const storedToken = window.localStorage.getItem("accessToken");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      }, []);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -115,11 +124,16 @@ const PostBoardPage = () => {
                         <WButton><a href="/write" style={{ textDecoration: "none", color: "white" }}>+ 포스팅하기</a></WButton>
                     </Head>
                     <Wrapper>
-                        {view === "myPosts" ? (
-                            <MyPostBoard />
-                        ) : view === "myScraps" ? (
-                            <ScrapBoard />
-                        ) : (
+                          {view === "myPosts" ? (
+                                token ? <MyPostBoard /> : <>
+                                    내가 작성한 포스팅은 로그인 후에 볼 수 있어요!
+                                </>
+                            ) : view === "myScraps" ? (
+                                token ? <ScrapBoard /> : <>
+                                    내가 스크랩한 포스팅은 로그인 후에 볼 수 있어요!
+                                </>
+                            ) : (
+
                             <>
                                 <TagWrap>
                                     {categories.map((categoryName, index) => (
