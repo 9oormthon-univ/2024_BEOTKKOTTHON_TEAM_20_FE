@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import MainPage from "./pages/MainPage";
+import MainPage from "./pages/MainPage2";
 import InterestPage from "./pages/InterestPage";
 import PostBoardPage from "./pages/PostBoardPage";
 import LoginPage from "./pages/LoginPage";
