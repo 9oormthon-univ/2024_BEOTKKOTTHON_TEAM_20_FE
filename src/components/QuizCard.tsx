@@ -48,7 +48,7 @@ const QuizCard: React.FC<MyQuiz> = ({
                 <div className="quizBox">
                     <div className="hashtagBox">
                         <p className="categoryName">
-                            {categories[categoryId].category}
+                            {categories[categoryId - 1].category}
                         </p>
                         {tags.map((tag) => (
                             <p className="hashtag">#{tag}</p>
@@ -60,7 +60,7 @@ const QuizCard: React.FC<MyQuiz> = ({
                             alt="quizReviewIcon"
                             className="icon"
                         ></img>
-                        <Link to={`/quizReivew?reviewId=${reviewId}`}>
+                        <Link to={`/quizReview?reviewId=${reviewId}`}>
                             <p className="title">학습하기</p>
                         </Link>
                     </div>
