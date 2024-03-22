@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "./theme";
+import ReactModal from "react-modal";
 
 export const Container = styled.div`
     padding-top: 11.5vh; //  추후 네브바에 맞춰서 수정
@@ -45,8 +46,12 @@ export const Container = styled.div`
     }
 
     .progress {
-        font-size: 16px;
+        width: 3.125rem;
+        font-size: 1rem;
         color: ${theme.colors.font1};
+
+        display: flex;
+        justify-content: center;
     }
 
     .quiz {
@@ -82,11 +87,15 @@ export const Container = styled.div`
     }
 
     .quiz_choice:hover {
+        cursor: pointer;
+    }
+
+    /* .quiz_choice:hover {
         border: 1px solid ${theme.colors.line1};
         border-radius: 10px;
         background-color: ${theme.colors.line2};
         color: ${theme.colors.primary};
-    }
+    } */
 
     .btns {
         width: 54vw;
@@ -114,6 +123,14 @@ export const Container = styled.div`
     .icon {
         margin: 0 1vw;
     }
+
+    // 선택한 답안
+    .select {
+        border: 1px solid ${theme.colors.line1};
+        border-radius: 10px;
+        background-color: ${theme.colors.line2};
+        color: ${theme.colors.primary};
+    }
 `;
 
 // 전체 진도율 바 컨테이너
@@ -134,4 +151,44 @@ export const Progress = styled.div<{ width: number }>`
     height: 20px;
     background-color: #4caf50;
     transition: width 0.5s ease-in-out;
+`;
+
+export const customStyles = {
+    overlay: {
+        background: "rgba(0, 0, 0, 0.2)",
+    },
+};
+
+export const StyledModal = styled(ReactModal)`
+    width: 440px;
+    height: 250px;
+
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+    background-color: white;
+
+    border-radius: 15px;
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+
+    .closeBtn {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+
+        color: ${theme.colors.primary};
+        cursor: pointer;
+    }
+
+    .error {
+        font-size: 16px;
+        font-weight: bold;
+        color: ${theme.colors.font1};
+    }
 `;

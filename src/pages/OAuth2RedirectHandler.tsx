@@ -18,7 +18,10 @@ const OAuth2RedirectHandler = () => {
                 }
             );
             localStorage.setItem("accessToken", response.data.accessToken);
-            navigate("/"); // 로그인 후 이동할 페이지 경로 : 바로 이전 페이지
+            // eslint-disable-next-line no-lone-blocks
+            {
+                response.data.first ? navigate("/interest") : navigate("/");
+            }
             console.log(response);
         } catch (error) {
             console.log(error);

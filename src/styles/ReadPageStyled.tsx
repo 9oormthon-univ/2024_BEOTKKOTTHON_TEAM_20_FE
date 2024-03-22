@@ -37,9 +37,12 @@ height:auto;
 position:relative;
 `;
 export const TalkBoard=styled.div`
-    border:1px solid red;
     height:auto;
-    
+    .div{
+        display:flex;
+        justify-content:center;
+        margin-top:20px;
+    }
 `;
 export const DetailInfo=styled.div`
     width:100%;
@@ -105,6 +108,19 @@ padding:40px;
 export const Img=styled.img`
 position:absolute;
 right:0;
+`;
+export const Opt0=styled.div`
+font-size:20px;
+    font-weight:600;
+    height:auto;
+    span{
+        margin-left:20px;
+    }
+    div{
+        display:flex;
+    flex-flow:row wrap;
+    gap:10px;
+    }
 `;
 export const Talk=styled.div`
     display:flex;
