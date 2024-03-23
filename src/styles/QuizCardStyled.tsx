@@ -58,7 +58,7 @@ export const Container = styled.div`
     }
 
     .qudyImg {
-        width: 1rem;
+        width: 1.1rem;
     }
 
     .source_name {
