@@ -20,7 +20,9 @@ const OAuth2RedirectHandler = () => {
             localStorage.setItem("accessToken", response.data.accessToken);
             // eslint-disable-next-line no-lone-blocks
             {
-                response.data.first ? navigate("/interest") : navigate("/");
+                response.data.first
+                    ? navigate(`/interest?value=new`)
+                    : navigate("/");
             }
             console.log(response);
         } catch (error) {
