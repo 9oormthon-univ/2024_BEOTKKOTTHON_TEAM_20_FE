@@ -1,23 +1,9 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import NavBar from "../components/NavBar";
 import { Container } from "../styles/Comment2Styled";
-import QuizGo from "../image/QuizGo.png";
-import QudyLogo from "../image/QudyLogo.png";
-import ScrapIcon from "../image/ScrapIcon.png";
-import NoScrapIcon from "../image/NoScrapIcon.png";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { DetailPost } from "../components/post";
 import { Comment } from "../components/comment";
 import { Pagination } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import CommentBoard from "../components/CommentBoard";
 import qudyImg from "../image/Qtudy_char.png";
-import TalkIcon from "../image/commentIcon.png";
-import notScrapIcon from "../image/notScrapIcon.png";
-import GoIcon from "../image/GoIcon.png";
-import Qudy from "../image/Qtudy_char.png";
 
 interface CommentBoardProps {
     postId: string | undefined;
@@ -191,48 +177,79 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
     return (
         <Container>
             <div className="commentBox">
-                        <p className="commentTitle">댓글</p>
-                        {/* 댓글 하나 입니다  */}
-                        {commentList.map(comment => (
-                        <div className="comment" key={comment.commentId}>
-                            <div className="commentHeader">
-                                <div className="userBox">
+                <p className="commentTitle">댓글</p>
+                {/* 댓글 하나 입니다  */}
+                {commentList.map((comment) => (
+                    <div className="comment" key={comment.commentId}>
+                        <div className="commentHeader">
+                            <div className="userBox">
                                 {comment.profileImageUrl === null ? (
-                                   <img className="userProfileImg" src={qudyImg} alt="qudy" />
-                                    ):
-                                    <img className="userProfileImg" src={comment.profileImageUrl} alt="profile"></img>}
-                                    <p className="userName">{comment.name}</p>
-                                </div>
-                                {comment.name===loginName && comment.profileImageUrl===loginProfile?
+                                    <img
+                                        className="userProfileImg"
+                                        src={qudyImg}
+                                        alt="qudy"
+                                    />
+                                ) : (
+                                    <img
+                                        className="userProfileImg"
+                                        src={comment.profileImageUrl}
+                                        alt="profile"
+                                    ></img>
+                                )}
+                                <p className="userName">{comment.name}</p>
+                            </div>
+                            {comment.name === loginName &&
+                            comment.profileImageUrl === loginProfile ? (
                                 <div className="commentBtnBox">
-                                    <p className="commentDelBtn" onClick={() => handleDeleteComment(comment.commentId.toString())}>삭제</p>
-                                </div>:null}
-                            </div>
-                            <div className="commentBody">
-                                <p className="commentText">{comment.content}</p>
-                                <p className="commentDate">{comment.createdAt}</p>
-                            </div>
+                                    <p
+                                        className="commentDelBtn"
+                                        onClick={() =>
+                                            handleDeleteComment(
+                                                comment.commentId.toString()
+                                            )
+                                        }
+                                    >
+                                        삭제
+                                    </p>
+                                </div>
+                            ) : null}
                         </div>
-                         ))}
-                    </div>
-                      <div style={{display:"flex",justifyContent:"center"}}>
-                    <Pagination count={totalPages} onChange={handlePageChange}/>
-                    </div>              
-                    <div className="postCommentBox">
-                        <div className="postCommentBoxHeader">
-                            <img className="userProfileImg" src={loginProfile} />
-                            <p className="userName">{loginName}</p>
-                        </div>
-                        <textarea
-                            className="postComment"
-                            placeholder="댓글을 남겨보세요"
-                            value={inputComment} 
-                            onChange={onInputHandler}
-                        ></textarea>
-                        <div className="commentSubmitBtnBox">
-                            <div className="commentSubmitBtn" onClick={SendCommentHandler}>등록</div>
+                        <div className="commentBody">
+                            <p className="commentText">{comment.content}</p>
+                            <p className="commentDate">
+                                {comment.createdAt.slice(0, 10)}
+                            </p>
                         </div>
                     </div>
+                ))}
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <Pagination count={totalPages} onChange={handlePageChange} />
+            </div>
+            <div className="postCommentBox">
+                <div className="postCommentBoxHeader">
+                    <img
+                        className="userProfileImg"
+                        src={loginProfile}
+                        alt="img"
+                    />
+                    <p className="userName">{loginName}</p>
+                </div>
+                <textarea
+                    className="postComment"
+                    placeholder="댓글을 남겨보세요"
+                    value={inputComment}
+                    onChange={onInputHandler}
+                ></textarea>
+                <div className="commentSubmitBtnBox">
+                    <div
+                        className="commentSubmitBtn"
+                        onClick={SendCommentHandler}
+                    >
+                        등록
+                    </div>
+                </div>
+            </div>
         </Container>
     );
 };
