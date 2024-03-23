@@ -14,7 +14,8 @@ export const Container = styled.div`
     align-items: center;
 
     background-image: url(${interest_background});
-    background-size: 100vw;
+    background-size: cover;
+    background-repeat: no-repeat;
 
     p {
         margin: 0;
@@ -31,7 +32,7 @@ export const Container = styled.div`
     }
 
     .titleBox {
-        width: 80vw;
+        width: 59rem;
 
         display: flex;
         justify-content: flex-start;
@@ -59,7 +60,7 @@ export const Container = styled.div`
     }
 
     .interests {
-        width: 1000px;
+        width: 62rem;
         display: flex;
         flex-wrap: wrap;
         justify-content: space-evenly;
@@ -115,18 +116,33 @@ export const StyledModal = styled(ReactModal)`
     justify-content: space-evenly;
     align-items: center;
 
-    .closeBtn {
-        position: absolute;
-        top: 10px;
-        right: 15px;
-
-        color: ${theme.colors.primary};
-        cursor: pointer;
+    .error {
+        font-size: 1.1rem;
+        /* font-weight: bold; */
+        color: ${theme.colors.font1};
     }
 
-    .error {
-        font-size: 16px;
-        font-weight: bold;
-        color: ${theme.colors.font1};
+    .warningIcon {
+        width: 3rem;
+    }
+
+    .okBtn {
+        width: 5rem;
+        padding: 0.4rem;
+        border-radius: 0.3rem;
+        font-size: 0.9rem;
+        color: white;
+        background-color: ${theme.colors.primary};
+        border: 1px solid ${theme.colors.primary};
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .okBtn:hover {
+        color: ${theme.colors.primary};
+        background-color: white;
+        cursor: pointer;
     }
 `;

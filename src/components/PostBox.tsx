@@ -13,7 +13,7 @@ interface PostBoxProps {
 const PostBox: React.FC<PostBoxProps> = ({ post }) => {
     const { title, summary, scrapCount: initialScrapCount, commentCount, tag, postId, categoryId, createdAt } = post;
 
-    const titleMaxLength = 18;
+    const titleMaxLength = 13;
     const contentMaxLength = 98;
 
     const trimmedTitle = title.length > titleMaxLength ? title.slice(0, titleMaxLength) + "..." : title;

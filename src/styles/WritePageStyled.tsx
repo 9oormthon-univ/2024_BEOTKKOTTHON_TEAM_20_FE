@@ -28,29 +28,38 @@ export const HeadOpt = styled.div`
     justify-content:space-between;
     margin-bottom:80px;
     flex-flow: row wrap;
+    div{
+        width:70%;
+        display:flex;
+        flex-direction:row;
+    }
 `;
 export const Opt1 = styled.div`
-    font-size:20px;
-    font-weight:600;
+font-weight:bold;
+
+    display:flex;
+    flex-direction:row;
+    align-items:center;
 `;
 export const Selector=styled.select`
-    width:280px;
-    height:40px;
+    width:60%;
+    height:35px;
     margin-left:20px;
 `;
 export const TagInput=styled.input`
-    width:280px;
+    width:60%;
     height:35px;
     margin-left:20px;
     padding-left:5px;
 `;
 export const SummaryB = styled.button`
-    width:200px;
+    width:17%;
     color:white;
     background-color:#7B3FF6;
     font-size:large;
     border-radius:5px;
     border:none;
+    height:40px;
 `;
 export const WTitle =styled.textarea`
 border:none;
@@ -81,20 +90,30 @@ bottom:0;
 `;
 export const CategoryButton=styled.option`
     padding-left:5px;
+
 `;
 export const Prompt =styled.div`
-    border:1px solid purple;
+    background-color:white;
+    border-radius:15px;
     display:flex;
     justify-content:center;
     flex-direction: column;
-    width:30%;
+    width:25%;
+    height:300px;
+    margin-top:300px;
     align-items:center;
+    z-index:99;
+    .notice{
+        font-size:large;
+        font-weight:bold;
+    }
     div{
         margin-top:30px;
-        border:1px solid #7B3FF6;
         display:flex;
         justify-content:space-between;
+        width:60%;
     }
+
 
 `;
 export const BackBtn=styled.button`
@@ -103,10 +122,12 @@ export const BackBtn=styled.button`
     border:1px solid #7B3FF6;
     color:#7B3FF6;
     background-color:white;
+    border-radius:5px;
 `;
 export const GoBtn=styled.button`
 width:100px;
 height:30px;
     color:white;
     background-color:#7B3FF6;
+    border-radius:5px;
 `;

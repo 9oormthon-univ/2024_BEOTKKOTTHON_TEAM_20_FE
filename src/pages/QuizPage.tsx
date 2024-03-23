@@ -11,7 +11,7 @@ import axios, { AxiosResponse } from "axios";
 import { useLocation } from "react-router-dom";
 import PreventPageChange from "../components/PreventPageChange";
 import { useNavigate } from "react-router-dom";
-import ErrorModal from "../components/ErrorModal";
+import warningIcon from "../image/warningIcon.png";
 
 interface Quiz {
     answer: string;
@@ -32,6 +32,7 @@ interface Grade {
 const QuizPageStyled = () => {
     const location = useLocation();
     let navigate = useNavigate();
+    console.log(location.state.postId);
 
     const [quiz, setQuiz] = useState<Quiz[]>([]);
     const [quizIndex, setQuixIndex] = useState(0);
@@ -89,7 +90,7 @@ const QuizPageStyled = () => {
                 response = await axios.get(
                     "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/quiz/post-quiz",
                     {
-                        params: { posetId: location.state.postId },
+                        params: { postId: location.state.postId },
                     }
                 );
 
@@ -261,14 +262,21 @@ const QuizPageStyled = () => {
                         onRequestClose={() => setIsModal(false)}
                         style={customStyles}
                     >
-                        <div
-                            className="closeBtn"
-                            onClick={() => setIsModal(false)}
-                        >
-                            X
-                        </div>
+                        <img
+                            src={warningIcon}
+                            alt="warning"
+                            className="warningIcon"
+                        />
                         <div className="error">
-                            아직 풀지 않은 문제가 있습니다.
+                            잠깐! 아직 풀지 않은 문제가 있습니다.
+                        </div>
+                        <div
+                            className="okBtn"
+                            onClick={(
+                                event: React.MouseEvent<HTMLDivElement>
+                            ) => setIsModal(false)}
+                        >
+                            확인
                         </div>
                     </StyledModal>
                 ) : null}

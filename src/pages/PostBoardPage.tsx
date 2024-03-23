@@ -8,12 +8,23 @@ import ScrapBoard from "../components/ScrapBoard";
 import Pagination from '@mui/material/Pagination';
 import axios from 'axios'; 
 import { Post } from "../components/post"; 
+import PostCard from "../components/PostCard";
+import { MyPostProps } from "./MyPostPage";
 
 const PostBoardPage = () => {
-    const [postList, setPostList] = useState<Post[]>([]);
+    const [postList, setPostList] = useState<MyPostProps[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
     const [selectedCategory, setSelectedCategory] = useState<number | null>(null);
     const [selectedButton, setSelectedButton] = useState<number | null>(null);
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const storedToken = window.localStorage.getItem("accessToken");
+        if (storedToken) {
+          setToken(storedToken);
+        }
+      }, []);
 
     useEffect(() => {
         const fetchPosts = async () => {
@@ -68,12 +79,15 @@ const PostBoardPage = () => {
                 },
             });
             setPostList(response.data.postList);
+            // 페이지 변경 후 화면의 위쪽으로 스크롤
+            window.scrollTo({ top: 0, behavior: 'smooth' });
         } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log('error fetching :',error.response);
             }
         }
     };
+    
 
     const handleCategoryClick = (index: number) => {
         setView("all");
@@ -99,7 +113,6 @@ const PostBoardPage = () => {
     }
 }
 
-
     return (
         <Container>
             <NavBar onSearchWordChange={handleSearchWordChange}/>
@@ -112,11 +125,16 @@ const PostBoardPage = () => {
                         <WButton><a href="/write" style={{ textDecoration: "none", color: "white" }}>+ 포스팅하기</a></WButton>
                     </Head>
                     <Wrapper>
-                        {view === "myPosts" ? (
-                            <MyPostBoard />
-                        ) : view === "myScraps" ? (
-                            <ScrapBoard />
-                        ) : (
+                          {view === "myPosts" ? (
+                                token ? <MyPostBoard /> : <>
+                                    내가 작성한 포스팅은 로그인 후에 볼 수 있어요!
+                                </>
+                            ) : view === "myScraps" ? (
+                                token ? <ScrapBoard /> : <>
+                                    내가 스크랩한 포스팅은 로그인 후에 볼 수 있어요!
+                                </>
+                            ) : (
+
                             <>
                                 <TagWrap>
                                     {categories.map((categoryName, index) => (
@@ -128,7 +146,17 @@ const PostBoardPage = () => {
                                 </TagWrap>
                                 <PostWrap>
                                     {postList.map(post => (
-                                        <PostBox key={post.postId} post={post} />
+                                       <PostCard
+                                       key={post.postId}
+                                       postId={post.postId}
+                                       categoryId={post.categoryId}
+                                       title={post.title}
+                                       createdAt={post.createdAt}
+                                       summary={post.summary}
+                                       tag={post.tag}
+                                       commentCount={post.commentCount}
+                                       scrapCount={post.scrapCount}
+                                   />
                                     ))}
                                 </PostWrap>
                                 <Pagination count={totalPages} onChange={handlePageChange} />

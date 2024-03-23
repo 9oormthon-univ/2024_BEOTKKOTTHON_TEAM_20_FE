@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 export const TagOutput =styled.p`
+
 `;
 export const Refactor=styled.button`
     width:100px;
@@ -54,7 +55,6 @@ export const DetailInfo=styled.div`
 export const Wrapping=styled.div`
     display:flex;
     flex-direction:column;
-    border:1px solid red;
     width:100%;
     justify-content:center;
     align-items:center;
@@ -110,16 +110,22 @@ position:absolute;
 right:0;
 `;
 export const Opt0=styled.div`
-font-size:20px;
+font-size:17px;
     font-weight:600;
-    height:auto;
-    span{
-        margin-left:20px;
+    height:40px;
+    display:flex;
+    flex-direction:column;
+    
+    width:10px;
+    .tagwrap{
+        margin-top:-17px;
     }
     div{
-        display:flex;
-    flex-flow:row wrap;
+       
     gap:10px;
+    }
+    .font{
+        width:20%;
     }
 `;
 export const Talk=styled.div`
@@ -130,8 +136,13 @@ export const Talk=styled.div`
     border-bottom:1px solid gray;
     align-items:center;
     padding-bottom:20px;
+    .profileImg{
+        width:50px;
+        height:50px;
+        border-radius:50%;
+    }
 `;
-export const ProfileImg=styled.img`
+export const ProfileImg=styled.div`
     border:1px solid gray;
     border-radius:30px;
     width:60px;
@@ -139,17 +150,57 @@ export const ProfileImg=styled.img`
     margin-right:40px;
 `;
 export const TalkInfo=styled.div`
-
+margin-left:100px;
 height:auto;
 width:800px;
+.editform{
+    resize: none;
+    width:90%;
+    &focus{
+        outline:none;
+    }
+}
 `;
 export const Datee=styled.div`
 width:auto;
 position:absolute;
 right:0;
+
+button{
+    border:none;
+    background-color:white;
+    font-size:medium;
+    margin-left:40px;
+}
 `;
 export const Dateee=styled.div`
 width:auto;
+
+`;
+export const Iconi=styled.img`
+width:25px;
+    height:25px;
+    margin-left:15px;
+    opacity:0.4;
+    margin-top:5px;
+    
+`;
+export const Countti=styled.div`
+height:30px;
+width:40%;
+display:flex;
+flex-direction:row;
+width:15%;
+text-align:center;
+p{
+    margin-right:10px;
+    margin-left:10px;
+    margin-top:10px;
+}
+`;
+export const P=styled.p`
+    margin-left:10px;
+    margin-right:10px;
 
 `;
 export const TalkForm=styled.textarea`

@@ -6,7 +6,7 @@ export const Box = styled.div`
     border-radius: 15px;
     padding: 15px;
     position: relative;
-    box-shadow: 5px 5px 30px 2px lightgray;
+    box-shadow:1px 1px 7px 2px lightgray;
     padding-left: 20px;
     padding-right: 20px;
     width: calc((85% - 5px) / 3); /* 40px는 padding-left와 padding-right 값의 합 */
