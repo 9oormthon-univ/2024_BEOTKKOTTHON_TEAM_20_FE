@@ -27,6 +27,9 @@ export const Navigation = styled.nav`
         display: flex;
         justify-content: flex-end;
         align-items: center;
+        border:1px solid red;
+        height:50%;
+        position:relative;
     }
 `;
 export const Logo = styled.img`
@@ -40,11 +43,10 @@ export const Nav = styled.a`
     font-weight: bold;
     font-size: 1.1rem;
     color: ${theme.colors.font1};
-
     display: flex;
     justify-content: center;
     align-items: center;
-
+    width:100%;
     &:hover {
         color: ${theme.colors.primary};
     }
@@ -74,6 +76,22 @@ export const Nav = styled.a`
     .userProfileImg:hover {
         cursor: pointer;
     }
+    .arrow{
+        width:20px;
+        height:20px;
+        margin-left:20px;
+    }
+    .row{
+        display:flex;
+        flex-direction:row;
+        height:50px;
+        margin-bottom:-50px;
+        border:1px solid red;
+        text-align:center;
+        align-items:center;
+      
+    }
+   
 `;
 
 export const Div = styled.div`
@@ -154,23 +172,25 @@ export const AnimationDiv=styled.div`
     border-radius:10px;
     box-shadow:1px 1px 7px 1px lightgray;
     z-index:99;
-    width:80%;
+    width:100%;
     height:auto;
-    position:absolute;
-    right:0;
-    margin-top:80px;
+    background-color:white;
     justify-content:center;
+    display:flex;
+    flex-direction:column;
+    font-size: small;
+    margin-top:50px;
     div{
         display:flex;
         flex-direction:row;
         text-align:center;
         align-items:center;
-        gap:20px;
+        width:100%;
         height:40px;
         margin-left:10px;
         img{
-            width:20px;
-            height:20px;
+            width:15px;
+            height:15px;
         }
     }
 `;
