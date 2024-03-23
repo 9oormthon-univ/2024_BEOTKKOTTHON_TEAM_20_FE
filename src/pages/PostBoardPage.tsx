@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../styles/MainPage2Styled";
 import NavBar from "../components/NavBar";
-import { useParams } from "react-router-dom";
 import {
     Frame2,
     Head,
@@ -120,7 +119,7 @@ const PostBoardPage = () => {
     const location = useLocation();
     const searchWord = new URLSearchParams(location.search).get("keyword");
     console.log(searchWord);
-    
+
     const handleSearchWordChange = async (searchWord: string) => {
         try {
             const response = await axios.get(
