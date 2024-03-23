@@ -74,8 +74,8 @@ export const Container = styled.div`
     }
 
     .nav_icon {
-        width: 3vw;
-        height: 3vw;
+        width: 1.6rem;
+        height: 1.6rem;
 
         display: flex;
         justify-content: center;

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { Container } from "../styles/WritePage2Styled";
 import axios from "axios";
+import PreventPageChange from "../components/PreventPageChange";
 
 const WritePage2 = () => {
     const [inputCount, setInputCount] = useState(0);
@@ -11,7 +12,6 @@ const WritePage2 = () => {
     const [tags, setTags] = useState<string[]>([]);
     const [categoryId, setCategoryId] = useState(1);
     const navigate = useNavigate();
-
 
     const categories = [
         "경영학",
@@ -43,11 +43,11 @@ const WritePage2 = () => {
         } else if (e.target.name === "tags") {
             const tagArray = value
                 .split("#")
-                .map((tag) => tag.trim()) 
-                .filter((tag) => tag !== ""); 
+                .map((tag) => tag.trim())
+                .filter((tag) => tag !== "");
             setTags(tagArray);
         }
-    };    
+    };
 
     /*const handleCategoryChange = (categoryId: number) => {
         setCategoryId(categoryId);
@@ -154,7 +154,9 @@ const WritePage2 = () => {
                                 ></input>
                             </div>
                         </div>
-                        <div className="saveBtn" onClick={handleSubmit}>저장 후 AI 요약하기</div>
+                        <div className="saveBtn" onClick={handleSubmit}>
+                            저장 후 AI 요약하기
+                        </div>
                     </div>
                     <div className="writingBox">
                         <input
@@ -175,6 +177,7 @@ const WritePage2 = () => {
                     </div>
                 </div>
             </Container>
+            <PreventPageChange />
         </>
     );
 };

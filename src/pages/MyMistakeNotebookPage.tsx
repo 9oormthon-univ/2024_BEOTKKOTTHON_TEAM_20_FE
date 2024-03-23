@@ -4,6 +4,8 @@ import MyPageNav from "../components/MyPageNav";
 import QuizCard from "../components/QuizCard";
 import BasicPagination from "../components/BasicPagination";
 import axios from "axios";
+import Loading from "../components/Loading";
+import NotLogin from "../components/NotLogin";
 
 export interface MyQuiz {
     categoryId: number;
@@ -76,28 +78,34 @@ const MyMistakeNotebookPage = () => {
         <>
             <MyPageNav />
             <Container>
-                <div className="contentBox">
-                    {myQuizList?.map((quiz) => (
-                        <QuizCard
-                            key={quiz.categoryId}
-                            categoryId={quiz.categoryId}
-                            createdAt={quiz.createdAt}
-                            reviewId={quiz.reviewId}
-                            tags={quiz.tags}
-                            totalScore={quiz.totalScore}
-                            type={quiz.type}
-                            userName={quiz.userName}
-                            userProfile={quiz.userProfile}
-                        />
-                    ))}
-                </div>
-                <div className="paginationBox">
-                    <BasicPagination
-                        count={totalPages}
-                        page={page + 1}
-                        onChange={handleChangePage}
-                    />
-                </div>
+                {myQuizList === null || myQuizList?.length === 0 ? (
+                    <Loading />
+                ) : (
+                    <>
+                        <div className="contentBox">
+                            {myQuizList?.map((quiz) => (
+                                <QuizCard
+                                    key={quiz.categoryId}
+                                    categoryId={quiz.categoryId}
+                                    createdAt={quiz.createdAt}
+                                    reviewId={quiz.reviewId}
+                                    tags={quiz.tags}
+                                    totalScore={quiz.totalScore}
+                                    type={quiz.type}
+                                    userName={quiz.userName}
+                                    userProfile={quiz.userProfile}
+                                />
+                            ))}
+                        </div>
+                        <div className="paginationBox">
+                            <BasicPagination
+                                count={totalPages}
+                                page={page + 1}
+                                onChange={handleChangePage}
+                            />
+                        </div>
+                    </>
+                )}
             </Container>
         </>
     );

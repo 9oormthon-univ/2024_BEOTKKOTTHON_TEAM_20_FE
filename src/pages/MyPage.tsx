@@ -6,6 +6,7 @@ import axios from "axios";
 import qudyImg from "../image/Qtudy_char.png";
 import linkIcon from "../image/linkIcon.png";
 import { categories } from "../components/category";
+import Loading from "../components/Loading";
 
 interface MyPageProps {
     name: string;
@@ -15,7 +16,7 @@ interface MyPageProps {
 
 const MyPage = () => {
     const [data, setData] = useState<MyPageProps>();
-    const [Interests, setInterests] = useState<number[]>([]);
+    const [interests, setInterests] = useState<number[]>([]);
 
     const getData = async () => {
         try {
@@ -61,62 +62,77 @@ const MyPage = () => {
         <>
             <MyPageNav />
             <Container>
-                <div className="contentBox">
-                    <div className="profileBox">
-                        <div className="profile_img">
-                            {data?.profileImage ? (
-                                <img
-                                    src={data.profileImage}
-                                    alt="default"
-                                    className="profileImg"
-                                />
-                            ) : (
-                                <img
-                                    src={qudyImg}
-                                    alt="default"
-                                    className="qudyImg"
-                                />
-                            )}
-                        </div>
-                        <div className="profile_user">
-                            <p className="username">{data && data.name}</p>
-                            <p className="email">{data && data.email}</p>
-                        </div>
-                    </div>
-                    <div className="interestBox">
-                        <div className="interestTitle">
-                            <p className="userTitle">
-                                {data && data.name} 님의 관심사
-                            </p>
-                            <StyledLink to="/interest">
-                                <div className="linkToInterest">
-                                    <p className="linkTitle">관심사 수정하기</p>
-                                    <img src={linkIcon} alt="link" />
-                                </div>
-                            </StyledLink>
-                        </div>
-
-                        <div className="interests">
-                            {Interests.map((interest) => (
-                                <div className="interest">
-                                    <div className="interest_icon">
+                {interests === null || interests?.length === 0 ? (
+                    <Loading />
+                ) : (
+                    <>
+                        <div className="contentBox">
+                            <div className="profileBox">
+                                <div className="profile_img">
+                                    {data?.profileImage ? (
                                         <img
-                                            src={
-                                                categories[interest - 1]
-                                                    .categoryImg
-                                            }
-                                            alt="interestIcon"
-                                            className="interesIconImg"
+                                            src={data.profileImage}
+                                            alt="default"
+                                            className="profileImg"
                                         />
-                                    </div>
-                                    <div className="interest_text">
-                                        {categories[interest - 1].category}
-                                    </div>
+                                    ) : (
+                                        <img
+                                            src={qudyImg}
+                                            alt="default"
+                                            className="qudyImg"
+                                        />
+                                    )}
                                 </div>
-                            ))}
+                                <div className="profile_user">
+                                    <p className="username">
+                                        {data && data.name}
+                                    </p>
+                                    <p className="email">
+                                        {data && data.email}
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="interestBox">
+                                <div className="interestTitle">
+                                    <p className="userTitle">
+                                        {data && data.name} 님의 관심사
+                                    </p>
+                                    <StyledLink to="/interest">
+                                        <div className="linkToInterest">
+                                            <p className="linkTitle">
+                                                관심사 수정하기
+                                            </p>
+                                            <img src={linkIcon} alt="link" />
+                                        </div>
+                                    </StyledLink>
+                                </div>
+
+                                <div className="interests">
+                                    {interests.map((interest) => (
+                                        <div className="interest">
+                                            <div className="interest_icon">
+                                                <img
+                                                    src={
+                                                        categories[interest - 1]
+                                                            .categoryImg
+                                                    }
+                                                    alt="interestIcon"
+                                                    className="interesIconImg"
+                                                />
+                                            </div>
+                                            <div className="interest_text">
+                                                {
+                                                    categories[interest - 1]
+                                                        .category
+                                                }
+                                            </div>
+                                        </div>
+                                    ))}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                </div>
+                    </>
+                )}
             </Container>
         </>
     );
