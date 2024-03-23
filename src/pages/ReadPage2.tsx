@@ -18,6 +18,7 @@ import TalkIcon from "../image/commentIcon.png";
 import notScrapIcon from "../image/notScrapIcon.png";
 import GoIcon from "../image/GoIcon.png";
 import Qudy from "../image/Qtudy_char.png";
+import Comment2 from "../components/Comment2";
 
 const ReadPage = () => {
     const [post, setPost] = useState<DetailPost | null>(null);
@@ -231,22 +232,7 @@ const ReadPage = () => {
                     <div className="commentBox">
                         <p className="commentTitle">댓글</p>
                         {/* 댓글 하나 입니다  */}
-                        <div className="comment">
-                            <div className="commentHeader">
-                                <div className="userBox">
-                                    <div className="userProfileImg"></div>
-                                    <p className="userName">사용자이름</p>
-                                </div>
-                                <div className="commentBtnBox">
-                                    <p className="commentEditBtn">수정</p>
-                                    <p className="commentDelBtn">삭제</p>
-                                </div>
-                            </div>
-                            <div className="commentBody">
-                                <p className="commentText">댓글본문</p>
-                                <p className="commentDate">2023.03.03</p>
-                            </div>
-                        </div>
+                        <Comment2 postId={postId} />
                     </div>
 
                     <Pagination />
