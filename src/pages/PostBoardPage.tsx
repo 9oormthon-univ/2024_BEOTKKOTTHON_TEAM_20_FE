@@ -120,6 +120,7 @@ const PostBoardPage = () => {
     const location = useLocation();
     const searchWord = new URLSearchParams(location.search).get("keyword");
     console.log(searchWord);
+    
     const handleSearchWordChange = async (searchWord: string) => {
         try {
             const response = await axios.get(

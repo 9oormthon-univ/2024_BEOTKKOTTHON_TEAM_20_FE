@@ -275,7 +275,7 @@ const MainPage2 = () => {
                         ></img>
                     </Link>
                 </div>
-
+                {/* 로그인을 하면 preferboard 로그인 안하면 totalboard */}
                 <PreferBoard />
             </div>
             <div className="footerBox">

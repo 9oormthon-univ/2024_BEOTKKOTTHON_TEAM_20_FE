@@ -20,6 +20,8 @@ const PreferBoard = () => {
     const [profileImg, setProfileImg]=useState(null);
     const [isExpanded, setIsExpanded] = useState(false);
     const [token, setToken] = useState<string | null>(null);
+    const [postList,setPostList]=useState<Post[]>([]);
+    
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
@@ -105,9 +107,11 @@ const PreferBoard = () => {
         <Board2>
             <BoardWrap2>
                 <div className="head">
-                        <H1>{profileNickname} 님의 관심사에 맞춘 포스팅</H1>
+                    {token?
+                        <H1>{profileNickname} 님의 관심사에 맞춘 포스팅</H1>:<><H1>로그인 후 관심사 페이지를 만나보세요 !</H1></>}
                         </div>
                         <BoxWrap>
+                            {token?<>
                             {interestPosts.slice(0, visiblePosts).map(post => (
                                 <PostCard
                                 key={post.postId}
@@ -120,7 +124,8 @@ const PreferBoard = () => {
                                 commentCount={post.commentCount}
                                 scrapCount={post.scrapCount}
                             />
-                            ))}
+                            ))}</>:<>
+                            </>}
                         </BoxWrap>
                         <MoreButton onClick={MoreViewHandler}>
                     {token && visiblePosts>6?<>
