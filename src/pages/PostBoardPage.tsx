@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Container } from "../styles/MainPageStyled";
+import { Container } from "../styles/MainPage2Styled";
 import NavBar from "../components/NavBar";
 import { Frame2, Head, WrapBoard, T, WButton, Wrapper, TagButton, TagWrap, PostWrap } from "../styles/PostBoardPageStyled";
 import PostBox from "../components/PostBox";
@@ -10,6 +10,7 @@ import axios from 'axios';
 import { Post } from "../components/post"; 
 import PostCard from "../components/PostCard";
 import { MyPostProps } from "./MyPostPage";
+import MainLogo from "../image/MainLogo.png";
 
 const PostBoardPage = () => {
     const [postList, setPostList] = useState<MyPostProps[]>([]);
@@ -91,9 +92,10 @@ const PostBoardPage = () => {
 
     const handleCategoryClick = (index: number) => {
         setView("all");
-        setSelectedCategory(index+1); 
+        setSelectedCategory(index);
         setSelectedButton(index);
-    };    
+    }; 
+      
 
     const handleSearchWordChange = async (searchWord: string) => {
     try {
@@ -165,6 +167,18 @@ const PostBoardPage = () => {
                     </Wrapper>
                 </WrapBoard>
             </Frame2>
+            <div className="footerBox">
+                <div className="footer_inner">
+                    <img src={MainLogo} alt="logo"></img>
+                    <p className="copyright">
+                        Copyright ⓒ Qtudy. All rights reserved.
+                    </p>
+                </div>
+                <div className="footer_inner">
+                    <p className="footer">Instagram | @q_qtudy</p>
+                    <p className="footer">구름톤 유니브 2기</p>
+                </div>
+            </div>
         </Container>
     );
 };

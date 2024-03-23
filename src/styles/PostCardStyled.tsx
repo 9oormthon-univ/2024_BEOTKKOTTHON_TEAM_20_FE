@@ -6,7 +6,6 @@ export const Container = styled.div`
     width: 20vw;
     padding: 1.5vw;
     margin: 0.5vw;
-
     background-color: white;
     border-radius: 15px;
     box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.05);
@@ -33,7 +32,6 @@ export const Container = styled.div`
         width: inherit;
         display: flex;
         justify-content: space-between;
-        align-items: center;
     }
 
     .title {

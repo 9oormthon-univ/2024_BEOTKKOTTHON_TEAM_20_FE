@@ -35,6 +35,22 @@ const MainPage2 = () => {
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
+    const [topPosts, setTopPosts] = useState<{ name: string; count: number }[]>([]);
+
+    useEffect(() => {
+      const fetchTrend = async () => {
+        try {
+          const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/tag/top3`);
+          setTopPosts(response.data.tagList);
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            console.log('error fetching :',error.response);
+          }
+        }
+      };
+      fetchTrend();
+    }, []);
+    
 
     useEffect(() => {
         const fetchInterest = async () => {
@@ -127,48 +143,62 @@ const MainPage2 = () => {
                 <div className="trendBox">
                     <p className="boxTitle">요즘 뜨는 트렌드 TOP 3</p>
                     <div className="trends">
-                        <div className="trend">
-                            <div className="trendImg">
-                                <img src={Trend1} alt="top3" />
-                            </div>
-                            <div className="trendText">
-                                <p className="top">분야명</p>
-                                <div className="goToQuiz">
-                                    <p>퀴즈 풀러가기</p>
-                                    <div className="goIcon">
-                                        <img src={linkIcon} alt="topQuiz" />
+                    <div className="trends">
+                        {/* 첫 번째 트렌드 요소 */}
+                        {topPosts[0] && (
+                            <div className="trend">
+                                <div className="trendImg">
+                                    <img src={Trend1} alt="top3" />
+                                </div>
+                                <div className="trendText">
+                                    <p className="top">{topPosts[0].name}</p>
+                                    <div className="goToQuiz">
+                                        <p>퀴즈 풀러가기</p>
+                                        <div className="goIcon">
+                                            <img src={linkIcon} alt="topQuiz" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="trend">
-                            <div className="trendImg">
-                                <img src={Trend2} alt="top3" />
-                            </div>
-                            <div className="trendText">
-                                <p className="top">분야명</p>
-                                <div className="goToQuiz">
-                                    <p>퀴즈 풀러가기</p>
-                                    <div className="goIcon">
-                                        <img src={linkIcon} alt="topQuiz" />
+                        )}
+
+                        {/* 두 번째 트렌드 요소 */}
+                        {topPosts[1] && (
+                            <div className="trend">
+                                <div className="trendImg">
+                                    <img src={Trend2} alt="top3" />
+                                </div>
+                                <div className="trendText">
+                                    <p className="top">{topPosts[1].name}</p>
+                                    <div className="goToQuiz">
+                                        <p>퀴즈 풀러가기</p>
+                                        <div className="goIcon">
+                                            <img src={linkIcon} alt="topQuiz" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="trend">
-                            <div className="trendImg">
-                                <img src={Trend3} alt="top3" />
-                            </div>
-                            <div className="trendText">
-                                <p className="top">분야명</p>
-                                <div className="goToQuiz">
-                                    <p>퀴즈 풀러가기</p>
-                                    <div className="goIcon">
-                                        <img src={linkIcon} alt="topQuiz" />
+                        )}
+
+                        {/* 세 번째 트렌드 요소 */}
+                        {topPosts[2] && (
+                            <div className="trend">
+                                <div className="trendImg">
+                                    <img src={Trend3} alt="top3" />
+                                </div>
+                                <div className="trendText">
+                                    <p className="top">{topPosts[2].name}</p>
+                                    <div className="goToQuiz">
+                                        <p>퀴즈 풀러가기</p>
+                                        <div className="goIcon">
+                                            <img src={linkIcon} alt="topQuiz" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
+                    </div>
+
                     </div>
                 </div>
 
