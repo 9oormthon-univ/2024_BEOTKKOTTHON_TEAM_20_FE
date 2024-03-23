@@ -7,6 +7,7 @@ import {
     InputQ,
     AnimationDiv,
     SIcon,
+    StyledLink,
 } from "../styles/NavBarStyled";
 import MainLogo from "../image/Qtudy_logo_2.png";
 import SearchIcon from "../image/SearchIcon.png";
@@ -16,6 +17,7 @@ import mypageIcon from "../image/mypageIcon.png";
 import logoutIcon from "../image/logoutIcon.png";
 import DownArrow from "../image/DownArrow.png";
 import UpArrow from "../image/UpArrow.png";
+import { Link } from "react-router-dom";
 
 interface MyPageProps {
     name: string;
@@ -26,7 +28,7 @@ interface MyPageProps {
 const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
     const [data, setData] = useState<MyPageProps>();
     const [searchWord, setSearchWord] = useState("");
-    const [viewOption,setViewOption]=useState(false);
+    const [viewOption, setViewOption] = useState(false);
 
     const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         setSearchWord(event.target.value);
@@ -101,45 +103,63 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                 {isLogin ? (
                     <>
                         <div className="infoo">
-                        <div className="userProfileImg">
-                            {data?.profileImage ? (
-                                <img
-                                    src={data.profileImage}
-                                    alt="default"
-                                    className="profileImg"
-                                />
-                            ) : (
-                                <img
-                                    src={qudyImg}
-                                    alt="default"
-                                    className="qudyImg"
-                                />
-                            )}
-                        </div>
-                        <div className="userName">{data && data.name} 님</div>
-                        <img className="arrow" src={viewOption?UpArrow:DownArrow} onClick={animationHandler}/>
+                            <div className="userProfileImg">
+                                {data?.profileImage ? (
+                                    <img
+                                        src={data.profileImage}
+                                        alt="default"
+                                        className="profileImg"
+                                    />
+                                ) : (
+                                    <img
+                                        src={qudyImg}
+                                        alt="default"
+                                        className="qudyImg"
+                                    />
+                                )}
+                            </div>
+                            <div className="userName">
+                                {data && data.name} 님
+                            </div>
+                            <img
+                                className="arrow"
+                                src={viewOption ? UpArrow : DownArrow}
+                                onClick={animationHandler}
+                                alt="icon"
+                            />
                         </div>
                         <div>
-                        {viewOption&&<>
-                        {isLogin ? (
-                            <>
-                            <AnimationDiv>
-                                <div>
-                                <img src={mypageIcon}/>
-                                <p>마이페이지</p>
-                                </div>
-                                <div>
-                                <img src={logoutIcon}/>
-                                <p>로그아웃</p>
-                                </div>
-                            </AnimationDiv></>
-                             ) : (<></>)}
-                </>}</div>
-                </>
+                            {viewOption && (
+                                <>
+                                    {isLogin ? (
+                                        <>
+                                            <AnimationDiv>
+                                                <StyledLink to="/mypage">
+                                                    <img
+                                                        src={mypageIcon}
+                                                        alt="icon"
+                                                    />
+                                                    <p>마이페이지</p>
+                                                </StyledLink>
+                                                <StyledLink to="/logout">
+                                                    <img
+                                                        src={logoutIcon}
+                                                        alt="icon"
+                                                    />
+                                                    <p>로그아웃</p>
+                                                </StyledLink>
+                                            </AnimationDiv>
+                                        </>
+                                    ) : (
+                                        <></>
+                                    )}
+                                </>
+                            )}
+                        </div>
+                    </>
                 ) : (
                     <Nav href="/login">로그인</Nav>
                 )}
-                
             </div>
         </Navigation>
     );

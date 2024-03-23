@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 const LogoutPage = () => {
     const navigate = useNavigate();
@@ -24,6 +25,15 @@ const LogoutPage = () => {
             console.log(error);
         }
     };
-    return <div onClick={logout}>logout</div>;
+
+    useEffect(() => {
+        logout();
+    }, []);
+
+    return (
+        <>
+            <Loading />
+        </>
+    );
 };
 export default LogoutPage;
