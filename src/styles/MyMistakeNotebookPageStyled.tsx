@@ -44,6 +44,10 @@ export const Container = styled.div`
 
         /* background-color: red; */
     }
+
+    .noData {
+        color: ${theme.colors.font3};
+    }
 `;
 
 export default Container;

@@ -5,6 +5,7 @@ import BasicPagination from "../components/BasicPagination";
 import PostCard from "../components/PostCard";
 import axios from "axios";
 import Loading from "../components/Loading";
+import LoginModal from "../components/LoginModal";
 
 export interface MyPostProps {
     postId: number;
@@ -53,6 +54,8 @@ const MyPostPage = () => {
                 }
             );
 
+            console.log(response.data);
+
             setTotalPages(response.data.totalPages);
             handleApiResponse(response.data.postList);
         } catch (error) {
@@ -69,7 +72,6 @@ const MyPostPage = () => {
 
     useEffect(() => {
         getData();
-        console.log(page);
     }, [page]);
 
     return (
@@ -77,7 +79,7 @@ const MyPostPage = () => {
             <MyPageNav />
             <Container>
                 {myPost === null || myPost?.length === 0 ? (
-                    <Loading />
+                    <p className="noData">등록된 글이 없습니다.</p>
                 ) : (
                     <>
                         <div className="contentBox">
