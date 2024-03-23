@@ -143,6 +143,7 @@ const PostBoardPage = () => {
     
     const { searchWord } = useParams<{searchWord:string}>(); // URL에서 search 파라미터 추출
     console.log(searchWord);
+    
     const handleSearchWordChange = async (searchWord: string) => {
         try {
             const response = await axios.get(

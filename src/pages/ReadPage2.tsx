@@ -15,6 +15,7 @@ import notScrapIcon from "../image/notScrapIcon.png";
 import GoIcon from "../image/GoIcon.png";
 import Qudy from "../image/Qtudy_char.png";
 import Comment2 from "../components/Comment2";
+import DownArrow from "../image/DownArrow.png";
 
 interface Scrap {
     postId: string;
@@ -282,8 +283,9 @@ const ReadPage = () => {
                         </div>
                         </Link>
                     </div>
-
+                            {token?<>
                    <Comment2 postId={postId}/>
+                   </>:<>로그인 후 댓글을 남겨보세요<img style={{marginTop:"10px"}}src={DownArrow}/></>}
                 </div>
             </Container>
         </>

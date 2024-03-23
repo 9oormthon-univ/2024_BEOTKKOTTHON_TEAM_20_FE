@@ -70,6 +70,7 @@ const PostCard: React.FC<MyPostProps> = ({
     useEffect(() => {
         getData();
     }, []);
+    
     return (
         <Container>
             <div className="categoryBox">
