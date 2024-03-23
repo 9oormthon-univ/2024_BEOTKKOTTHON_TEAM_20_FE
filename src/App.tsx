@@ -8,7 +8,7 @@ import LoginPage from "./pages/LoginPage";
 import OAuth2RedirectHandler from "./pages/OAuth2RedirectHandler";
 import LogoutPage from "./pages/LogoutPage";
 // import WritePage from "./pages/WritePage";
-import ReadPage from "./pages/ReadPage";
+// import ReadPage from "./pages/ReadPage";
 import MyPage from "./pages/MyPage";
 import MyPostPage from "./pages/MyPostPage";
 import MyScrapPage from "./pages/MyScrapPage";
@@ -18,6 +18,7 @@ import QuizPage from "./pages/QuizPage";
 import QuizReviewPage from "./pages/QuizReviewPage";
 import EditPostPage from "./pages/EditPostPage";
 import WritePage from "./pages/WritePage2";
+import ReadPage from "./pages/ReadPage2";
 
 const App: React.FC = () => {
     return (
