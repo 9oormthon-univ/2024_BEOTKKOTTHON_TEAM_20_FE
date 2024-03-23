@@ -22,6 +22,7 @@ import { Post } from "../components/post";
 import PostCard from "../components/PostCard";
 import { MyPostProps } from "./MyPostPage";
 import MainLogo from "../image/MainLogo.png";
+import { useLocation, useParams } from "react-router-dom";
 
 const PostBoardPage = () => {
     const [postList, setPostList] = useState<MyPostProps[]>([]);
@@ -39,34 +40,6 @@ const PostBoardPage = () => {
             setToken(storedToken);
         }
     }, []);
-
-    useEffect(() => {
-        const fetchPosts = async () => {
-            try {
-                let url =
-                    "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all";
-                if (selectedCategory !== null) {
-                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${selectedCategory}`;
-                }
-                const response = await axios.get(url, {
-                    params: { page: 0 },
-                    headers: {
-                        Authorization:
-                            window.localStorage.getItem("accessToken"),
-                    },
-                });
-                setPostList(response.data.postList);
-                setTotalPages(response.data.totalPages);
-                console.log(response.data);
-            } catch (error) {
-                if (axios.isAxiosError(error)) {
-                    console.log("error fetching :", error.response);
-                }
-            }
-        };
-
-        fetchPosts();
-    }, [selectedCategory]);
 
     const categories = [
         "경영학",
@@ -127,10 +100,25 @@ const PostBoardPage = () => {
     };
 
     const handleCategoryClick = (index: number) => {
-        setView("all");
-        setSelectedCategory(index);
-        setSelectedButton(index);
+        // 현재 선택된 카테고리와 클릭된 카테고리가 같은 경우 선택 해제
+        if (selectedCategory === index) {
+            setView("all");
+            setSelectedCategory(null);
+            setSelectedButton(null);
+        } else {
+            // 다른 카테고리를 선택한 경우 선택
+            setView("all");
+            setSelectedCategory(index);
+            setSelectedButton(index);
+        }
     };
+
+    // 파라미터 받아오기
+    // const { searchWord } = useParams<{ searchWord: string }>(); // URL에서 search 파라미터 추출
+    // console.log(searchWord);
+    const location = useLocation();
+    const searchWord = new URLSearchParams(location.search).get("keyword");
+    console.log(searchWord);
 
     const handleSearchWordChange = async (searchWord: string) => {
         try {
@@ -153,6 +141,34 @@ const PostBoardPage = () => {
             }
         }
     };
+
+    useEffect(() => {
+        // 처음 실행
+        const fetchPosts = async () => {
+            try {
+                let url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/search-list`;
+                if (selectedCategory !== null) {
+                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${selectedCategory}`;
+                }
+                const response = await axios.get(url, {
+                    params: { searchWord: searchWord, page: 0 },
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                });
+                setPostList(response.data.postList);
+                setTotalPages(response.data.totalPages);
+                console.log(response.data);
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.log("error fetching :", error.response);
+                }
+            }
+        };
+
+        fetchPosts();
+    }, [searchWord, selectedCategory]);
 
     return (
         <Container>
@@ -261,6 +277,7 @@ const PostBoardPage = () => {
                                 <Pagination
                                     count={totalPages}
                                     onChange={handlePageChange}
+                                    // onChange={handleSearchWordChange}
                                 />
                             </>
                         )}
@@ -284,3 +301,6 @@ const PostBoardPage = () => {
 };
 
 export default PostBoardPage;
+function useQuery() {
+    throw new Error("Function not implemented.");
+}
