@@ -1,23 +1,9 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
-import NavBar from "../components/NavBar";
 import { Container } from "../styles/Comment2Styled";
-import QuizGo from "../image/QuizGo.png";
-import QudyLogo from "../image/QudyLogo.png";
-import ScrapIcon from "../image/ScrapIcon.png";
-import NoScrapIcon from "../image/NoScrapIcon.png";
 import axios from "axios";
-import { useParams } from "react-router-dom";
-import { DetailPost } from "../components/post";
 import { Comment } from "../components/comment";
 import { Pagination } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { Link } from "react-router-dom";
-import CommentBoard from "../components/CommentBoard";
 import qudyImg from "../image/Qtudy_char.png";
-import TalkIcon from "../image/commentIcon.png";
-import notScrapIcon from "../image/notScrapIcon.png";
-import GoIcon from "../image/GoIcon.png";
-import Qudy from "../image/Qtudy_char.png";
 
 interface CommentBoardProps {
     postId: string | undefined;
@@ -26,8 +12,6 @@ interface CommentBoardProps {
 const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
     const [editCommentId, setEditCommentId] = useState<string | null>(null); // 수정할 댓글의 ID를 저장하는 상태
     const [editCommentContent, setEditCommentContent] = useState(""); // 수정한 댓글의 내용을 저장하는 상태
-    const [profileNickname, setProfileNickname] = useState("");
-    const [profileImg, setProfileImg] = useState(null);
     const [inputComment, setInputComment] = useState("");
     const [commentList, setCommentList] = useState<Comment[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
@@ -96,8 +80,11 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
                 }
             );
             setCommentList(response.data.commentList);
-            setTotalPages(response.data.totalPages); // 총 페이지 수 설정
-            console.log(response.data);
+            setTotalPages(response.data.totalPages);
+
+            response.data.commentList.forEach((comment: Comment) => {
+                console.log(comment.profileImageUrl);
+            });
         } catch (error) {
             console.error("Error fetching comments:", error);
         }
@@ -190,47 +177,79 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
     return (
         <Container>
             <div className="commentBox">
-                        <p className="commentTitle">댓글</p>
-                        {/* 댓글 하나 입니다  */}
-                        {commentList.map(comment => (
-                        <div className="comment" key={comment.commentId}>
-                            <div className="commentHeader">
-                                <div className="userBox">
-                                {comment.profileImageUrl !== null ? (
-                                    <img className="userProfileImg" src={comment.profileImageUrl} alt="profile"></img>
-                                    ):<img className="userProfileImg" src={qudyImg} alt="qudy" />}
-                                    <p className="userName">{comment.name}</p>
-                                </div>
-                                {comment.name===loginName && comment.profileImageUrl===loginProfile?
+                <p className="commentTitle">댓글</p>
+                {/* 댓글 하나 입니다  */}
+                {commentList.map((comment) => (
+                    <div className="comment" key={comment.commentId}>
+                        <div className="commentHeader">
+                            <div className="userBox">
+                                {comment.profileImageUrl === null ? (
+                                    <img
+                                        className="userProfileImg"
+                                        src={qudyImg}
+                                        alt="qudy"
+                                    />
+                                ) : (
+                                    <img
+                                        className="userProfileImg"
+                                        src={comment.profileImageUrl}
+                                        alt="profile"
+                                    ></img>
+                                )}
+                                <p className="userName">{comment.name}</p>
+                            </div>
+                            {comment.name === loginName &&
+                            comment.profileImageUrl === loginProfile ? (
                                 <div className="commentBtnBox">
-                                    <p className="commentDelBtn" onClick={() => handleDeleteComment(comment.commentId.toString())}>삭제</p>
-                                </div>:null}
-                            </div>
-                            <div className="commentBody">
-                                <p className="commentText">{comment.content}</p>
-                                <p className="commentDate">{comment.createdAt}</p>
-                            </div>
+                                    <p
+                                        className="commentDelBtn"
+                                        onClick={() =>
+                                            handleDeleteComment(
+                                                comment.commentId.toString()
+                                            )
+                                        }
+                                    >
+                                        삭제
+                                    </p>
+                                </div>
+                            ) : null}
                         </div>
-                         ))}
-                    </div>
-                      <div style={{display:"flex",justifyContent:"center"}}>
-                    <Pagination count={totalPages} onChange={handlePageChange}/>
-                    </div>              
-                    <div className="postCommentBox">
-                        <div className="postCommentBoxHeader">
-                            <img className="userProfileImg" src={loginProfile} />
-                            <p className="userName">{loginName}</p>
-                        </div>
-                        <textarea
-                            className="postComment"
-                            placeholder="댓글을 남겨보세요"
-                            value={inputComment} 
-                            onChange={onInputHandler}
-                        ></textarea>
-                        <div className="commentSubmitBtnBox">
-                            <div className="commentSubmitBtn" onClick={SendCommentHandler}>등록</div>
+                        <div className="commentBody">
+                            <p className="commentText">{comment.content}</p>
+                            <p className="commentDate">
+                                {comment.createdAt.slice(0, 10)}
+                            </p>
                         </div>
                     </div>
+                ))}
+            </div>
+            <div style={{ display: "flex", justifyContent: "center" }}>
+                <Pagination count={totalPages} onChange={handlePageChange} />
+            </div>
+            <div className="postCommentBox">
+                <div className="postCommentBoxHeader">
+                    <img
+                        className="userProfileImg"
+                        src={loginProfile}
+                        alt="img"
+                    />
+                    <p className="userName">{loginName}</p>
+                </div>
+                <textarea
+                    className="postComment"
+                    placeholder="댓글을 남겨보세요"
+                    value={inputComment}
+                    onChange={onInputHandler}
+                ></textarea>
+                <div className="commentSubmitBtnBox">
+                    <div
+                        className="commentSubmitBtn"
+                        onClick={SendCommentHandler}
+                    >
+                        등록
+                    </div>
+                </div>
+            </div>
         </Container>
     );
 };

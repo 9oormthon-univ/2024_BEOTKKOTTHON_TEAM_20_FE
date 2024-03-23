@@ -70,64 +70,60 @@ const PostCard: React.FC<MyPostProps> = ({
     useEffect(() => {
         getData();
     }, []);
+    
     return (
-            <Container>
-                <div className="categoryBox">
-                    <p className="category">
-                        {categories[categoryId]?.category}
-                    </p>
-                </div>
-                <div className="titleBox">
+        <Container>
+            <div className="categoryBox">
+                <p className="category">{categories[categoryId]?.category}</p>
+            </div>
+            <div className="titleBox">
                 <StyledLink to={`/read/${postId}`}>
                     <div className="title">
                         {title.length > 10
                             ? title.slice(0, 10) + " ..."
                             : title}
                     </div>
-                    </StyledLink>
-                    <div className="date">{createdAt.slice(0, 10)}</div>
-                </div>
-                <StyledLink to={`/read/${postId}`}>
+                </StyledLink>
+                <div className="date">{createdAt.slice(0, 10)}</div>
+            </div>
+            <StyledLink to={`/read/${postId}`}>
                 <div className="PostBox">
                     <p className="post">
-                        {summary.length > 280
-                            ? summary.slice(0, 280) + "..."
+                        {summary.length > 200
+                            ? summary.slice(0, 200) + "..."
                             : summary}
                     </p>
                 </div>
-                </StyledLink>
-                <div className="additionalBox">
-                    <div className="hashtagBox">
-                        {tag.map((tagName) => (
-                            <p className="hashtag">#{tagName}</p>
-                        ))}
+            </StyledLink>
+            <div className="additionalBox">
+                <div className="hashtagBox">
+                    {tag.map((tagName) => (
+                        <p className="hashtag">#{tagName}</p>
+                    ))}
+                </div>
+                <div className="reactionBox">
+                    <div className="reaction">
+                        <div className="icon">
+                            <Icon src={TalkIcon} />
+                        </div>
+                        <p className="count">{commentCount}</p>
                     </div>
-                    <div className="reactionBox">
-                        <div className="reaction">
-                            <div className="icon">
-                                <Icon src={TalkIcon} />
-                            </div>
-                            <p className="count">{commentCount}</p>
+                    <div className="reaction">
+                        <div className="icon">
+                            {isScrapped ? (
+                                <Icon src={ScrapIcon} onClick={scrapHandler} />
+                            ) : (
+                                <Icon
+                                    src={notScrapIcon}
+                                    onClick={scrapHandler}
+                                />
+                            )}
                         </div>
-                        <div className="reaction">
-                            <div className="icon">
-                                {isScrapped ? (
-                                    <Icon
-                                        src={ScrapIcon}
-                                        onClick={scrapHandler}
-                                    />
-                                ) : (
-                                    <Icon
-                                        src={notScrapIcon}
-                                        onClick={scrapHandler}
-                                    />
-                                )}
-                            </div>
-                            <p className="count">{scrapCount}</p>
-                        </div>
+                        <p className="count">{scrapCount}</p>
                     </div>
                 </div>
-            </Container>
+            </div>
+        </Container>
     );
 };
 export default PostCard;

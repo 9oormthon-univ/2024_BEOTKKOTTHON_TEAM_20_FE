@@ -116,10 +116,10 @@ const InterestPage = () => {
                     },
                 }
             );
-            // console.log(response.data);
+            console.log(query);
             setUserInterests(response.data.interests);
 
-            if (query) setNewMember(true);
+            if (query === "new") setNewMember(true);
             else setSelectedCategories(response.data.interests);
         } catch (error) {
             console.log(error);

@@ -22,7 +22,7 @@ import { Link } from "react-router-dom";
 interface MyPageProps {
     name: string;
     email: string;
-    profileImage: any;
+    profileImageUrl: string;
 }
 
 const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
@@ -104,9 +104,9 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                     <>
                         <div className="infoo">
                             <div className="userProfileImg">
-                                {data?.profileImage ? (
+                                {data?.profileImageUrl ? (
                                     <img
-                                        src={data.profileImage}
+                                        src={data.profileImageUrl}
                                         alt="default"
                                         className="profileImg"
                                     />

@@ -11,7 +11,7 @@ import Loading from "../components/Loading";
 interface MyPageProps {
     name: string;
     email: string;
-    profileImage: any;
+    profileImageUrl: string;
 }
 
 const MyPage = () => {
@@ -29,7 +29,6 @@ const MyPage = () => {
                     },
                 }
             );
-            // console.log(response.data);
 
             setData(response.data);
         } catch (error) {
@@ -69,9 +68,9 @@ const MyPage = () => {
                         <div className="contentBox">
                             <div className="profileBox">
                                 <div className="profile_img">
-                                    {data?.profileImage ? (
+                                    {data?.profileImageUrl ? (
                                         <img
-                                            src={data.profileImage}
+                                            src={data.profileImageUrl}
                                             alt="default"
                                             className="profileImg"
                                         />

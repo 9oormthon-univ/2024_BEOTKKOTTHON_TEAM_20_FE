@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Container } from "../styles/MainPage2Styled";
 import NavBar from "../components/NavBar";
+import { useParams } from "react-router-dom";
 import {
     Frame2,
     Head,
@@ -75,7 +76,7 @@ const PostBoardPage = () => {
         "법학",
         "사회과학",
         "식품 및 체육",
-        "언어 및 문학",
+        "언어 및 문화",
         "인문학",
         "의학",
         "예술 및 디자인",
@@ -127,11 +128,22 @@ const PostBoardPage = () => {
     };
 
     const handleCategoryClick = (index: number) => {
-        setView("all");
-        setSelectedCategory(index);
-        setSelectedButton(index);
+        // 현재 선택된 카테고리와 클릭된 카테고리가 같은 경우 선택 해제
+        if (selectedCategory === index) {
+            setView("all");
+            setSelectedCategory(null);
+            setSelectedButton(null);
+        } else {
+            // 다른 카테고리를 선택한 경우 선택
+            setView("all");
+            setSelectedCategory(index);
+            setSelectedButton(index);
+        }
     };
-
+    
+    const { searchWord } = useParams<{searchWord:string}>(); // URL에서 search 파라미터 추출
+    console.log(searchWord);
+    
     const handleSearchWordChange = async (searchWord: string) => {
         try {
             const response = await axios.get(

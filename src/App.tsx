@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import MainPage from "./pages/MainPage";
 import MainPage2 from "./pages/MainPage2";
@@ -19,8 +19,19 @@ import QuizReviewPage from "./pages/QuizReviewPage";
 import EditPostPage from "./pages/EditPostPage";
 import WritePage from "./pages/WritePage2";
 import ReadPage from "./pages/ReadPage2";
+import LoginModal from "./components/LoginModal";
 
 const App: React.FC = () => {
+    const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 확인
+        const token = localStorage.getItem("token");
+        if (token) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
     return (
         <Router>
             <Routes>
@@ -35,19 +46,45 @@ const App: React.FC = () => {
                     element={<OAuth2RedirectHandler />}
                 />
                 <Route path="/logout" element={<LogoutPage />} />
-                <Route path="/write" Component={WritePage} />
-                <Route path="/edit/:postId" element={<EditPostPage />} />
+                <Route
+                    path="/write"
+                    element={isLoggedIn ? <WritePage /> : <LoginPage />}
+                />
+                <Route
+                    path="/edit/:postId"
+                    element={isLoggedIn ? <EditPostPage /> : <LoginPage />}
+                />
                 <Route path="/read/:postId" element={<ReadPage />} />
-                <Route path="/mypage" element={<MyPage />} />
-                <Route path="/mypost" element={<MyPostPage />} />
-                <Route path="/myscrap" element={<MyScrapPage />} />
+                <Route
+                    path="/mypage"
+                    element={isLoggedIn ? <MyPage /> : <LoginPage />}
+                />
+                <Route
+                    path="/mypost"
+                    element={isLoggedIn ? <MyPostPage /> : <LoginPage />}
+                />
+                <Route
+                    path="/myscrap"
+                    element={isLoggedIn ? <MyScrapPage /> : <LoginPage />}
+                />
                 <Route
                     path="/myMistakeNotebook"
-                    element={<MyMistakeNotebookPage />}
+                    element={
+                        isLoggedIn ? <MyMistakeNotebookPage /> : <LoginPage />
+                    }
                 />
-                <Route path="/aiQuiz" element={<AiQuizPage />} />
-                <Route path="/quiz" element={<QuizPage />} />
-                <Route path="/quizReview" element={<QuizReviewPage />} />
+                <Route
+                    path="/aiQuiz"
+                    element={isLoggedIn ? <AiQuizPage /> : <LoginPage />}
+                />
+                <Route
+                    path="/quiz"
+                    element={isLoggedIn ? <QuizPage /> : <LoginPage />}
+                />
+                <Route
+                    path="/quizReview"
+                    element={isLoggedIn ? <QuizReviewPage /> : <LoginPage />}
+                />
             </Routes>
         </Router>
     );

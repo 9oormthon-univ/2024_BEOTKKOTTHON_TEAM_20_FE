@@ -23,14 +23,14 @@ export const Container = styled.div`
     .spinner {
         position: absolute;
         border: 20px solid rgba(0, 0, 0, 0.1); /* 스피너의 배경색 */
-        width: 20vw;
-        height: 20vw;
+        width: 11rem;
+        height: 11rem;
         border-radius: 50%;
         border-left-color: #7b3ff6; /* 스피너의 색상 */
         animation: ${rotate} 1s ease-in-out infinite;
     }
 
     .qudy_logo {
-        width: 13vw;
+        width: 7rem;
     }
 `;
