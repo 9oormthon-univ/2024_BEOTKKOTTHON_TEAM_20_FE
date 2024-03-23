@@ -25,8 +25,6 @@ const QuizCard: React.FC<MyQuiz> = ({
         userName = "큐디 ai";
     }
 
-    console.log("여기는 퀴즈 카드");
-
     return (
         <Container>
             <div className="sourceBox">

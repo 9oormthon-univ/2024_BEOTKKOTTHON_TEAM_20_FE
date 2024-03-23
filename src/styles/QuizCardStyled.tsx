@@ -61,6 +61,12 @@ export const Container = styled.div`
         width: 1.1rem;
     }
 
+    .userProfileImg {
+        width: 2vw;
+        height: 2vw;
+        border-radius: 50%;
+    }
+
     .source_name {
         font-size: 0.8rem;
         color: ${theme.colors.font2};
