@@ -56,7 +56,7 @@ export const Container = styled.div`
     .postSetting_content {
         padding: 0.3rem 1rem;
         margin-right: 2rem;
-        width: 14rem;
+        /* width: 10rem; */
         border: 1px solid ${theme.colors.line1};
         border-radius: 0.3rem;
         color: ${theme.colors.font1};

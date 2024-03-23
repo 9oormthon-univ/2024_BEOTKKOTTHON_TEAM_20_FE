@@ -4,8 +4,8 @@ import theme from "./theme";
 export const Container = styled.div`
     margin: 5px;
     .interest {
-        width: 150px;
-        height: 150px;
+        width: 9rem;
+        height: 9rem;
 
         position: relative;
         display: inline-block;
@@ -30,6 +30,7 @@ export const Container = styled.div`
         font-size: 80px;
         opacity: 1;
         transition: opacity 0.2s ease-in-out;
+        /* box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1); */
 
         display: flex;
         justify-content: center;
@@ -41,8 +42,8 @@ export const Container = styled.div`
     }
 
     .text {
-        width: 150px;
-        height: 150px;
+        width: 9rem;
+        height: 9rem;
         background-color: #000000bb;
         border-radius: 50%;
 
