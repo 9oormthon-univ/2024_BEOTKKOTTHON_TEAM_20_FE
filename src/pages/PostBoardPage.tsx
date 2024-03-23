@@ -125,12 +125,21 @@ const PostBoardPage = () => {
             }
         }
     };
-
+    
     const handleCategoryClick = (index: number) => {
-        setView("all");
-        setSelectedCategory(index);
-        setSelectedButton(index);
+        // 현재 선택된 카테고리와 클릭된 카테고리가 같은 경우 선택 해제
+        if (selectedCategory === index) {
+            setView("all");
+            setSelectedCategory(null);
+            setSelectedButton(null);
+        } else {
+            // 다른 카테고리를 선택한 경우 선택
+            setView("all");
+            setSelectedCategory(index);
+            setSelectedButton(index);
+        }
     };
+    
 
     const handleSearchWordChange = async (searchWord: string) => {
         try {
