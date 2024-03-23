@@ -49,7 +49,9 @@ const ScrapBoard = () => {
     };
 
     return (
-        <>
+        <> {postList.length === 0 ? <>
+            스크랩한 포스트가 없습니다!
+    </>:<>
             <PostWrap>
                 {/* 스크랩 한 포스트 가져오기 */}
                 {postList.map(post => (
@@ -67,6 +69,7 @@ const ScrapBoard = () => {
                 ))}
             </PostWrap>
             <Pagination count={totalPages} onChange={handlePageChange} />
+            </>}
         </>
     );
 }
