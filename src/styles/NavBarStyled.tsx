@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import theme from "./theme";
+import { Link } from "react-router-dom";
 
 export const Navigation = styled.nav`
     border: 1px solid #e9e9e9;
@@ -23,10 +24,57 @@ export const Navigation = styled.nav`
     }
 
     .userBox {
-        width: 10vw;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        /* border: 1px solid red; */
+        .infoo {
+            display: flex;
+            flex-direction: row;
+            text-align: center;
+            align-items: center;
+        }
+
+        .userProfileImg {
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 50%;
+            background-color: ${theme.colors.line2};
+            margin-right: 1rem;
+
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .profileImg {
+            width: 2.3rem;
+            height: 2.3rem;
+            border-radius: 50%;
+        }
+
+        .qudyImg {
+            width: 1.2rem;
+        }
+
+        .userProfileImg:hover {
+            cursor: pointer;
+        }
+        .arrow {
+            width: 20px;
+            height: 20px;
+            margin-left: 20px;
+
+            cursor: pointer;
+        }
+
+        //     text-decoration: none;
+        // font-weight: bold;
+        // font-size: 1.1rem;
+        // color: ${theme.colors.font1};
+        // display: flex;
+        // align-items: center;
+        // width:100%;
+        // &:hover {
+        //     color: ${theme.colors.primary};
+        // }
     }
 `;
 export const Logo = styled.img`
@@ -40,39 +88,12 @@ export const Nav = styled.a`
     font-weight: bold;
     font-size: 1.1rem;
     color: ${theme.colors.font1};
-
     display: flex;
     justify-content: center;
     align-items: center;
-
+    width: 100%;
     &:hover {
         color: ${theme.colors.primary};
-    }
-
-    .userProfileImg {
-        width: 2.3rem;
-        height: 2.3rem;
-        border-radius: 50%;
-        background-color: ${theme.colors.line2};
-        margin-right: 1rem;
-
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .profileImg {
-        width: 2.3rem;
-        height: 2.3rem;
-        border-radius: 50%;
-    }
-
-    .qudyImg {
-        width: 1.2rem;
-    }
-
-    .userProfileImg:hover {
-        cursor: pointer;
     }
 `;
 
@@ -136,48 +157,67 @@ export const SIcon = styled.img`
     height: 20px;
     margin-right: -30px; */
 `;
-export const SideDiv=styled.div`
-width:100%;
-display:flex;
-flex-direction:row;
-align-items:center;
-justify-content:space-between;
-float:right;
+export const SideDiv = styled.div`
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    float: right;
 `;
-export const ImgProfile=styled.div`
-    border:1px solid gray;
-    width:45px;
-    height:45px;
-    border-radius:30px;
+export const ImgProfile = styled.div`
+    border: 1px solid gray;
+    width: 45px;
+    height: 45px;
+    border-radius: 30px;
 `;
-export const AnimationDiv=styled.div`
-    border-radius:10px;
-    box-shadow:1px 1px 7px 1px lightgray;
-    z-index:99;
-    width:80%;
-    height:auto;
-    position:absolute;
-    right:0;
-    margin-top:80px;
-    justify-content:center;
-    div{
-        display:flex;
-        flex-direction:row;
-        text-align:center;
-        align-items:center;
-        gap:20px;
-        height:40px;
-        margin-left:10px;
-        img{
-            width:20px;
-            height:20px;
-        }
+export const AnimationDiv = styled.div`
+    border-radius: 10px;
+    box-shadow: 0px 1px 20px 0px rgba(0, 0, 0, 0.1);
+    z-index: 99;
+    width: 10vw;
+    height: auto;
+    background-color: white;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+    font-size: small;
+    margin-top: 0.5rem;
+
+    position: absolute;
+    cursor: pointer;
+`;
+export const InfoWrap = styled.div`
+    display: flex;
+    flex-direction: column;
+    margin-right: 70px;
+    width: 10%;
+    position: relative;
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+
+    display: flex;
+    flex-direction: row;
+    text-align: center;
+    align-items: center;
+    width: 100%;
+    height: 2.5rem;
+    margin-left: 1rem;
+    font-size: 0.9rem;
+    color: ${theme.colors.font1};
+    img {
+        width: 1.2rem;
+        height: 1.2rem;
+        margin-right: 1rem;
     }
-`;
-export const InfoWrap=styled.div`
-display:flex;
-flex-direction:column;
-margin-right:70px;
-width:10%;
-position:relative;
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
+    }
 `;

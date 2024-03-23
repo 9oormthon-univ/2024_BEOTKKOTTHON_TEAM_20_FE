@@ -2,7 +2,7 @@ import React, { useState, useEffect, ChangeEvent } from "react";
 import axios from "axios";
 import { TalkBoard, Talk, ProfileImg, TalkInfo, Datee, TalkForm, TalkWrap, CheckBtn } from "../styles/ReadPageStyled";
 import { Comment } from "./comment";
-import { Pagination } from "@mui/material";
+import Pagination from '@mui/material/Pagination';
 
 // postId props의 타입 정의
 interface CommentBoardProps {
@@ -42,12 +42,13 @@ const CommentBoard: React.FC<CommentBoardProps> = ({ postId }) => {
     const handlePageChange = async (event: React.ChangeEvent<unknown>, page: number) => {
         try {
             const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/comments/all?postId=${postId}`, {
-                params: { page },
+                params: { page }, 
                 headers: {
-                    Authorization:
-                        window.localStorage.getItem("accessToken"),
+                    Authorization: window.localStorage.getItem("accessToken"),
                 },
             });
+            
+            setCommentList(response.data.commentList);
             if (Array.isArray(response.data)) {
             } else {
                 console.log("API 응답 데이터가 배열이 아닙니다.");
@@ -59,6 +60,8 @@ const CommentBoard: React.FC<CommentBoardProps> = ({ postId }) => {
             }
         }
     };
+    
+    
     useEffect(() => {
         if (postId) {
             fetchComments();
@@ -66,18 +69,19 @@ const CommentBoard: React.FC<CommentBoardProps> = ({ postId }) => {
     }, [postId]);
 
     // 댓글 조회
-    const fetchComments = async () => {
-        try {
-            const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/comments/all?postId=${postId}`,{
-                params:{page :0}
-            });
-            setCommentList(response.data.commentList);
-            
-            console.log(response.data);
-        } catch (error) {
-            console.error("Error fetching comments:", error);
-        }
-    };
+const fetchComments = async () => {
+    try {
+        const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/comments/all?postId=${postId}`,{
+            params:{page :0}
+        });
+        setCommentList(response.data.commentList);
+        setTotalPages(response.data.totalPages); // 총 페이지 수 설정
+        console.log(response.data);
+    } catch (error) {
+        console.error("Error fetching comments:", error);
+    }
+};
+
 
     // 댓글 삭제
     const handleDeleteComment = async (commentId: string) => {
@@ -179,7 +183,7 @@ const SendCommentHandler = async () => {
                     </Talk>
                 ))}
                 <div className="div">
-                    <Pagination count={totalPages} onChange={handlePageChange} />
+                <Pagination count={totalPages} onChange={handlePageChange} />
                 </div>
             </TalkBoard>
             <TalkWrap>

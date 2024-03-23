@@ -4,6 +4,7 @@ import MyPageNav from "../components/MyPageNav";
 import BasicPagination from "../components/BasicPagination";
 import PostCard from "../components/PostCard";
 import axios from "axios";
+import Loading from "../components/Loading";
 
 export interface MyPostProps {
     postId: number;
@@ -75,28 +76,34 @@ const MyPostPage = () => {
         <>
             <MyPageNav />
             <Container>
-                <div className="contentBox">
-                    {myPost?.map((post, index) => (
-                        <PostCard
-                            key={post.postId}
-                            postId={post.postId}
-                            categoryId={post.categoryId}
-                            title={post.title}
-                            createdAt={post.createdAt}
-                            summary={post.summary}
-                            tag={post.tag}
-                            commentCount={post.commentCount}
-                            scrapCount={post.scrapCount}
-                        />
-                    ))}
-                </div>
-                <div className="paginationBox">
-                    <BasicPagination
-                        count={totalPages}
-                        page={page + 1}
-                        onChange={handleChangePage}
-                    />
-                </div>
+                {myPost === null || myPost?.length === 0 ? (
+                    <Loading />
+                ) : (
+                    <>
+                        <div className="contentBox">
+                            {myPost?.map((post, index) => (
+                                <PostCard
+                                    key={post.postId}
+                                    postId={post.postId}
+                                    categoryId={post.categoryId}
+                                    title={post.title}
+                                    createdAt={post.createdAt}
+                                    summary={post.summary}
+                                    tag={post.tag}
+                                    commentCount={post.commentCount}
+                                    scrapCount={post.scrapCount}
+                                />
+                            ))}
+                        </div>
+                        <div className="paginationBox">
+                            <BasicPagination
+                                count={totalPages}
+                                page={page + 1}
+                                onChange={handleChangePage}
+                            />
+                        </div>
+                    </>
+                )}
             </Container>
         </>
     );

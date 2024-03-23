@@ -71,21 +71,23 @@ const PostCard: React.FC<MyPostProps> = ({
         getData();
     }, []);
     return (
-        <StyledLink to={`/read/${postId}`}>
             <Container>
                 <div className="categoryBox">
                     <p className="category">
-                        {categories[categoryId].category}
+                        {categories[categoryId]?.category}
                     </p>
                 </div>
                 <div className="titleBox">
-                    <p className="title">
+                <StyledLink to={`/read/${postId}`}>
+                    <div className="title">
                         {title.length > 10
                             ? title.slice(0, 10) + " ..."
                             : title}
-                    </p>
-                    <p className="date">{createdAt.slice(0, 10)}</p>
+                    </div>
+                    </StyledLink>
+                    <div className="date">{createdAt.slice(0, 10)}</div>
                 </div>
+                <StyledLink to={`/read/${postId}`}>
                 <div className="PostBox">
                     <p className="post">
                         {summary.length > 280
@@ -93,6 +95,7 @@ const PostCard: React.FC<MyPostProps> = ({
                             : summary}
                     </p>
                 </div>
+                </StyledLink>
                 <div className="additionalBox">
                     <div className="hashtagBox">
                         {tag.map((tagName) => (
@@ -125,7 +128,6 @@ const PostCard: React.FC<MyPostProps> = ({
                     </div>
                 </div>
             </Container>
-        </StyledLink>
     );
 };
 export default PostCard;

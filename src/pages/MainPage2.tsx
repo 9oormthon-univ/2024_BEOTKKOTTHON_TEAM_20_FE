@@ -8,14 +8,14 @@ import "swiper/css/scrollbar";
 import { Container } from "../styles/MainPage2Styled";
 import NavBar from "../components/NavBar";
 import PreferBoard from "../components/PreferBoard";
-import Banner1 from "../image/Banner1.png";
-import Banner2 from "../image/Banner2.png";
+import Banner1 from "../image/banner1_ver2.png";
+import Banner2 from "../image/banner2_ver2.png";
 import GoQuiz from "../image/GoQuiz.png";
 import GoPost from "../image/GoPost.png";
 import GoNote from "../image/GoNote.png";
 import MainLogo from "../image/Qtudy_logo_2.png";
 import { Link, useNavigate } from "react-router-dom";
-import { MoreButton,BoxWrap } from "../styles/PreferBoardStyled";
+import { MoreButton, BoxWrap } from "../styles/PreferBoardStyled";
 import Trend1 from "../image/Trend1.png";
 import Trend2 from "../image/Trend2.png";
 import Trend3 from "../image/Trend3.png";
@@ -26,7 +26,6 @@ import PostCard from "../components/PostCard";
 import DownArrow from "../image/DownArrow.png";
 import UpArrow from "../image/UpArrow.png";
 
-
 const MainPage2 = () => {
     const navigate = useNavigate();
     const [interestPosts, setInterestPosts] = useState<MyPostProps[]>([]);
@@ -36,7 +35,22 @@ const MainPage2 = () => {
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
+    const [topPosts, setTopPosts] = useState<{ name: string; count: number }[]>([]);
 
+    useEffect(() => {
+      const fetchTrend = async () => {
+        try {
+          const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/tag/top3`);
+          setTopPosts(response.data.tagList);
+        } catch (error) {
+          if (axios.isAxiosError(error)) {
+            console.log('error fetching :',error.response);
+          }
+        }
+      };
+      fetchTrend();
+    }, []);
+    
 
     useEffect(() => {
         const fetchInterest = async () => {
@@ -86,12 +100,11 @@ const MainPage2 = () => {
         if (isExpanded) {
             setVisiblePosts(6);
         } else {
-            setVisiblePosts(prev => prev + 6);
+            setVisiblePosts((prev) => prev + 6);
         }
-        setIsExpanded(prev => !prev); // 버튼 클릭 시 "더보기" 상태와 "접기" 상태를 토글
+        setIsExpanded((prev) => !prev); // 버튼 클릭 시 "더보기" 상태와 "접기" 상태를 토글
     };
-      
-      
+
     return (
         <Container>
             <NavBar onSearchWordChange={goToPostBoardPage} />
@@ -130,48 +143,62 @@ const MainPage2 = () => {
                 <div className="trendBox">
                     <p className="boxTitle">요즘 뜨는 트렌드 TOP 3</p>
                     <div className="trends">
-                        <div className="trend">
-                            <div className="trendImg">
-                                <img src={Trend1} alt="top3" />
-                            </div>
-                            <div className="trendText">
-                                <p className="top">분야명</p>
-                                <div className="goToQuiz">
-                                    <p>퀴즈 풀러가기</p>
-                                    <div className="goIcon">
-                                        <img src={linkIcon} alt="topQuiz" />
+                    <div className="trends">
+                        {/* 첫 번째 트렌드 요소 */}
+                        {topPosts[0] && (
+                            <div className="trend">
+                                <div className="trendImg">
+                                    <img src={Trend1} alt="top3" />
+                                </div>
+                                <div className="trendText">
+                                    <p className="top">{topPosts[0].name}</p>
+                                    <div className="goToQuiz">
+                                        <p>퀴즈 풀러가기</p>
+                                        <div className="goIcon">
+                                            <img src={linkIcon} alt="topQuiz" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="trend">
-                            <div className="trendImg">
-                                <img src={Trend2} alt="top3" />
-                            </div>
-                            <div className="trendText">
-                                <p className="top">분야명</p>
-                                <div className="goToQuiz">
-                                    <p>퀴즈 풀러가기</p>
-                                    <div className="goIcon">
-                                        <img src={linkIcon} alt="topQuiz" />
+                        )}
+
+                        {/* 두 번째 트렌드 요소 */}
+                        {topPosts[1] && (
+                            <div className="trend">
+                                <div className="trendImg">
+                                    <img src={Trend2} alt="top3" />
+                                </div>
+                                <div className="trendText">
+                                    <p className="top">{topPosts[1].name}</p>
+                                    <div className="goToQuiz">
+                                        <p>퀴즈 풀러가기</p>
+                                        <div className="goIcon">
+                                            <img src={linkIcon} alt="topQuiz" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div className="trend">
-                            <div className="trendImg">
-                                <img src={Trend3} alt="top3" />
-                            </div>
-                            <div className="trendText">
-                                <p className="top">분야명</p>
-                                <div className="goToQuiz">
-                                    <p>퀴즈 풀러가기</p>
-                                    <div className="goIcon">
-                                        <img src={linkIcon} alt="topQuiz" />
+                        )}
+
+                        {/* 세 번째 트렌드 요소 */}
+                        {topPosts[2] && (
+                            <div className="trend">
+                                <div className="trendImg">
+                                    <img src={Trend3} alt="top3" />
+                                </div>
+                                <div className="trendText">
+                                    <p className="top">{topPosts[2].name}</p>
+                                    <div className="goToQuiz">
+                                        <p>퀴즈 풀러가기</p>
+                                        <div className="goIcon">
+                                            <img src={linkIcon} alt="topQuiz" />
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        )}
+                    </div>
+
                     </div>
                 </div>
 
@@ -183,14 +210,14 @@ const MainPage2 = () => {
                             className="linkImg"
                         ></img>
                     </Link>
-                    <Link to="/aiQuiz">
+                    <Link to="/write">
                         <img
                             src={GoPost}
                             alt="linkImg"
                             className="linkImg"
                         ></img>
                     </Link>
-                    <Link to="/aiQuiz">
+                    <Link to="/myMistakeNotebook">
                         <img
                             src={GoNote}
                             alt="linkImg"
@@ -199,8 +226,7 @@ const MainPage2 = () => {
                     </Link>
                 </div>
 
-                <PreferBoard/>
-                
+                <PreferBoard />
             </div>
             <div className="footerBox">
                 <div className="footer_inner">

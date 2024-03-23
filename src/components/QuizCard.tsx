@@ -31,12 +31,13 @@ const QuizCard: React.FC<MyQuiz> = ({
                 <div className="userBox">
                     <div className="source_img">
                         {userProfile === null ? (
-                            <img src={qudyImg} alt="qudy" className="qudyImg" />
+                            <img src={qudyImg} alt="qudy" className="qudyImg" style={{width:"30px",height:"30px"}}/>
                         ) : (
                             <img
                                 src={userProfile}
                                 alt="userProfile"
                                 className="userProfileImg"
+                                style={{width:"30px",height:"30px",borderRadius:"50%"}}
                             />
                         )}
                     </div>
@@ -60,7 +61,7 @@ const QuizCard: React.FC<MyQuiz> = ({
                             alt="quizReviewIcon"
                             className="icon"
                         ></img>
-                        <Link to={`/quizReview?reviewId=${reviewId}`}>
+                        <Link to={`/quizReview?reviewId=${reviewId}`} style={{textDecoration:"none"}}>
                             <p className="title">학습하기</p>
                         </Link>
                     </div>
