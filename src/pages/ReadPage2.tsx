@@ -1,10 +1,7 @@
 import React, { useState, useEffect, ChangeEvent } from "react";
 import NavBar from "../components/NavBar";
 import { Container } from "../styles/ReadPage2Styled";
-import QuizGo from "../image/QuizGo.png";
-import QudyLogo from "../image/QudyLogo.png";
-import ScrapIcon from "../image/ScrapIcon.png";
-import NoScrapIcon from "../image/NoScrapIcon.png";
+import isScrapIcon from "../image/isScrapIcon.png";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 import { DetailPost } from "../components/post";
@@ -13,13 +10,15 @@ import { Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import CommentBoard from "../components/CommentBoard";
-
 import TalkIcon from "../image/commentIcon.png";
 import notScrapIcon from "../image/notScrapIcon.png";
 import GoIcon from "../image/GoIcon.png";
 import Qudy from "../image/Qtudy_char.png";
 import Comment2 from "../components/Comment2";
 
+interface Scrap {
+    postId: string;
+}
 const ReadPage = () => {
     const [post, setPost] = useState<DetailPost | null>(null);
     const { postId } = useParams<{ postId: string }>();
@@ -28,6 +27,7 @@ const ReadPage = () => {
     const [token, setToken] = useState<string | null>(null);
     const [viewEdit, setViewEdit] = useState(false);
     const [isScrapped, setIsScrapped] = useState(false);
+    const [scrapList,setScrapList]=useState<Scrap[]>([]);
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
@@ -178,6 +178,27 @@ const ReadPage = () => {
         setIsScrapped(!isScrapped);
     };
 
+    // 스크랩 조회
+    const getScrap=async()=>{
+        try{
+            const response=await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all-scrap-list`,
+            {
+                headers: {
+                    Authorization:
+                        window.localStorage.getItem("accessToken"),
+                },
+            });
+            console.log(response.data);
+            setScrapList(response.data.postList);
+
+        }catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log("error deleting post:", error.response);
+            }
+        }
+    }
+
+
     return (
         <>
             <NavBar onSearchWordChange={goToPostBoardPage} />
@@ -211,10 +232,10 @@ const ReadPage = () => {
                     <div className="titleBox">
                         <p className="title">{post?.title}</p>
                         <img
-                            src={notScrapIcon}
+                            src={isScrapped ? isScrapIcon : notScrapIcon}
                             alt="icon"
                             className="scrapBtn"
-                            onClick={sraphandler}
+                            onClick={sraphandler} 
                         />
                     </div>
 

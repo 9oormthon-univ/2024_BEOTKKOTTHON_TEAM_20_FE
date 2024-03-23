@@ -31,6 +31,7 @@ const MainPage2 = () => {
     const [interestPosts, setInterestPosts] = useState<MyPostProps[]>([]);
     const [visiblePosts, setVisiblePosts] = useState(6);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [postList, setPostList] = useState<MyPostProps[]>([]);
 
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
@@ -105,9 +106,14 @@ const MainPage2 = () => {
         setIsExpanded((prev) => !prev); // 버튼 클릭 시 "더보기" 상태와 "접기" 상태를 토글
     };
 
+    const handleSearchWordChange = (searchWord: string) => {
+        navigate(`/postBoard?searchWord=${searchWord}`);
+      };      
+      
+
     return (
         <Container>
-            <NavBar onSearchWordChange={goToPostBoardPage} />
+            <NavBar onSearchWordChange={handleSearchWordChange} />
             <div className="contentBox">
                 <div className="bannerBox">
                     <div>
