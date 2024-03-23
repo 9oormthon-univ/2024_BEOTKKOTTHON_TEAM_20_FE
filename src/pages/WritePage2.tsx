@@ -49,9 +49,11 @@ const WritePage2 = () => {
         }
     };
 
-    /*const handleCategoryChange = (categoryId: number) => {
-        setCategoryId(categoryId);
-    };*/
+    // // 복사 - 붙여넣기 금지
+    const onPasteHandler = (event: React.ClipboardEvent) => {
+        event.preventDefault(); // 붙여넣기 동작 방지
+        alert("붙여넣기가 금지되었습니다."); // 사용자에게 알림
+    };
 
     const handleSubmit = async () => {
         try {
@@ -118,7 +120,7 @@ const WritePage2 = () => {
     ) => {
         // getHashtag(event.target.value);
         // 선택된 카테고리 확인
-        console.log(event.target.value);
+        // console.log(event.target.value);
     };
 
     return (
@@ -163,12 +165,14 @@ const WritePage2 = () => {
                             name="title"
                             placeholder="제목"
                             onChange={onInputHandler}
+                            onPaste={onPasteHandler}
                             className="write_title"
                         ></input>
                         <textarea
                             name="content"
                             placeholder="내용을 입력해주세요 (200자 이상 2000자 이하)"
                             onChange={onInputHandler}
+                            onPaste={onPasteHandler}
                             maxLength={2000}
                             minLength={200}
                             className="write_content"
