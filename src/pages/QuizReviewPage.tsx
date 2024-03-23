@@ -106,7 +106,6 @@ const QuizReviewPage = () => {
     };
 
     const getReview = async () => {
-        console.log("퀴즈 다시보기");
         try {
             const response = await axios.get(
                 "https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my/quiz",

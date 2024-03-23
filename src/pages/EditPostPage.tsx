@@ -154,6 +154,12 @@ const EditPost = () => {
     const defaultCategoryIndex = categoryId - 1;
     const defaultCategory = categories[defaultCategoryIndex];
 
+    // // 복사 - 붙여넣기 금지
+    const onPasteHandler = (event: React.ClipboardEvent) => {
+        event.preventDefault(); // 붙여넣기 동작 방지
+        alert("붙여넣기가 금지되었습니다."); // 사용자에게 알림
+    };
+
     return (
         <>
             <NavBar onSearchWordChange={goToPostBoardPage} />
@@ -196,6 +202,7 @@ const EditPost = () => {
                             name="title"
                             placeholder="제목"
                             onChange={onInputHandler}
+                            onPaste={onPasteHandler}
                             className="write_title"
                         />
                         <textarea
@@ -203,6 +210,7 @@ const EditPost = () => {
                             name="content"
                             placeholder="내용을 입력해주세요 (200자 이상 2000자 이하)"
                             onChange={onInputHandler}
+                            onPaste={onPasteHandler}
                             maxLength={2000}
                             minLength={200}
                             className="write_content"
