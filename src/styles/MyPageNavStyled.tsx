@@ -12,6 +12,7 @@ export const Container = styled.div`
 
         position: fixed;
         top: 0;
+        z-index: 5;
 
         display: flex;
         justify-content: flex-end;
@@ -34,7 +35,7 @@ export const Container = styled.div`
 
         position: fixed;
         top: 0;
-        z-index: 1;
+        z-index: 10;
 
         display: flex;
         flex-direction: column;
