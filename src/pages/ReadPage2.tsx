@@ -28,7 +28,7 @@ const ReadPage = () => {
     const [token, setToken] = useState<string | null>(null);
     const [viewEdit, setViewEdit] = useState(false);
     const [isScrapped, setIsScrapped] = useState(false);
-    const [scrapList,setScrapList]=useState<Scrap[]>([]);
+    const [scrapList, setScrapList] = useState<Scrap[]>([]);
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
@@ -183,25 +183,25 @@ const ReadPage = () => {
     };
 
     // 스크랩 조회
-    const getScrap=async()=>{
-        try{
-            const response=await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all-scrap-list`,
-            {
-                headers: {
-                    Authorization:
-                        window.localStorage.getItem("accessToken"),
-                },
-            });
+    const getScrap = async () => {
+        try {
+            const response = await axios.get(
+                `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/all-scrap-list`,
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
             console.log(response.data);
             setScrapList(response.data.postList);
-
-        }catch (error) {
+        } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log("error deleting post:", error.response);
             }
         }
-    }
-
+    };
 
     return (
         <>
@@ -253,7 +253,7 @@ const ReadPage = () => {
                             src={isScrapped ? isScrapIcon : notScrapIcon}
                             alt="icon"
                             className="scrapBtn"
-                            onClick={sraphandler} 
+                            onClick={sraphandler}
                         />
                     </div>
 
@@ -312,9 +312,19 @@ const ReadPage = () => {
                             </div>
                         </Link>
                     </div>
-                            {token?<>
-                   <Comment2 postId={postId}/>
-                   </>:<>로그인 후 댓글을 남겨보세요<img style={{marginTop:"10px"}}src={DownArrow}/></>}
+                    {token ? (
+                        <>
+                            <Comment2 postId={postId} />
+                        </>
+                    ) : (
+                        <>
+                            로그인 후 댓글을 남겨보세요
+                            <img
+                                style={{ marginTop: "10px" }}
+                                src={DownArrow}
+                            />
+                        </>
+                    )}
                 </div>
             </Container>
         </>

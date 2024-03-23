@@ -55,23 +55,12 @@ const App: React.FC = () => {
                     element={isLoggedIn ? <EditPostPage /> : <LoginPage />}
                 />
                 <Route path="/read/:postId" element={<ReadPage />} />
-                <Route
-                    path="/mypage"
-                    element={isLoggedIn ? <MyPage /> : <LoginPage />}
-                />
-                <Route
-                    path="/mypost"
-                    element={isLoggedIn ? <MyPostPage /> : <LoginPage />}
-                />
-                <Route
-                    path="/myscrap"
-                    element={isLoggedIn ? <MyScrapPage /> : <LoginPage />}
-                />
+                <Route path="/mypage" element={<MyPage />} />
+                <Route path="/mypost" element={<MyPostPage />} />
+                <Route path="/myscrap" element={<MyScrapPage />} />
                 <Route
                     path="/myMistakeNotebook"
-                    element={
-                        isLoggedIn ? <MyMistakeNotebookPage /> : <LoginPage />
-                    }
+                    element={<MyMistakeNotebookPage />}
                 />
                 <Route
                     path="/aiQuiz"
@@ -81,10 +70,7 @@ const App: React.FC = () => {
                     path="/quiz"
                     element={isLoggedIn ? <QuizPage /> : <LoginPage />}
                 />
-                <Route
-                    path="/quizReview"
-                    element={isLoggedIn ? <QuizReviewPage /> : <LoginPage />}
-                />
+                <Route path="/quizReview" element={<QuizReviewPage />} />
             </Routes>
         </Router>
     );

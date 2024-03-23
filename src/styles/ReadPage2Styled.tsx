@@ -156,7 +156,7 @@ export const Container = styled.div`
     .summaryBox {
         position: relative;
         padding-bottom: 2rem;
-        margin: 2rem 0;
+        margin: 5rem 0;
         width: 65vw;
 
         display: flex;
@@ -170,9 +170,11 @@ export const Container = styled.div`
     .summaryTitle {
         color: ${theme.colors.primary};
         margin-bottom: 0.2rem;
+        margin-left: 3.4rem;
     }
 
     .summary {
+        /* position: relative; */
         width: 61vw;
         padding: 2rem 2vw;
         border-radius: 1rem;
@@ -186,13 +188,13 @@ export const Container = styled.div`
         border-radius: 50%;
 
         position: absolute;
-        top: 5rem;
+        top: -5vw;
         left: -2rem;
 
         display: flex;
         justify-content: center;
         align-items: center;
-        margin-top:40px;
+        margin-top: 40px;
         background-color: white;
         border: 0.4rem solid ${theme.colors.primary};
     }
@@ -208,6 +210,11 @@ export const Container = styled.div`
         justify-content: flex-end;
         align-items: center;
         color: ${theme.colors.primary};
+
+        /* position: relative;
+        top: -7vw; */
+
+        /* background-color: red; */
     }
 
     .goToQuizIcon {

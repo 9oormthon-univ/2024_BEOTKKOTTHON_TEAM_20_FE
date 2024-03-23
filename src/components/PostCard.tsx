@@ -70,11 +70,13 @@ const PostCard: React.FC<MyPostProps> = ({
     useEffect(() => {
         getData();
     }, []);
-    
+
     return (
         <Container>
             <div className="categoryBox">
-                <p className="category">{categories[categoryId]?.category}</p>
+                <p className="category">
+                    {categories[categoryId - 1]?.category}
+                </p>
             </div>
             <div className="titleBox">
                 <StyledLink to={`/read/${postId}`}>

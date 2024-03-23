@@ -110,11 +110,9 @@ const MainPage2 = () => {
         setIsExpanded((prev) => !prev); // 버튼 클릭 시 "더보기" 상태와 "접기" 상태를 토글
     };
 
-
     const handleSearchWordChange = (searchWord: string) => {
         navigate(`/postBoard?searchWord=${searchWord}`);
-      };      
-      
+    };
 
     // const goToQuiz = (event: React.MouseEvent<HTMLDivElement>) => {
 
@@ -167,7 +165,7 @@ const MainPage2 = () => {
                                     </div>
                                     <div className="trendText">
                                         <p className="top">
-                                            {topPosts[0].name}
+                                            # {topPosts[0].name}
                                         </p>
                                         <div className="goToQuiz">
                                             <StyledLink
@@ -197,7 +195,7 @@ const MainPage2 = () => {
                                     </div>
                                     <div className="trendText">
                                         <p className="top">
-                                            {topPosts[1].name}
+                                            # {topPosts[1].name}
                                         </p>
                                         <div className="goToQuiz">
                                             <StyledLink
@@ -227,7 +225,7 @@ const MainPage2 = () => {
                                     </div>
                                     <div className="trendText">
                                         <p className="top">
-                                            {topPosts[2].name}
+                                            # {topPosts[2].name}
                                         </p>
                                         <div className="goToQuiz">
                                             <StyledLink

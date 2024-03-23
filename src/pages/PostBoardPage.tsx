@@ -117,7 +117,7 @@ const PostBoardPage = () => {
     // const { searchWord } = useParams<{ searchWord: string }>(); // URL에서 search 파라미터 추출
     // console.log(searchWord);
     const location = useLocation();
-    const searchWord = new URLSearchParams(location.search).get("keyword");
+    let searchWord = new URLSearchParams(location.search).get("keyword");
     console.log(searchWord);
 
     const handleSearchWordChange = async (searchWord: string) => {
@@ -144,11 +144,16 @@ const PostBoardPage = () => {
 
     useEffect(() => {
         // 처음 실행
+        console.log("이거 실행" + searchWord);
+        if (searchWord === null) searchWord = "";
         const fetchPosts = async () => {
             try {
                 let url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/search-list`;
                 if (selectedCategory !== null) {
-                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${selectedCategory}`;
+                    console.log(selectedCategory);
+                    url = `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/category-list?categoryId=${
+                        selectedCategory + 1
+                    }`;
                 }
                 const response = await axios.get(url, {
                     params: { searchWord: searchWord, page: 0 },
