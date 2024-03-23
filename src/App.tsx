@@ -26,7 +26,7 @@ const App: React.FC = () => {
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 확인
-        const token = localStorage.getItem("token");
+        const token = localStorage.getItem("accessToken");
         if (token) {
             setIsLoggedIn(true);
         }

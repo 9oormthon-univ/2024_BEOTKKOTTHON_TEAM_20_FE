@@ -18,6 +18,7 @@ import logoutIcon from "../image/logoutIcon.png";
 import DownArrow from "../image/DownArrow.png";
 import UpArrow from "../image/UpArrow.png";
 import { Link } from "react-router-dom";
+import Search from "./Search";
 
 interface MyPageProps {
     name: string;
@@ -26,6 +27,7 @@ interface MyPageProps {
 }
 
 const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
+    // const NavBar = () => {
     const [data, setData] = useState<MyPageProps>();
     const [searchWord, setSearchWord] = useState("");
     const [viewOption, setViewOption] = useState(false);
@@ -43,7 +45,7 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
 
     const search = () => {
         // 검색어 변경 시 부모 컴포넌트로 전달
-        onSearchWordChange(searchWord);
+        // onSearchWordChange(searchWord);
     };
 
     //     const animationHandler = () => {
@@ -51,7 +53,6 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
     // };
 
     const isLogin = window.localStorage.getItem("accessToken");
-    console.log(isLogin);
 
     const getData = async () => {
         try {
@@ -88,7 +89,7 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                 <Div>
                     <Nav href="/postBoard">스터디 포스팅</Nav>
                     <Nav href="/aiQuiz">AI 퀴즈</Nav>
-                    <div className="searchBar">
+                    {/* <div className="searchBar">
                         <SIcon src={SearchIcon}></SIcon>
                         <input
                             placeholder="검색어를 입력하세요"
@@ -96,7 +97,9 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                             onChange={handleInputChange}
                             onKeyPress={handleKeyPress}
                         ></input>
-                    </div>
+                        
+                    </div> */}
+                    <Search />
                 </Div>
             </div>
             <div className="userBox">
