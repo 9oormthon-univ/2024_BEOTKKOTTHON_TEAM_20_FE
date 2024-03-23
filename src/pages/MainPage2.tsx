@@ -5,7 +5,7 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import "swiper/css/scrollbar";
-import { Container } from "../styles/MainPage2Styled";
+import { Container, StyledLink } from "../styles/MainPage2Styled";
 import NavBar from "../components/NavBar";
 import PreferBoard from "../components/PreferBoard";
 import Banner1 from "../image/banner1_ver2.png";
@@ -36,22 +36,26 @@ const MainPage2 = () => {
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
-    const [topPosts, setTopPosts] = useState<{ name: string; count: number }[]>([]);
+    const [topPosts, setTopPosts] = useState<{ name: string; count: number }[]>(
+        []
+    );
 
     useEffect(() => {
-      const fetchTrend = async () => {
-        try {
-          const response = await axios.get(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/tag/top3`);
-          setTopPosts(response.data.tagList);
-        } catch (error) {
-          if (axios.isAxiosError(error)) {
-            console.log('error fetching :',error.response);
-          }
-        }
-      };
-      fetchTrend();
+        const fetchTrend = async () => {
+            try {
+                const response = await axios.get(
+                    `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/tag/top3`
+                );
+                setTopPosts(response.data.tagList);
+                console.log(response.data);
+            } catch (error) {
+                if (axios.isAxiosError(error)) {
+                    console.log("error fetching :", error.response);
+                }
+            }
+        };
+        fetchTrend();
     }, []);
-    
 
     useEffect(() => {
         const fetchInterest = async () => {
@@ -106,10 +110,15 @@ const MainPage2 = () => {
         setIsExpanded((prev) => !prev); // 버튼 클릭 시 "더보기" 상태와 "접기" 상태를 토글
     };
 
+
     const handleSearchWordChange = (searchWord: string) => {
         navigate(`/postBoard?searchWord=${searchWord}`);
       };      
       
+
+    // const goToQuiz = (event: React.MouseEvent<HTMLDivElement>) => {
+
+    // };
 
     return (
         <Container>
@@ -149,62 +158,97 @@ const MainPage2 = () => {
                 <div className="trendBox">
                     <p className="boxTitle">요즘 뜨는 트렌드 TOP 3</p>
                     <div className="trends">
-                    <div className="trends">
-                        {/* 첫 번째 트렌드 요소 */}
-                        {topPosts[0] && (
-                            <div className="trend">
-                                <div className="trendImg">
-                                    <img src={Trend1} alt="top3" />
-                                </div>
-                                <div className="trendText">
-                                    <p className="top">{topPosts[0].name}</p>
-                                    <div className="goToQuiz">
-                                        <p>퀴즈 풀러가기</p>
-                                        <div className="goIcon">
-                                            <img src={linkIcon} alt="topQuiz" />
+                        <div className="trends">
+                            {/* 첫 번째 트렌드 요소 */}
+                            {topPosts[0] && (
+                                <div className="trend">
+                                    <div className="trendImg">
+                                        <img src={Trend1} alt="top3" />
+                                    </div>
+                                    <div className="trendText">
+                                        <p className="top">
+                                            {topPosts[0].name}
+                                        </p>
+                                        <div className="goToQuiz">
+                                            <StyledLink
+                                                to={"/quiz"}
+                                                state={{
+                                                    tagName: topPosts[0].name,
+                                                }}
+                                            >
+                                                퀴즈 풀러 가기
+                                            </StyledLink>
+                                            <div className="goIcon">
+                                                <img
+                                                    src={linkIcon}
+                                                    alt="topQuiz"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        {/* 두 번째 트렌드 요소 */}
-                        {topPosts[1] && (
-                            <div className="trend">
-                                <div className="trendImg">
-                                    <img src={Trend2} alt="top3" />
-                                </div>
-                                <div className="trendText">
-                                    <p className="top">{topPosts[1].name}</p>
-                                    <div className="goToQuiz">
-                                        <p>퀴즈 풀러가기</p>
-                                        <div className="goIcon">
-                                            <img src={linkIcon} alt="topQuiz" />
+                            {/* 두 번째 트렌드 요소 */}
+                            {topPosts[1] && (
+                                <div className="trend">
+                                    <div className="trendImg">
+                                        <img src={Trend2} alt="top3" />
+                                    </div>
+                                    <div className="trendText">
+                                        <p className="top">
+                                            {topPosts[1].name}
+                                        </p>
+                                        <div className="goToQuiz">
+                                            <StyledLink
+                                                to={"/quiz"}
+                                                state={{
+                                                    tagName: topPosts[1].name,
+                                                }}
+                                            >
+                                                퀴즈 풀러 가기
+                                            </StyledLink>
+                                            <div className="goIcon">
+                                                <img
+                                                    src={linkIcon}
+                                                    alt="topQuiz"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
+                            )}
 
-                        {/* 세 번째 트렌드 요소 */}
-                        {topPosts[2] && (
-                            <div className="trend">
-                                <div className="trendImg">
-                                    <img src={Trend3} alt="top3" />
-                                </div>
-                                <div className="trendText">
-                                    <p className="top">{topPosts[2].name}</p>
-                                    <div className="goToQuiz">
-                                        <p>퀴즈 풀러가기</p>
-                                        <div className="goIcon">
-                                            <img src={linkIcon} alt="topQuiz" />
+                            {/* 세 번째 트렌드 요소 */}
+                            {topPosts[2] && (
+                                <div className="trend">
+                                    <div className="trendImg">
+                                        <img src={Trend3} alt="top3" />
+                                    </div>
+                                    <div className="trendText">
+                                        <p className="top">
+                                            {topPosts[2].name}
+                                        </p>
+                                        <div className="goToQuiz">
+                                            <StyledLink
+                                                to={"/quiz"}
+                                                state={{
+                                                    tagName: topPosts[2].name,
+                                                }}
+                                            >
+                                                퀴즈 풀러 가기
+                                            </StyledLink>
+                                            <div className="goIcon">
+                                                <img
+                                                    src={linkIcon}
+                                                    alt="topQuiz"
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                        )}
-                    </div>
-
+                            )}
+                        </div>
                     </div>
                 </div>
 

@@ -2,6 +2,7 @@ import styled from "styled-components";
 import theme from "./theme";
 import interest_background from "../image/interest_background.png";
 import ReactModal from "react-modal";
+import { Link } from "react-router-dom";
 
 export const Container = styled.div`
     width: 100vw;
@@ -158,5 +159,18 @@ export const Container = styled.div`
 
     .footer_inner > p {
         margin: 0.5rem;
+    }
+`;
+
+export const StyledLink = styled(Link)`
+    text-decoration: none;
+    color: ${theme.colors.font1};
+
+    &:focus,
+    &:hover,
+    &:visited,
+    &:link,
+    &:active {
+        text-decoration: none;
     }
 `;

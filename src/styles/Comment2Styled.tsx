@@ -82,17 +82,20 @@ export const Container = styled.div`
         width: 65vw;
         margin: 1rem 0;
         display: flex;
+        flex-direction: column;
         justify-content: space-between;
-        align-items: center;
+        align-items: flex-end;
     }
 
     .commentText {
+        width: 65vw;
         font-size: 1rem;
         color: ${theme.colors.font1};
     }
 
     .commentDate {
-        font-size: 0.9rem;
+        font-size: 0.8rem;
+        margin-top: 0.5rem;
         color: ${theme.colors.font3};
     }
 `;

@@ -79,7 +79,7 @@ const MyMistakeNotebookPage = () => {
             <MyPageNav />
             <Container>
                 {myQuizList === null || myQuizList?.length === 0 ? (
-                    <Loading />
+                    <p className="noData">등록된 퀴즈가 없습니다.</p>
                 ) : (
                     <>
                         <div className="contentBox">
