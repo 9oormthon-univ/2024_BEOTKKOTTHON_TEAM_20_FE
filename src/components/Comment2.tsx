@@ -26,8 +26,6 @@ interface CommentBoardProps {
 const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
     const [editCommentId, setEditCommentId] = useState<string | null>(null); // 수정할 댓글의 ID를 저장하는 상태
     const [editCommentContent, setEditCommentContent] = useState(""); // 수정한 댓글의 내용을 저장하는 상태
-    const [profileNickname, setProfileNickname] = useState("");
-    const [profileImg, setProfileImg] = useState(null);
     const [inputComment, setInputComment] = useState("");
     const [commentList, setCommentList] = useState<Comment[]>([]);
     const [totalPages, setTotalPages] = useState<number>(1);
@@ -96,8 +94,11 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
                 }
             );
             setCommentList(response.data.commentList);
-            setTotalPages(response.data.totalPages); // 총 페이지 수 설정
-            console.log(response.data);
+            setTotalPages(response.data.totalPages);
+
+            response.data.commentList.forEach((comment: Comment) => {
+                console.log(comment.profileImageUrl);
+            });
         } catch (error) {
             console.error("Error fetching comments:", error);
         }
@@ -196,9 +197,10 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
                         <div className="comment" key={comment.commentId}>
                             <div className="commentHeader">
                                 <div className="userBox">
-                                {comment.profileImageUrl !== null ? (
-                                    <img className="userProfileImg" src={comment.profileImageUrl} alt="profile"></img>
-                                    ):<img className="userProfileImg" src={qudyImg} alt="qudy" />}
+                                {comment.profileImageUrl === null ? (
+                                   <img className="userProfileImg" src={qudyImg} alt="qudy" />
+                                    ):
+                                    <img className="userProfileImg" src={comment.profileImageUrl} alt="profile"></img>}
                                     <p className="userName">{comment.name}</p>
                                 </div>
                                 {comment.name===loginName && comment.profileImageUrl===loginProfile?

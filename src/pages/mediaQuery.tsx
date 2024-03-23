@@ -1,5 +1,6 @@
 import { useMediaQuery } from "react-responsive";
 
+
 export const Desktop = ({
     children,
 }: {
@@ -8,3 +9,4 @@ export const Desktop = ({
     const isDesktop = useMediaQuery({ minWidth: 1024 });
     return isDesktop ? children : null;
 };
+

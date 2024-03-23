@@ -27,6 +27,7 @@ const ReadPage = () => {
     const navigate = useNavigate();
     const [token, setToken] = useState<string | null>(null);
     const [viewEdit, setViewEdit] = useState(false);
+    const [isScrapped, setIsScrapped] = useState(false);
 
     useEffect(() => {
         // 로컬 스토리지에서 토큰 가져오기
@@ -154,6 +155,29 @@ const ReadPage = () => {
         }
     };
 
+    // 스크랩 요청
+    const putScrap=async()=>{
+        try{
+            const response=await axios.put(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/scrap?postId=${postId}`, {},
+            {
+                headers: {
+                    Authorization:
+                        window.localStorage.getItem("accessToken"),
+                },
+            });
+            console.log(response.data);
+            setIsScrapped(!isScrapped);
+        }catch (error) {
+            if (axios.isAxiosError(error)) {
+                console.log("error deleting post:", error.response);
+            }
+        }
+    }
+    const sraphandler = () => {
+        putScrap();
+        setIsScrapped(!isScrapped);
+    };
+
     return (
         <>
             <NavBar onSearchWordChange={goToPostBoardPage} />
@@ -190,6 +214,7 @@ const ReadPage = () => {
                             src={notScrapIcon}
                             alt="icon"
                             className="scrapBtn"
+                            onClick={sraphandler}
                         />
                     </div>
 
