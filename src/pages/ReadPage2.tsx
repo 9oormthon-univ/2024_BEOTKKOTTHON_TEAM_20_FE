@@ -154,8 +154,9 @@ const ReadPage = () => {
             }
         }
     };
+
     // 스크랩 요청
-    const sraphandler=async()=>{
+    const putScrap=async()=>{
         try{
             const response=await axios.put(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/scrap?postId=${postId}`, {},
             {
@@ -172,6 +173,10 @@ const ReadPage = () => {
             }
         }
     }
+    const sraphandler = () => {
+        putScrap();
+        setIsScrapped(!isScrapped);
+    };
 
     return (
         <>
@@ -209,6 +214,7 @@ const ReadPage = () => {
                             src={notScrapIcon}
                             alt="icon"
                             className="scrapBtn"
+                            onClick={sraphandler}
                         />
                     </div>
 
@@ -229,7 +235,6 @@ const ReadPage = () => {
                                     src={notScrapIcon}
                                     alt="icon"
                                     className="reactionIcon"
-                                    onClick={sraphandler}
                                 />
                                 <p className="reactionCount">{post?.scrapCount}</p>
                             </div>
