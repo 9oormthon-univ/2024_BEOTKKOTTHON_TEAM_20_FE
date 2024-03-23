@@ -99,7 +99,8 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
             </div>
             <div className="userBox">
                 {isLogin ? (
-                    <Nav>
+                    <>
+                        <div className="infoo">
                         <div className="userProfileImg">
                             {data?.profileImage ? (
                                 <img
@@ -117,6 +118,8 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                         </div>
                         <div className="userName">{data && data.name} 님</div>
                         <img className="arrow" src={viewOption?UpArrow:DownArrow} onClick={animationHandler}/>
+                        </div>
+                        <div>
                         {viewOption&&<>
                         {isLogin ? (
                             <>
@@ -131,11 +134,12 @@ const NavBar = ({ onSearchWordChange }: { onSearchWordChange: Function }) => {
                                 </div>
                             </AnimationDiv></>
                              ) : (<></>)}
-                </>}
-                    </Nav>
+                </>}</div>
+                </>
                 ) : (
                     <Nav href="/login">로그인</Nav>
                 )}
+                
             </div>
         </Navigation>
     );

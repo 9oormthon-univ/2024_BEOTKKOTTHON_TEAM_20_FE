@@ -61,7 +61,7 @@ const QuizCard: React.FC<MyQuiz> = ({
                             alt="quizReviewIcon"
                             className="icon"
                         ></img>
-                        <Link to={`/quizReview?reviewId=${reviewId}`}>
+                        <Link to={`/quizReview?reviewId=${reviewId}`} style={{textDecoration:"none"}}>
                             <p className="title">학습하기</p>
                         </Link>
                     </div>
