@@ -28,12 +28,13 @@ export const Container = styled.div`
     }
 
     .bannerBox {
-        width: 80vw;
-        /* height: 40vh; */
+        width: 100vw;
+        /* width: 80vw; */
     }
 
     .bannerImg {
-        width: 80vw;
+        width: 100vw;
+        /* width: 80vw; */
     }
 
     .trendBox {
@@ -101,7 +102,9 @@ export const Container = styled.div`
     }
 
     .linkImg {
-        width: 24.5rem;
+        /* width: 24.5rem; */
+        width: 33.333vw;
+        /* flex: 1; */
     }
 
     .preferBox {
