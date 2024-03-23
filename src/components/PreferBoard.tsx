@@ -19,6 +19,15 @@ const PreferBoard = () => {
     const [profileNickname, setProfileNickname]=useState("");
     const [profileImg, setProfileImg]=useState(null);
     const [isExpanded, setIsExpanded] = useState(false);
+    const [token, setToken] = useState<string | null>(null);
+
+    useEffect(() => {
+        // 로컬 스토리지에서 토큰 가져오기
+        const storedToken = window.localStorage.getItem("accessToken");
+        if (storedToken) {
+            setToken(storedToken);
+        }
+    }, []);
 
     useEffect(() => {
         const fetchInterest = async () => {
@@ -114,7 +123,8 @@ const PreferBoard = () => {
                             ))}
                         </BoxWrap>
                         <MoreButton onClick={MoreViewHandler}>
-                    {isExpanded ? (
+                    {token && visiblePosts>6?<>
+                        {isExpanded ? (
                         <>
                             <div>
                                 <p className="font">접기</p>
@@ -129,6 +139,7 @@ const PreferBoard = () => {
                             </div>
                         </>
                     )}
+                    </>:<></>}
                 </MoreButton>
             </BoardWrap2>
         </Board2>
