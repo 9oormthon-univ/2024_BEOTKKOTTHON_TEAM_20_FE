@@ -75,7 +75,7 @@ const PostCard: React.FC<MyPostProps> = ({
             <Container>
                 <div className="categoryBox">
                     <p className="category">
-                        {categories[categoryId].category}
+                        {categories[categoryId]?.category}
                     </p>
                 </div>
                 <div className="titleBox">

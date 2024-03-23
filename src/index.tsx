@@ -7,6 +7,7 @@ import reportWebVitals from "./reportWebVitals";
 const root = ReactDOM.createRoot(
     document.getElementById("root") as HTMLElement
 );
+
 root.render(
     // strictMode에서는 두번 렌더링 될 수 있으나, 프로덕션빌드 모드에서는 그렇지 않을것
     <React.StrictMode>
