@@ -26,6 +26,7 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
         if (storedToken) {
             setToken(storedToken);
         }
+        getUser();
     }, []);
 
     useEffect(() => {
@@ -132,9 +133,7 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
         setEditCommentContent(content);
     };
 
-    // 댓글 등록
-    const SendCommentHandler = async () => {
-        console.log("테스트");
+    const getUser = async () => {
         try {
             // 로그인한 사용자의 정보 및 프로필 이미지 가져오기
             const userProfileResponse = await axios.get(
@@ -146,10 +145,31 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
                     },
                 }
             );
-            const { name, profileImageUrl } = userProfileResponse.data;
-            console.log(userProfileResponse.data);
+            // const { name, profileImageUrl } = userProfileResponse.data;
             setLoginName(userProfileResponse.data.name);
-            console.log(userProfileResponse.data.name);
+            console.log(userProfileResponse.data.profileImageUrl);
+            setLoginProfile(userProfileResponse.data.profileImageUrl);
+        } catch (error) {
+            console.error("Error sending comment:", error);
+        }
+    };
+
+    // 댓글 등록
+    const SendCommentHandler = async () => {
+        // console.log("테스트");
+        try {
+            // 로그인한 사용자의 정보 및 프로필 이미지 가져오기
+            const userProfileResponse = await axios.get(
+                `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/my`,
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
+            // const { name, profileImageUrl } = userProfileResponse.data;
+            setLoginName(userProfileResponse.data.name);
             console.log(userProfileResponse.data.profileImageUrl);
             setLoginProfile(userProfileResponse.data.profileImageUrl);
             const response = await axios.post(

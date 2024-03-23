@@ -3,6 +3,7 @@ import theme from "./theme";
 import { Link } from "react-router-dom";
 
 export const Container = styled.div`
+    width: 70vw;
     p {
         margin: 0;
     }
@@ -97,6 +98,51 @@ export const Container = styled.div`
         font-size: 0.8rem;
         margin-top: 0.5rem;
         color: ${theme.colors.font3};
+    }
+
+    .postCommentBox {
+        width: 65vw;
+        margin-top: 2rem;
+        padding: 1rem 2rem;
+
+        border-radius: 1rem;
+        border: 1px solid ${theme.colors.line1};
+        background-color: white;
+    }
+
+    .postCommentBoxHeader {
+        width: inherit;
+        margin-top: 1rem;
+        display: flex;
+        justify-content: flex-start;
+        align-items: center;
+
+        margin-bottom: 1rem;
+    }
+
+    .postComment {
+        width: inherit;
+        padding: 1rem 0;
+        resize: none;
+        border: none;
+        font-size: 1rem;
+    }
+
+    .postComment:focus {
+        outline: none;
+    }
+
+    .commentSubmitBtnBox {
+        width: 65vw;
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+    }
+
+    .commentSubmitBtn {
+        margin-top: 1rem;
+        color: ${theme.colors.primary};
+        cursor: pointer;
     }
 `;
 
