@@ -41,7 +41,7 @@ const MainPage = () => {
 
     return (
         <Container>
-            <NavBar onSearchWordChange={goToPostBoardPage} />
+            {/* <NavBar onSearchWordChange={goToPostBoardPage} /> */}
             <div className="frame1">
                 {/* <Slider>
                     <Swiper

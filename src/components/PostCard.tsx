@@ -36,13 +36,13 @@ const PostCard: React.FC<MyPostProps> = ({
                     },
                 }
             );
-            const scrapCheck = response.data.postList.some(
-                (post: any) => post.postId === postId
-            );
-            console.log(scrapCheck);
-            setIsScrapped(scrapCheck);
+            // const scrapCheck = response.data.postList.some(
+            //     (post: any) => post.postId === postId
+            // );
+            console.log(response.data);
+            // setIsScrapped(scrapCheck);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 
@@ -60,10 +60,10 @@ const PostCard: React.FC<MyPostProps> = ({
                     },
                 }
             );
-            console.log(response.data);
+            // console.log(response.data);
             setIsScrapped(!isScrapped);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
         }
     };
 

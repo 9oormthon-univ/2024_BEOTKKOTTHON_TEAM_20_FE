@@ -157,23 +157,26 @@ const ReadPage = () => {
     };
 
     // 스크랩 요청
-    const putScrap=async()=>{
-        try{
-            const response=await axios.put(`https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/scrap?postId=${postId}`, {},
-            {
-                headers: {
-                    Authorization:
-                        window.localStorage.getItem("accessToken"),
-                },
-            });
+    const putScrap = async () => {
+        try {
+            const response = await axios.put(
+                `https://port-0-qtudy-qxz2elttj8wkd.sel5.cloudtype.app/posts/scrap?postId=${postId}`,
+                {},
+                {
+                    headers: {
+                        Authorization:
+                            window.localStorage.getItem("accessToken"),
+                    },
+                }
+            );
             console.log(response.data);
             setIsScrapped(!isScrapped);
-        }catch (error) {
+        } catch (error) {
             if (axios.isAxiosError(error)) {
                 console.log("error deleting post:", error.response);
             }
         }
-    }
+    };
     const sraphandler = () => {
         putScrap();
         setIsScrapped(!isScrapped);
@@ -208,26 +211,40 @@ const ReadPage = () => {
                     <div className="settingBox">
                         <div className="postSetting">
                             <p className="postSetting_title">글 분류</p>
-                            <p className="postSetting_content">{post ? categories[post.categoryId - 1] : ""}</p>
+                            <p className="postSetting_content">
+                                {post ? categories[post.categoryId - 1] : ""}
+                            </p>
                             <p className="postSetting_title">해시태그</p>
                             {post?.tag.map((tag, index) => (
-                            <p className="postSetting_content" key={index}>#{tag}</p>
+                                <p className="postSetting_content" key={index}>
+                                    #{tag}
+                                </p>
                             ))}
                         </div>
-                        {viewEdit?<>
-                        <div className="btnBox">
-                        <Link to={`/edit/${postId}`} style={{textDecoration:"none"}}>
-                            <div className="editBtn">
-                                {/* <img /> */}
-                                <p className="editTitle">수정</p>
-                            </div>
-                            </Link>
-                            <div className="delBtn" onClick={handleDeletePost}>
-                                {/* <img /> */}
-                                <p className="delTitle">삭제</p>
-                            </div>
-                        </div> </>:<>
-                                </>}
+                        {viewEdit ? (
+                            <>
+                                <div className="btnBox">
+                                    <Link
+                                        to={`/edit/${postId}`}
+                                        style={{ textDecoration: "none" }}
+                                    >
+                                        <div className="editBtn">
+                                            {/* <img /> */}
+                                            <p className="editTitle">수정</p>
+                                        </div>
+                                    </Link>
+                                    <div
+                                        className="delBtn"
+                                        onClick={handleDeletePost}
+                                    >
+                                        {/* <img /> */}
+                                        <p className="delTitle">삭제</p>
+                                    </div>
+                                </div>{" "}
+                            </>
+                        ) : (
+                            <></>
+                        )}
                     </div>
 
                     <div className="titleBox">
@@ -250,7 +267,9 @@ const ReadPage = () => {
                                     alt="icon"
                                     className="reactionIcon"
                                 />
-                                <p className="reactionCount">{post?.commentCount}</p>
+                                <p className="reactionCount">
+                                    {post?.commentCount}
+                                </p>
                             </div>
                             <div className="reactionCountBox">
                                 <img
@@ -258,10 +277,16 @@ const ReadPage = () => {
                                     alt="icon"
                                     className="reactionIcon"
                                 />
-                                <p className="reactionCount">{post?.scrapCount}</p>
+                                <p className="reactionCount">
+                                    {post?.scrapCount}
+                                </p>
                             </div>
                         </div>
-                        <p className="date">{post?.createdAt ? new Date(post.createdAt).toLocaleString() : ''}</p>
+                        <p className="date">
+                            {post?.createdAt
+                                ? new Date(post.createdAt).toLocaleString()
+                                : ""}
+                        </p>
                     </div>
 
                     <div className="summaryBox">
@@ -272,15 +297,19 @@ const ReadPage = () => {
                         <div className="qudyBox">
                             <img src={Qudy} alt="icon" className="qudyIcon" />
                         </div>
-                        <Link to={"/quiz"} state={{ postId: postId }} style={{textDecoration:"none"}}>
-                        <div className="goToQuizBox">
-                            <p className="goToQuiz">AI Quiz 바로 가기</p>
-                            <img
-                                src={GoIcon}
-                                alt="icon"
-                                className="goToQuizIcon"
-                            />
-                        </div>
+                        <Link
+                            to={"/quiz"}
+                            state={{ postId: postId }}
+                            style={{ textDecoration: "none" }}
+                        >
+                            <div className="goToQuizBox">
+                                <p className="goToQuiz">AI Quiz 바로 가기</p>
+                                <img
+                                    src={GoIcon}
+                                    alt="icon"
+                                    className="goToQuizIcon"
+                                />
+                            </div>
                         </Link>
                     </div>
                             {token?<>
