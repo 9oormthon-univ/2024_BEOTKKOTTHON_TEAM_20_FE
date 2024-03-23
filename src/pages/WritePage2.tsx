@@ -1,11 +1,8 @@
-import React, { useState, useEffect, ChangeEvent } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import React, { useState, ChangeEvent } from "react";
+import { useNavigate } from "react-router-dom";
 import NavBar from "../components/NavBar";
 import { Container } from "../styles/WritePage2Styled";
 import axios from "axios";
-import NoticeIcon from "../image/NoticeIcon.png";
-import PreventPageChange from "../components/PreventPageChange";
-import { categories } from "../components/category";
 
 const WritePage2 = () => {
     const [inputCount, setInputCount] = useState(0);
@@ -14,16 +11,7 @@ const WritePage2 = () => {
     const [tags, setTags] = useState<string[]>([]);
     const [categoryId, setCategoryId] = useState(1);
     const navigate = useNavigate();
-    const location = useLocation();
-    const [showPrompt, setShowPrompt] = useState();
 
-    const handleCancel = () => {
-        navigate(-1);
-    };
-
-    const handleConfirm = () => {
-        navigate("/postBoard");
-    };
 
     const categories = [
         "경영학",
@@ -46,7 +34,7 @@ const WritePage2 = () => {
     const onInputHandler = (
         e: ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
     ) => {
-        const value = e.target.value;
+        const value = e.target.value.trim(); // 입력값 앞뒤 공백 제거
         if (e.target.name === "title") {
             setTitle(value);
         } else if (e.target.name === "content") {
@@ -55,15 +43,15 @@ const WritePage2 = () => {
         } else if (e.target.name === "tags") {
             const tagArray = value
                 .split("#")
-                .map((tag) => tag.trim()) // 여기에서 각 태그를 trim하여 양쪽 공백을 제거합니다.
-                .filter((tag) => tag !== ""); // trim된 결과를 바탕으로 빈 문자열이 아닌 태그만 필터링합니다.
+                .map((tag) => tag.trim()) 
+                .filter((tag) => tag !== ""); 
             setTags(tagArray);
         }
-    };
+    };    
 
-    const handleCategoryChange = (categoryId: number) => {
+    /*const handleCategoryChange = (categoryId: number) => {
         setCategoryId(categoryId);
-    };
+    };*/
 
     const handleSubmit = async () => {
         try {
@@ -119,13 +107,6 @@ const WritePage2 = () => {
         }
     };
 
-    const handleGoBack = () => {
-        navigate(-1);
-    };
-
-    const handleGoBoard = () => {
-        navigate("/postBoard");
-    };
     const goToPostBoardPage = (searchWord: string) => {
         navigate(`/postBoard?search=${searchWord}`);
     };
@@ -173,7 +154,7 @@ const WritePage2 = () => {
                                 ></input>
                             </div>
                         </div>
-                        <div className="saveBtn">저장 후 AI 요약하기</div>
+                        <div className="saveBtn" onClick={handleSubmit}>저장 후 AI 요약하기</div>
                     </div>
                     <div className="writingBox">
                         <input

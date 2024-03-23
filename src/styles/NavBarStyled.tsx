@@ -23,33 +23,13 @@ export const Navigation = styled.nav`
     }
 
     .userBox {
-        width: 10vw;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
         border:1px solid red;
-        height:50%;
-        position:relative;
-    }
-`;
-export const Logo = styled.img`
-    width: 5rem;
-    margin-right: 1rem;
-    /* margin-left: 40px; */
-`;
-
-export const Nav = styled.a`
-    text-decoration: none;
-    font-weight: bold;
-    font-size: 1.1rem;
-    color: ${theme.colors.font1};
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width:100%;
-    &:hover {
-        color: ${theme.colors.primary};
-    }
+    .infoo{
+        display:flex;
+        flex-direction:row;
+        text-align:center;
+        align-items:center;
+    }    
 
     .userProfileImg {
         width: 2.3rem;
@@ -81,15 +61,36 @@ export const Nav = styled.a`
         height:20px;
         margin-left:20px;
     }
-    .row{
-        display:flex;
-        flex-direction:row;
-        height:50px;
-        margin-bottom:-50px;
-        border:1px solid red;
-        text-align:center;
-        align-items:center;
-      
+   
+    //     text-decoration: none;
+    // font-weight: bold;
+    // font-size: 1.1rem;
+    // color: ${theme.colors.font1};
+    // display: flex;
+    // align-items: center;
+    // width:100%;
+    // &:hover {
+    //     color: ${theme.colors.primary};
+    // }
+    }
+`;
+export const Logo = styled.img`
+    width: 5rem;
+    margin-right: 1rem;
+    /* margin-left: 40px; */
+`;
+
+export const Nav = styled.a`
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: ${theme.colors.font1};
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width:100%;
+    &:hover {
+        color: ${theme.colors.primary};
     }
    
 `;
@@ -179,7 +180,7 @@ export const AnimationDiv=styled.div`
     display:flex;
     flex-direction:column;
     font-size: small;
-    margin-top:50px;
+    margin-top:10px;
     div{
         display:flex;
         flex-direction:row;

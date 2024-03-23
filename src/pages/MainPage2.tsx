@@ -210,14 +210,14 @@ const MainPage2 = () => {
                             className="linkImg"
                         ></img>
                     </Link>
-                    <Link to="/aiQuiz">
+                    <Link to="/write">
                         <img
                             src={GoPost}
                             alt="linkImg"
                             className="linkImg"
                         ></img>
                     </Link>
-                    <Link to="/aiQuiz">
+                    <Link to="/myMistakeNotebook">
                         <img
                             src={GoNote}
                             alt="linkImg"
