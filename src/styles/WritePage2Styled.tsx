@@ -128,7 +128,7 @@ export const Container = styled.div`
     .write_content {
         margin-top: 1rem;
         width: 65vw;
-        height: 20vh;
+        height: 33vh;
         padding: 1rem 0;
         resize: none;
         border: none;
