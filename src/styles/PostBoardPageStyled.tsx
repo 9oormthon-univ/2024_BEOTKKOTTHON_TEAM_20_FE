@@ -5,7 +5,7 @@ export const Frame2 = styled.div`
     height:1800px;
     justify-content:center;
     display:flex;
-    margin-top:150px;
+    margin-top:80px;
 `;
 export const WrapBoard =styled.div`
     width:75%;
