@@ -18,6 +18,7 @@ import TalkIcon from "../image/commentIcon.png";
 import notScrapIcon from "../image/notScrapIcon.png";
 import GoIcon from "../image/GoIcon.png";
 import Qudy from "../image/Qtudy_char.png";
+import Comment2 from "../components/Comment2";
 
 const ReadPage = () => {
     const [post, setPost] = useState<DetailPost | null>(null);
@@ -161,24 +162,30 @@ const ReadPage = () => {
                     <div className="settingBox">
                         <div className="postSetting">
                             <p className="postSetting_title">글 분류</p>
-                            <p className="postSetting_content">기획/아이디어</p>
+                            <p className="postSetting_content">{post ? categories[post.categoryId - 1] : ""}</p>
                             <p className="postSetting_title">해시태그</p>
-                            <p className="postSetting_content">#안녕 #안녕</p>
+                            {post?.tag.map((tag, index) => (
+                            <p className="postSetting_content" key={index}>#{tag}</p>
+                            ))}
                         </div>
+                        {viewEdit?<>
                         <div className="btnBox">
+                        <Link to={`/edit/${postId}`} style={{textDecoration:"none"}}>
                             <div className="editBtn">
                                 {/* <img /> */}
                                 <p className="editTitle">수정</p>
                             </div>
-                            <div className="delBtn">
+                            </Link>
+                            <div className="delBtn" onClick={handleDeletePost}>
                                 {/* <img /> */}
                                 <p className="delTitle">삭제</p>
                             </div>
-                        </div>
+                        </div> </>:<>
+                                </>}
                     </div>
 
                     <div className="titleBox">
-                        <p className="title">제목</p>
+                        <p className="title">{post?.title}</p>
                         <img
                             src={notScrapIcon}
                             alt="icon"
@@ -186,7 +193,7 @@ const ReadPage = () => {
                         />
                     </div>
 
-                    <div className="contentBox">사용자가 작성한 글</div>
+                    <div className="contentBox">{post?.content}</div>
 
                     <div className="contentBottomBox">
                         <div className="reactionBox">
@@ -196,7 +203,7 @@ const ReadPage = () => {
                                     alt="icon"
                                     className="reactionIcon"
                                 />
-                                <p className="reactionCount">55</p>
+                                <p className="reactionCount">{post?.commentCount}</p>
                             </div>
                             <div className="reactionCountBox">
                                 <img
@@ -204,20 +211,21 @@ const ReadPage = () => {
                                     alt="icon"
                                     className="reactionIcon"
                                 />
-                                <p className="reactionCount">55</p>
+                                <p className="reactionCount">{post?.scrapCount}</p>
                             </div>
                         </div>
-                        <p className="date">2024.2.2</p>
+                        <p className="date">{post?.createdAt ? new Date(post.createdAt).toLocaleString() : ''}</p>
                     </div>
 
                     <div className="summaryBox">
                         <p className="summaryTitle">
                             큐디가 요약한 포스팅의 내용이에요!
                         </p>
-                        <p className="summary">요약내용</p>
+                        <p className="summary">{summary}</p>
                         <div className="qudyBox">
                             <img src={Qudy} alt="icon" className="qudyIcon" />
                         </div>
+                        <Link to={"/quiz"} state={{ postId: postId }} style={{textDecoration:"none"}}>
                         <div className="goToQuizBox">
                             <p className="goToQuiz">AI Quiz 바로 가기</p>
                             <img
@@ -226,44 +234,10 @@ const ReadPage = () => {
                                 className="goToQuizIcon"
                             />
                         </div>
+                        </Link>
                     </div>
 
-                    <div className="commentBox">
-                        <p className="commentTitle">댓글</p>
-                        {/* 댓글 하나 입니다  */}
-                        <div className="comment">
-                            <div className="commentHeader">
-                                <div className="userBox">
-                                    <div className="userProfileImg"></div>
-                                    <p className="userName">사용자이름</p>
-                                </div>
-                                <div className="commentBtnBox">
-                                    <p className="commentEditBtn">수정</p>
-                                    <p className="commentDelBtn">삭제</p>
-                                </div>
-                            </div>
-                            <div className="commentBody">
-                                <p className="commentText">댓글본문</p>
-                                <p className="commentDate">2023.03.03</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <Pagination />
-
-                    <div className="postCommentBox">
-                        <div className="postCommentBoxHeader">
-                            <div className="userProfileImg"></div>
-                            <p className="userName">사용자이름</p>
-                        </div>
-                        <textarea
-                            className="postComment"
-                            placeholder="댓글을 남겨보세요"
-                        ></textarea>
-                        <div className="commentSubmitBtnBox">
-                            <div className="commentSubmitBtn">등록</div>
-                        </div>
-                    </div>
+                   <Comment2 postId={postId}/>
                 </div>
             </Container>
         </>
