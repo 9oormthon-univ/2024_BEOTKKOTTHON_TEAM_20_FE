@@ -13,7 +13,7 @@ import { Pagination } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 import { Link } from "react-router-dom";
 import CommentBoard from "../components/CommentBoard";
-
+import qudyImg from "../image/Qtudy_char.png";
 import TalkIcon from "../image/commentIcon.png";
 import notScrapIcon from "../image/notScrapIcon.png";
 import GoIcon from "../image/GoIcon.png";
@@ -189,23 +189,48 @@ const Comment2: React.FC<CommentBoardProps> = ({ postId }) => {
 
     return (
         <Container>
-            {/* 댓글 하나 입니다  */}
-            <div className="comment">
-                <div className="commentHeader">
-                    <div className="userBox">
-                        <div className="userProfileImg"></div>
-                        <p className="userName">사용자이름</p>
+            <div className="commentBox">
+                        <p className="commentTitle">댓글</p>
+                        {/* 댓글 하나 입니다  */}
+                        {commentList.map(comment => (
+                        <div className="comment" key={comment.commentId}>
+                            <div className="commentHeader">
+                                <div className="userBox">
+                                {comment.profileImageUrl !== null ? (
+                                    <img className="userProfileImg" src={comment.profileImageUrl} alt="profile"></img>
+                                    ):<img className="userProfileImg" src={qudyImg} alt="qudy" />}
+                                    <p className="userName">{comment.name}</p>
+                                </div>
+                                {comment.name===loginName && comment.profileImageUrl===loginProfile?
+                                <div className="commentBtnBox">
+                                    <p className="commentDelBtn" onClick={() => handleDeleteComment(comment.commentId.toString())}>삭제</p>
+                                </div>:null}
+                            </div>
+                            <div className="commentBody">
+                                <p className="commentText">{comment.content}</p>
+                                <p className="commentDate">{comment.createdAt}</p>
+                            </div>
+                        </div>
+                         ))}
                     </div>
-                    <div className="commentBtnBox">
-                        <p className="commentEditBtn">수정</p>
-                        <p className="commentDelBtn">삭제</p>
+                      <div style={{display:"flex",justifyContent:"center"}}>
+                    <Pagination count={totalPages} onChange={handlePageChange}/>
+                    </div>              
+                    <div className="postCommentBox">
+                        <div className="postCommentBoxHeader">
+                            <img className="userProfileImg" src={loginProfile} />
+                            <p className="userName">{loginName}</p>
+                        </div>
+                        <textarea
+                            className="postComment"
+                            placeholder="댓글을 남겨보세요"
+                            value={inputComment} 
+                            onChange={onInputHandler}
+                        ></textarea>
+                        <div className="commentSubmitBtnBox">
+                            <div className="commentSubmitBtn" onClick={SendCommentHandler}>등록</div>
+                        </div>
                     </div>
-                </div>
-                <div className="commentBody">
-                    <p className="commentText">댓글본문</p>
-                    <p className="commentDate">2023.03.03</p>
-                </div>
-            </div>
         </Container>
     );
 };

@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from 'react-router-dom';
 import NavBar from "../components/NavBar";
-import { Container } from "../styles/MainPageStyled";
-import { BackG, WBoard, WFrame, HeadOpt, Opt1, SummaryB, WContent, WTitle, Count, Selector, TagInput, CategoryButton, Prompt, BackBtn, GoBtn } from "../styles/WritePageStyled";
+import { Container } from "../styles/WritePage2Styled";
+
 import axios from "axios";
 import { useParams } from 'react-router-dom';
 import NoticeIcon from "../image/NoticeIcon.png";
@@ -126,50 +126,51 @@ const handleSubmit = async () => {
     const defaultCategory = categories[defaultCategoryIndex];
 
     return (
-        <Container>
+        <>
             <NavBar onSearchWordChange={goToPostBoardPage} />
-            <BackG>
-                {showPrompt ? (
-                    <Prompt>
-                        <img style={{ width: "40px", height: "40px" }} src={NoticeIcon} alt="Notice Icon" />
-                        <p>포스팅을 그만두시겠어요?</p>
-                        <p>페이지를 벗어나면 지금까지 작성한 내용은 모두 사라져요!</p>
-                        <div>
-                            <BackBtn name="back" onClick={handleCancel}>취소</BackBtn>
-                            <GoBtn name="go" onClick={handleConfirm}>확인</GoBtn>
-                        </div>
-                    </Prompt>
-                ) : (
-                    <WBoard>
-                        <WFrame>
-                            <HeadOpt>
-                                <Opt1>글 분류 
-                                    <Selector
+            <Container>
+                <div className="writeBox">
+                    <div className="postSettingBox">
+                        <div className="settingBox">
+                            <div className="categoryBox">
+                                <p className="categoryTitle">글 분류</p>
+                                <select
                                         onChange={handleCategoryChange}
                                         value={categoryId}
+                                        className="categorySelectBox"
                                     >
                                         {categories.map((category, index) => (
-                                            <CategoryButton key={index} value={index + 1}>{category}</CategoryButton>
+                                             <option key={index} value={index + 1}>{category} </option>
                                         ))}
-                                    </Selector>
-                                </Opt1>
-                                <Opt1>해쉬태그 설정
-                                    <TagInput name="tags" placeholder="최대 3개" onChange={onInputHandler} defaultValue={tags.join("#")} />
-                                </Opt1>
-                                <SummaryB onClick={handleSubmit}>저장 후 AI 요약하기</SummaryB>
-                            </HeadOpt>
-                            <WTitle value={title} name="title" placeholder="제목" onChange={onInputHandler} />
-                            <hr />
-                            <WContent value={content} name="content" placeholder="내용을 입력해주세요" onChange={onInputHandler} maxLength={2000} />
-                            <Count>
-                                <span>{inputCount}</span>
-                                <span>/2000 자</span>
-                            </Count>
-                        </WFrame>
-                    </WBoard>
-                )}
-            </BackG>
+                                    </select>
+                            </div>
+                            <div className="hashtagBox">
+                                <p className="hashtagTitle">해시태그 설정</p>
+                                <input
+                                    name="tags"
+                                    placeholder="#최대 #2개"
+                                    onChange={onInputHandler}
+                                    className="postTagsBox" 
+                                    defaultValue={tags.join(" , ")} />
+                                 </div>
+                        </div>
+                        <div className="saveBtn" onClick={handleSubmit}>저장 후 AI 요약하기</div>
+                        </div>
+                        <div className="writingBox">
+                        <input value={title} name="title" placeholder="제목" onChange={onInputHandler} className="write_title" />
+                        <textarea 
+                        value={content} 
+                        name="content" 
+                        placeholder="내용을 입력해주세요 (200자 이상 2000자 이하)" 
+                        onChange={onInputHandler} 
+                        maxLength={2000} 
+                        minLength={200}
+                        className="write_content"/>
+                             <p className="countWord">{inputCount} / 2000자</p>
+                    </div>
+                    </div>
         </Container>
+</>
     );
 }
 
